@@ -30,3 +30,9 @@ class Gaps {
   static const h2 = SizedBox(width: Sizes.size2);
 ..
 ```
+
+## 4.0. Sign Up Screen
+
+- Scafold makes contents configurable like font size, color ..
+- SafeArea
+- BottomAppBar
