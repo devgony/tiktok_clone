@@ -42,3 +42,35 @@ class Gaps {
 - feature driven architecture(not by page)
 - BoxDecoration
 - FractionallySizedBox: relative to parent
+
+## 4.2. AuthButton
+
+- Stack: items on top of another => align each items
+
+```dart
+child: Stack(
+  alignment: Alignment.center,
+  children: [
+    Align(
+      alignment: Alignment.centerLeft,
+      child: icon,
+    ),
+    Text(
+      text,
+      style: const TextStyle(
+        fontSize: Sizes.size16,
+        fontWeight: FontWeight.w600,
+      ),
+      textAlign: TextAlign.center,
+    ),
+  ],
+),
+```
+
+- install font awesome with fixed version
+
+```yaml
+# pubspec.yaml
+dependencies:
+  font_awesome_flutter: 10.3.0
+```
