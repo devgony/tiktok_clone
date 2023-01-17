@@ -36,3 +36,9 @@ class Gaps {
 - Scafold makes contents configurable like font size, color ..
 - SafeArea
 - BottomAppBar
+
+## 4.1. Logint Screen
+
+- feature driven architecture(not by page)
+- BoxDecoration
+- FractionallySizedBox: relative to parent
