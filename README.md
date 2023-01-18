@@ -309,3 +309,20 @@ void _onClearTap() {
   _passwordController.clear();
 }
 ```
+
+## 4.8. Birthday Screen
+
+- date => hint none, disabled but init with now()
+- CupertinoDatePicker
+- maximumDate: initialDate
+
+```dart
+child: CupertinoDatePicker(
+  maximumDate: initialDate,
+  initialDateTime: initialDate,
+  mode: CupertinoDatePickerMode.date,
+  onDateTimeChanged: _setTextFieldDate,
+),
+```
+
+- [x] challenge: 12 years ago => age limitation
