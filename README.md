@@ -74,3 +74,26 @@ child: Stack(
 dependencies:
   font_awesome_flutter: 10.3.0
 ```
+
+## 4.3. Sign Up Form
+
+- [x] Challenge: GestureDetector inside AuthButton
+- prefix `_`
+  - private convention eg) lifecycle method of widget
+  - Dart doesn't have access modifier
+- central control by AppBarTheme
+  - also can ovewrite at child
+
+```dart
+scaffoldBackgroundColor: Colors.white, // for what?
+appBarTheme: const AppBarTheme(
+  foregroundColor: Colors.black,
+  backgroundColor: Colors.white,
+  elevation: 0,
+  titleTextStyle: TextStyle(
+    color: Colors.black,
+    fontSize: Sizes.size16 + Sizes.size2,
+    fontWeight: FontWeight.w600,
+  ),
+)
+```
