@@ -269,3 +269,43 @@ void _onSubmit() {
 ..
 onEditingComplete: _onSubmit,
 ```
+
+## 4.7. Password Screen
+
+- decoration.{pref, suffix}
+
+```dart
+suffix: Row(
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    GestureDetector(
+      onTap: _onClearTap,
+      child: FaIcon(
+        FontAwesomeIcons.solidCircleXmark,
+        color: Colors.grey.shade500,
+        size: Sizes.size20,
+      ),
+    ),
+    Gaps.h16,
+    GestureDetector(
+      onTap: _toggleObscureText,
+      child: FaIcon(
+        _obscureText
+            ? FontAwesomeIcons.eye
+            : FontAwesomeIcons.eyeSlash,
+        color: Colors.grey.shade500,
+        size: Sizes.size20,
+      ),
+    ),
+  ],
+),
+```
+
+- obsecureText: true => password type
+- clear TextEditingController
+
+```dart
+void _onClearTap() {
+  _passwordController.clear();
+}
+```
