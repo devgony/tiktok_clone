@@ -220,3 +220,52 @@ void dispose() {
 ```
 
 - In Statefull widget, context is accessiable so that method does not need context as param
+
+## 4.6. Email Screen
+
+- errorText
+- validation
+
+```dart
+String? _isEmailValid() {
+  if (_email.isEmpty) return null;
+  final regExp = RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
+  if (!regExp.hasMatch(_email)) {
+    return "Email not valid";
+  }
+  return null;
+}
+..
+errorText: _isEmailValid(),
+```
+
+- TextInputType.emailAddress
+
+```dart
+keyboardType: TextInputType.emailAddress,
+```
+
+- GestureDetector => FocusScope.of().unfocus()
+
+```dart
+void _onScaffoldTap() {
+  FocusScope.of(context).unfocus();
+}
+```
+
+- onSubmitted Vs onEditingComplete
+
+```dart
+void _onSubmit() {
+  if (_email.isEmpty || _isEmailValid() != null) return;
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => const PasswordScreen(),
+    ),
+  );
+}
+..
+onEditingComplete: _onSubmit,
+```
