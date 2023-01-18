@@ -97,3 +97,70 @@ appBarTheme: const AppBarTheme(
   ),
 )
 ```
+
+## 4.4. Username Screen
+
+- hintText: placeholder
+- TextEditingController.addListener
+
+```dart
+final TextEditingController _usernameController = TextEditingController();
+
+String _username = "";
+
+@override
+void initState() {
+  super.initState();
+
+  _usernameController.addListener(() {
+    setState(() {
+      _username = _usernameController.text;
+    });
+  });
+}
+..
+TextField(
+  controller: _usernameController,
+  decoration: InputDecoration(
+    hintText: "Username",
+    enabledBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.grey.shade400,
+      ),
+    ),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(
+        color: Colors.grey.shade400,
+      ),
+    ),
+  ),
+  cursorColor: Theme.of(context).primaryColor,
+),
+```
+
+- AnimatedContainer
+  - curve: default=linear(fade in/out)
+  - duration: set the animating duration
+
+```dart
+child: AnimatedContainer(
+  padding: const EdgeInsets.symmetric(
+    vertical: Sizes.size16,
+  ),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(Sizes.size5),
+    color: _username.isEmpty
+        ? Colors.grey.shade300
+        : Theme.of(context).primaryColor,
+  ),
+  duration: const Duration(milliseconds: 500),
+  child: const Text(
+    'Next',
+    textAlign: TextAlign.center,
+    style: TextStyle(
+      color: Colors.white,
+      fontWeight: FontWeight.w600,
+    ),
+  ),
+),
+```

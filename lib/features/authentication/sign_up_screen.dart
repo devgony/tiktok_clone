@@ -5,7 +5,7 @@ import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/login_screen.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
 
-import 'email_screen.dart';
+import 'username_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
@@ -21,7 +21,7 @@ class SignUpScreen extends StatelessWidget {
   void _onEmailTap(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const EmailScreen(),
+        builder: (context) => const UsernameScreen(),
       ),
     );
   }
