@@ -164,3 +164,59 @@ child: AnimatedContainer(
   ),
 ),
 ```
+
+## 4.5. FormButton
+
+- Extract FormButton
+  - Complete TextButton is supported by flutter but try manually
+- AnimatedDefaultTextStyle
+
+```dart
+child: AnimatedContainer(
+  padding: const EdgeInsets.symmetric(
+    vertical: Sizes.size16,
+  ),
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(Sizes.size5),
+    color:
+        disabled ? Colors.grey.shade300 : Theme.of(context).primaryColor,
+  ),
+  duration: const Duration(milliseconds: 500),
+  child: AnimatedDefaultTextStyle(
+    duration: const Duration(milliseconds: 500),
+    style: TextStyle(
+      color: disabled ? Colors.grey.shade400 : Colors.white,
+      fontWeight: FontWeight.w600,
+    ),
+    child: const Text(
+      'Next',
+      textAlign: TextAlign.center,
+    ),
+  ),
+),
+```
+
+- dispose listener
+  - super.initState() first
+  - clean
+  - super.dispose at the end as convention(?)
+
+```dart
+@override
+void initState() {
+  super.initState();
+  _usernameController.addListener(() {
+    setState(() {
+      _username = _usernameController.text;
+    });
+  });
+}
+
+@override
+void dispose() {
+  _usernameController.dispose();
+  super.dispose();
+}
+```
+
+- In Statefull widget, context is accessiable so that method does not need context as param
