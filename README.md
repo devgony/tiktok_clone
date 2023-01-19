@@ -374,4 +374,4 @@ onSaved: (newValue) {
 },
 ```
 
-- [ ] challenge: extend button to take `text` param
+- [x] challenge: extend button to take `text` param
