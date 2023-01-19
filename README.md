@@ -326,3 +326,52 @@ child: CupertinoDatePicker(
 ```
 
 - [x] challenge: 12 years ago => age limitation
+
+## 4.9. Login Form
+
+### form
+
+- form takes GlobalKey
+
+```dart
+final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+..
+void _onSubmitTap() {
+  if (_formKey.currentState != null) {
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+    }
+  }
+}
+```
+
+- handling null
+
+  1. check null + `!`
+  2. `?`
+
+- validate
+
+  - any of targets gets error => false  
+    nothing gets error => true
+
+```dart
+validator: (value) {
+  if (value != null && value.isEmpty) {
+    return "Plase write your email";
+  }
+  return null;
+},
+```
+
+- save: call onSaved()
+
+```dart
+onSaved: (newValue) {
+  if (newValue != null) {
+    formData['email'] = newValue;
+  }
+},
+```
+
+- [ ] challenge: extend button to take `text` param
