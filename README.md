@@ -382,3 +382,37 @@ onSaved: (newValue) {
 
 - runSpacing: vertical gap
 - spacing: horizontal gap
+
+## 5.2. Scroll Animations
+
+- CupertinoButton: better for quick prototyping
+- Scrollbar
+
+```dart
+final ScrollController _scrollController = ScrollController();
+
+bool _showTitle = false;
+
+void _onScroll() {
+  if (_scrollController.offset > 100) {
+    if (_showTitle) return;
+    setState(() {
+      _showTitle = true;
+    });
+  } else {
+    setState(() {
+      _showTitle = false;
+    });
+  }
+}
+```
+
+- AnimatedOpacity
+
+```dart
+ title: AnimatedOpacity(
+  opacity: _showTitle ? 1 : 0,
+  duration: const Duration(milliseconds: 300),
+  child: const Text("Choose your interests"),
+),
+```
