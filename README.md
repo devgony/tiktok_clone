@@ -416,3 +416,24 @@ void _onScroll() {
   child: const Text("Choose your interests"),
 ),
 ```
+
+## 5.3.
+
+- DefaultTabcontroller
+  - TabBarView: gives swipable view
+    - TabPageSelector
+
+```dart
+return DefaultTabController(
+  length: 3,
+  child: Scaffold(
+    body: SafeArea(
+      child: TabBarView(
+        children: [
+..
+TabPageSelector(
+  color: Colors.white,
+  selectedColor: Colors.black38,
+),
+..
+```
