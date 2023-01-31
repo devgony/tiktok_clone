@@ -417,7 +417,7 @@ void _onScroll() {
 ),
 ```
 
-## 5.3.
+## 5.3. Tutorial Screen
 
 - DefaultTabcontroller
   - TabBarView: gives swipable view
@@ -436,4 +436,52 @@ TabPageSelector(
   selectedColor: Colors.black38,
 ),
 ..
+```
+
+## 5.4. AnimatedCrossFade
+
+- AnimatedCrossFade: cross-fades between two given children and animates itself between their sizes
+
+```dart
+child: AnimatedCrossFade(
+  firstChild: Column(
+  ..
+  secondChild: Column(
+  ..
+  crossFadeState: _showingPage == Page.first
+      ? CrossFadeState.showFirst
+      : CrossFadeState.showSecond,
+  duration: const Duration(milliseconds: 300),
+```
+
+- onPanUpdate(Drag)
+  - Positive: right
+  - Negative: left
+  - onPanend
+    - fire event after finger dettached
+
+```dart
+void _onPanUpdate(DragUpdateDetails details) {
+  if (details.delta.dx > 0) {
+    setState(() {
+      _direction = Direction.right;
+    });
+  } else {
+    setState(() {
+      _direction = Direction.left;
+    });
+  }
+}
+
+void _onPanEnd(DragEndDetails detail) {
+  if (_direction == Direction.left) {
+    setState(() {
+      _showingPage = Page.second;
+    });
+  } else {
+    setState(() {
+      _showingPage = Page.first;
+    });
+  }
+}
 ```
