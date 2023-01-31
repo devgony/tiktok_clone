@@ -375,3 +375,10 @@ onSaved: (newValue) {
 ```
 
 - [x] challenge: extend button to take `text` param
+
+# 5. Onboarding
+
+## 5.1. Interests Screen
+
+- runSpacing: vertical gap
+- spacing: horizontal gap
