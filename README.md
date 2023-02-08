@@ -568,7 +568,8 @@ bottomNavigationBar: NavigationBar(
 ## 6.4. CupertinoTabBar
 
 - it does not look native?
-- should use CupertinoApp in `main.dart`
+- use `CupertinoIcons`
+- should use `CupertinoApp` in `main.dart`
 
 ```dart
   Widget build(BuildContext context) {
@@ -590,3 +591,8 @@ bottomNavigationBar: NavigationBar(
   }
 }
 ```
+
+## 6.5. Custom Bar
+
+- column expand as much as possible by default => set `MainAxisSize.min`
+- cover icons with container + expanded to better click ux
