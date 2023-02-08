@@ -635,3 +635,19 @@ body: Stack(
       ],
     ),
 ```
+
+## 6.8. Post Video Button
+
+- Positioned widget
+
+- clipBehavior: hiding
+
+```dart
+clipBehavior: Clip.none,
+children: [
+  Positioned(
+    right: 20,
+    ..
+```
+
+- challenge: hover animation on Post Video Button
