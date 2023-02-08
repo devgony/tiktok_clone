@@ -592,7 +592,22 @@ bottomNavigationBar: NavigationBar(
 }
 ```
 
-## 6.5. Custom Bar
+## 6.5. Custom NavigationBar
 
 - column expand as much as possible by default => set `MainAxisSize.min`
 - cover icons with container + expanded to better click ux
+
+## 6.6. Stateful Navigation part One
+
+- selection effect
+
+```dart
+isSelected ? selectedIcon : icon,
+```
+
+- should give separated global key to statefull widget to distinguish each
+- but widget is disposed as sooon as move to other screen
+
+## 6.7. Stateful Navigation part Two
+
+- Offstage to stack and hide widget
