@@ -496,3 +496,71 @@ void _onPanEnd(DragEndDetails detail) {
 - tooltip: hover explain
 - if type is null && length >= 4, works as BottomNavigationBarType.shifting
 - To shift with 2 navigations, set `type: BottomNavigationBarType.shifting` manually
+
+```dart
+int _selectedIndex = 0;
+
+final screens = [
+  const Center(
+    child: Text('Home'),
+  ),
+  const Center(
+    child: Text('Search'),
+  ),
+];
+
+void _onTap(int index) {
+  setState(() {
+    _selectedIndex = index;
+  });
+}
+..
+bottomNavigationBar: BottomNavigationBar(
+  type: BottomNavigationBarType.shifting,
+  currentIndex: _selectedIndex,
+  onTap: _onTap,
+  selectedItemColor: Theme.of(context).primaryColor,
+  items: const [
+    BottomNavigationBarItem(
+      icon: FaIcon(FontAwesomeIcons.house),
+      label: "Home",
+      tooltip: "What are you?",
+      backgroundColor: Colors.amber,
+    ),
+    BottomNavigationBarItem(
+      icon: FaIcon(FontAwesomeIcons.magnifyingGlass),
+      label: "Search",
+      tooltip: "What are you?",
+      backgroundColor: Colors.blue,
+    ),
+  ],
+),
+```
+
+## 6.3. NavigationBar
+
+- material 3 => NavigationBar
+
+```dart
+bottomNavigationBar: NavigationBar(
+  labelBehavior: NavigationDestinationLabelBehavior.onlyShowSelected,
+  selectedIndex: _selectedIndex,
+  onDestinationSelected: _onTap,
+  destinations: const [
+    NavigationDestination(
+      icon: FaIcon(
+        FontAwesomeIcons.house,
+        color: Colors.white,
+      ),
+      label: 'Home',
+    ),
+    NavigationDestination(
+      icon: FaIcon(
+        FontAwesomeIcons.magnifyingGlass,
+        color: Colors.white,
+      ),
+      label: 'Search',
+    ),
+  ],
+),
+```
