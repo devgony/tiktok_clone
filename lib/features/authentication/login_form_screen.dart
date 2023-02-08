@@ -20,11 +20,11 @@ class _LoginFormScreenState extends State<LoginFormScreen> {
     if (_formKey.currentState != null) {
       if (_formKey.currentState!.validate()) {
         _formKey.currentState!.save();
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const InterestsScreen(),
-          ),
-        );
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(
+              builder: (context) => const InterestsScreen(),
+            ),
+            (route) => false);
       }
     }
   }

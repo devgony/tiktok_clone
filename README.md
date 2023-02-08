@@ -485,3 +485,8 @@ void _onPanEnd(DragEndDetails detail) {
   }
 }
 ```
+
+## 6.1. pushAndRemoveUntil
+
+- pushAndRemoveUntil: push and remove until predicate return false
+  - usage: after creating account, we don't need to go back
