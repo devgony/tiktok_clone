@@ -490,3 +490,9 @@ void _onPanEnd(DragEndDetails detail) {
 
 - pushAndRemoveUntil: push and remove until predicate return false
   - usage: after creating account, we don't need to go back
+
+## 6.2. BottomNavigationBar
+
+- tooltip: hover explain
+- if type is null && length >= 4, works as BottomNavigationBarType.shifting
+- To shift with 2 navigations, set `type: BottomNavigationBarType.shifting` manually
