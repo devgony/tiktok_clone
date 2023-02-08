@@ -564,3 +564,29 @@ bottomNavigationBar: NavigationBar(
   ],
 ),
 ```
+
+## 6.4. CupertinoTabBar
+
+- it does not look native?
+- should use CupertinoApp in `main.dart`
+
+```dart
+  Widget build(BuildContext context) {
+    return CupertinoTabScaffold(
+      tabBar: CupertinoTabBar(
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.house),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(CupertinoIcons.search),
+            label: "Search",
+          ),
+        ],
+      ),
+      tabBuilder: (context, index) => screens[index],
+    );
+  }
+}
+```
