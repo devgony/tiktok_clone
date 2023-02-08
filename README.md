@@ -610,8 +610,8 @@ isSelected ? selectedIcon : icon,
 
 ## 6.7. Stateful Navigation part Two
 
-- Offstage to stack and hide widget
-- But i'm built print every render?
+- Offstage to stack and hide widget => To store each states
+- But `i'm built` prints every render?
 
 ```dart
 body: Stack(
