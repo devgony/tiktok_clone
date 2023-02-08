@@ -87,8 +87,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                   selectedIcon: FontAwesomeIcons.solidCompass),
               Gaps.h24,
               GestureDetector(
-                onTap: _onPostVideoButtonTap,
-                child: const PostVideoButton(),
+                child: PostVideoButton(onTap: _onPostVideoButtonTap),
               ),
               Gaps.h24,
               NavTab(

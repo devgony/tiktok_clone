@@ -650,4 +650,25 @@ children: [
     ..
 ```
 
-- challenge: hover animation on Post Video Button
+### Challenge: onTabDown animation on Post Video Button
+
+- standBy
+  ![standBy](/md_images/2023-02-08-16-04-16.png)
+- onTabDown: scale up x1.2
+  ![onTabDown](/md_images/2023-02-08-16-04-27.png)
+- onTapUp => execute onTap to navigate to RecordVideoScreen
+
+### Question
+
+- Why scale should be set at `build`?
+
+```dart
+..
+Widget build(BuildContext context) {
+  _scale = 1 + _controller.value;
+  return GestureDetector(
+    onTapDown: _tapDown,
+    onTapUp: _tapUp,
+    child: Transform.scale(
+..
+```
