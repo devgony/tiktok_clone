@@ -611,3 +611,27 @@ isSelected ? selectedIcon : icon,
 ## 6.7. Stateful Navigation part Two
 
 - Offstage to stack and hide widget
+- But i'm built print every render?
+
+```dart
+body: Stack(
+      children: [
+        Offstage(
+          offstage: _selectedIndex != 0,
+          child: const StfScreen(),
+        ),
+        Offstage(
+          offstage: _selectedIndex != 1,
+          child: const StfScreen(),
+        ),
+        Offstage(
+          offstage: _selectedIndex != 3,
+          child: const StfScreen(),
+        ),
+        Offstage(
+          offstage: _selectedIndex != 4,
+          child: const StfScreen(),
+        )
+      ],
+    ),
+```
