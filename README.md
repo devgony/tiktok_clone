@@ -777,3 +777,43 @@ void _onVideoFinished() {
 ```
 
 - should we manually dispose even controller?
+
+# 7.4. VisibilityDetector
+
+- install
+
+```
+flutter pub add visibility_detector
+```
+
+- should play video 1 by 1 with visibility 100%
+
+```dart
+void _onVisibilityChanged(VisibilityInfo info) {
+  if (info.visibleFraction == 1 && !_videoPlayerController.value.isPlaying) {
+    _videoPlayerController.play();
+  }
+}
+```
+
+- toggle pause + animation + but ignore click
+
+```dart
+void _onTogglePause() {
+  if (_videoPlayerController.value.isPlaying) {
+    _videoPlayerController.pause();
+  } else {
+    _videoPlayerController.play();
+  }
+}
+..
+child: IgnorePointer(
+  child: Center(
+    child: FaIcon(
+      FontAwesomeIcons.play,
+      color: Colors.white,
+      size: Sizes.size52,
+    ),
+  ),
+),
+```
