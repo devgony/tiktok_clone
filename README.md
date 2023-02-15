@@ -880,3 +880,10 @@ child: AnimatedBuilder(
   ),
 ),
 ```
+
+## 7.7 SingleTickerProviderStateMixin
+
+- with => copy from extend
+- prevent unnecessary animation
+- Ticker class: calls its callback once per animation frame
+  - if need Multiple tickers => TickerProviderStateMixin
