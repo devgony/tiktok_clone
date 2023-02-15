@@ -672,3 +672,35 @@ Widget build(BuildContext context) {
     child: Transform.scale(
 ..
 ```
+
+# 7. Video timeline
+
+## 7.1. Infinite Scrolling
+
+- PageView
+- pageSnapping(default: true)
+
+  - snap the screen so that user don't need to swipe to end
+
+- itemBuilder for PageView
+
+```dart
+return PageView.builder(
+  scrollDirection: Axis.vertical,
+  onPageChanged: _onPageChanged,
+  itemCount: _itemCount,
+  itemBuilder: (context, index) => Container(
+    color: colors[index],
+    child: Center(
+      child: Text(
+        "Screen $index",
+        style: const TextStyle(fontSize: 68),
+      ),
+    ),
+  ),
+);
+```
+
+## 7.2.
+
+- remove deacceleration animation
