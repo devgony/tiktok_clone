@@ -839,6 +839,7 @@ void _onTogglePause() {
 ```
 
 - call `build` on every transition? => add event listener + setState
+  - does it render all the component again or juse button?
 
 ```dart
 _animationController = AnimationController(
@@ -852,4 +853,30 @@ _animationController = AnimationController(
       setState(() {});
     });
   }
+```
+
+## 7.6 AnimatedBuilder
+
+- AnimationBuilder widget
+- Wrapper of manual Animation Controller
+
+```dart
+child: AnimatedBuilder(
+  animation: _animationController,
+  builder: (context, child) {
+    return Transform.scale(
+      scale: _animationController.value,
+      child: child,
+    );
+  },
+  child: AnimatedOpacity(
+    opacity: _isPaused ? 1 : 0,
+    duration: _animationDuration,
+    child: const FaIcon(
+      FontAwesomeIcons.play,
+      color: Colors.white,
+      size: Sizes.size52,
+    ),
+  ),
+),
 ```
