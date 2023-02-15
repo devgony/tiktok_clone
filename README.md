@@ -712,3 +712,68 @@ _pageController.animateToPage(
   curve: Curves.linear,
 );
 ```
+
+## 7.3. Video Player
+
+- install
+
+```
+mkdir -p assets/videos
+mv *.mp4 assets/videos/
+flutter pub add video_player
+```
+
+- Video Player
+
+```dart
+// lib/features/videos/widgets/video_post.dart
+void _initVideoPlayer() async {
+  await _videoPlayerController.initialize();
+  _videoPlayerController.play();
+  setState(() {});
+  _videoPlayerController.addListener(_onVideoChange);
+}
+
+@override
+void initState() {
+  super.initState();
+  _initVideoPlayer();
+}
+
+@override
+void dispose() {
+  _videoPlayerController.dispose();
+  super.dispose();
+}
+..
+child: _videoPlayerController.value.isInitialized
+              ? VideoPlayer(_videoPlayerController)
+              : Container(
+                  color: Colors.black,
+                ),
+```
+
+- onFinished => nextPage
+
+```dart
+// lib/features/videos/widgets/video_post.dart
+void _onVideoChange() {
+  if (_videoPlayerController.value.isInitialized) {
+    if (_videoPlayerController.value.duration ==
+        _videoPlayerController.value.position) {
+      widget.onVideoFinished();
+    }
+  }
+}
+..
+
+// lib/features/videos/video_timeline_screen.dart
+void _onVideoFinished() {
+  _pageController.nextPage(
+    duration: _scrollDuration,
+    curve: _scrollCurve,
+  );
+}
+```
+
+- should we manually dispose even controller?
