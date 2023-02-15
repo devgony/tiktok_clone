@@ -817,3 +817,39 @@ child: IgnorePointer(
   ),
 ),
 ```
+
+## 7.5. AnimationController
+
+- Animation controller
+  - reverse & forward
+
+```dart
+void _onTogglePause() {
+  if (_videoPlayerController.value.isPlaying) {
+    _videoPlayerController.pause();
+    _animationController.reverse();
+  } else {
+    _videoPlayerController.play();
+    _animationController.forward();
+  }
+  setState(() {
+    _isPaused = !_isPaused;
+  });
+}
+```
+
+- call `build` on every transition? => add event listener + setState
+
+```dart
+_animationController = AnimationController(
+      vsync: this,
+      lowerBound: 1.0,
+      upperBound: 1.5,
+      value: 1.5,
+      duration: _animationDuration,
+    );
+    _animationController.addListener(() {
+      setState(() {});
+    });
+  }
+```
