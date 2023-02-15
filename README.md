@@ -855,7 +855,7 @@ _animationController = AnimationController(
   }
 ```
 
-## 7.6 AnimatedBuilder
+## 7.6. AnimatedBuilder
 
 - AnimationBuilder widget
 - Wrapper of manual Animation Controller
@@ -881,9 +881,39 @@ child: AnimatedBuilder(
 ),
 ```
 
-## 7.7 SingleTickerProviderStateMixin
+## 7.7. SingleTickerProviderStateMixin
 
 - with => copy from extend
 - prevent unnecessary animation
 - Ticker class: calls its callback once per animation frame
   - if need Multiple tickers => TickerProviderStateMixin
+
+## 7.8. Video UI
+
+- onFinished just return to stop
+- setLooping => replay forever
+- hashtags => code challenge later
+- CircleAvatar
+
+```dart
+CircleAvatar(
+  radius: 25,
+  backgroundColor: Colors.black,
+  foregroundColor: Colors.white,
+  foregroundImage: NetworkImage(
+    "https://avatars.githubusercontent.com/u/51254761?v=4",
+  ),
+  child: Text("henry"),
+),
+```
+
+- Custom widget for icons: VideoButton
+
+- Challenge: See more => show details
+  - jesture detector
+
+<!-- ## 7.9. RefreshIndicator
+- user pulls => refresh => should return future
+- edgeOffset like top: 0 (default)
+- displacement like margin-top: 0 (default)
+- background color => inherited from Scaffold -->
