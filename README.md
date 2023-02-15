@@ -909,8 +909,10 @@ CircleAvatar(
 
 - Custom widget for icons: VideoButton
 
-- Challenge: See more => show details
-  - jesture detector
+### Challenge: click more => show details
+
+- more
+- less
 
 <!-- ## 7.9. RefreshIndicator
 - user pulls => refresh => should return future

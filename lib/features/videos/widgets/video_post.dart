@@ -30,6 +30,7 @@ class _VideoPostState extends State<VideoPost>
 
   late final AnimationController _animationController;
   bool _isPaused = false;
+  bool _showDetail = false;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -85,6 +86,20 @@ class _VideoPostState extends State<VideoPost>
     });
   }
 
+  void toggleDetail() {
+    setState(() {
+      _showDetail = !_showDetail;
+    });
+  }
+
+  String handleDetail(String payload) {
+    if (payload.length <= 20) {
+      return payload;
+    }
+
+    return _showDetail ? payload : "${payload.substring(0, 20)}...";
+  }
+
   @override
   Widget build(BuildContext context) {
     return VisibilityDetector(
@@ -133,8 +148,8 @@ class _VideoPostState extends State<VideoPost>
             left: 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
-                Text(
+              children: [
+                const Text(
                   "@henry",
                   style: TextStyle(
                     fontSize: Sizes.size20,
@@ -144,10 +159,23 @@ class _VideoPostState extends State<VideoPost>
                 ),
                 Gaps.v10,
                 Text(
-                  "Let me go home",
-                  style: TextStyle(
+                  handleDetail(
+                      "Let me go home but you should know\nthere is super long sentence here"),
+                  style: const TextStyle(
                     fontSize: Sizes.size16,
                     color: Colors.white,
+                  ),
+                ),
+                Gaps.h10,
+                GestureDetector(
+                  onTap: toggleDetail,
+                  child: Text(
+                    _showDetail ? "less" : "more",
+                    style: const TextStyle(
+                      fontSize: Sizes.size16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 )
               ],
