@@ -682,7 +682,7 @@ Widget build(BuildContext context) {
 
   - snap the screen so that user don't need to swipe to end
 
-- itemBuilder for PageView
+- itemBuilder for PageView: add items dynamically
 
 ```dart
 return PageView.builder(
@@ -701,6 +701,14 @@ return PageView.builder(
 );
 ```
 
-## 7.2.
+## 7.2. PageController
 
 - remove deacceleration animation
+
+```dart
+_pageController.animateToPage(
+  page,
+  duration: const Duration(milliseconds: 150),
+  curve: Curves.linear,
+);
+```
