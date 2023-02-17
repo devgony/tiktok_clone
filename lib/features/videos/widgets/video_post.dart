@@ -27,6 +27,8 @@ class _VideoPostState extends State<VideoPost>
   final VideoPlayerController _videoPlayerController =
       VideoPlayerController.asset("assets/videos/sample.mp4");
   final Duration _animationDuration = const Duration(milliseconds: 200);
+  final String payload =
+      "Let me go home but you should know\nthere is super long sentence here";
 
   late final AnimationController _animationController;
   bool _isPaused = false;
@@ -158,25 +160,46 @@ class _VideoPostState extends State<VideoPost>
                   ),
                 ),
                 Gaps.v10,
-                Text(
-                  handleDetail(
-                      "Let me go home but you should know\nthere is super long sentence here"),
-                  style: const TextStyle(
-                    fontSize: Sizes.size16,
-                    color: Colors.white,
-                  ),
-                ),
-                Gaps.h10,
-                GestureDetector(
-                  onTap: toggleDetail,
-                  child: Text(
-                    _showDetail ? "less" : "more",
+                AnimatedCrossFade(
+                  duration: const Duration(microseconds: 2000),
+                  firstChild: Container(),
+                  secondChild: Text(
+                    handleDetail(payload),
                     style: const TextStyle(
                       fontSize: Sizes.size16,
                       color: Colors.white,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                  crossFadeState: _showDetail
+                      ? CrossFadeState.showSecond
+                      : CrossFadeState.showFirst,
+                ),
+                Row(
+                  children: [
+                    SizedBox(
+                      width: Sizes.size200,
+                      child: _showDetail
+                          ? Container()
+                          : Text(
+                              handleDetail(payload),
+                              style: const TextStyle(
+                                fontSize: Sizes.size16,
+                                color: Colors.white,
+                              ),
+                            ),
+                    ),
+                    GestureDetector(
+                      onTap: toggleDetail,
+                      child: Text(
+                        _showDetail ? "less" : "more",
+                        style: const TextStyle(
+                          fontSize: Sizes.size16,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
                 )
               ],
             ),

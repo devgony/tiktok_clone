@@ -911,8 +911,10 @@ CircleAvatar(
 
 ### Challenge: click more => show details
 
-- more
-- less
+- more  
+  ![more](/md_images/2023-02-17-16-30-46.png)
+- less  
+  ![less](/md_images/2023-02-17-16-31-06.png)
 
 <!-- ## 7.9. RefreshIndicator
 - user pulls => refresh => should return future
