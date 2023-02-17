@@ -916,8 +916,29 @@ CircleAvatar(
 - less  
   ![less](/md_images/2023-02-17-16-31-06.png)
 
-<!-- ## 7.9. RefreshIndicator
+## 7.9. RefreshIndicator
+
 - user pulls => refresh => should return future
 - edgeOffset like top: 0 (default)
 - displacement like margin-top: 0 (default)
-- background color => inherited from Scaffold -->
+- background color => inherited from Scaffold
+
+```dart
+// lib/features/videos/video_timeline_screen.dart
+return RefreshIndicator(
+  onRefresh: _onRefresh,
+  displacement: 50,
+  edgeOffset: 20,
+  color: Theme.of(context).primaryColor,
+  child: PageView.builder(
+    controller: _pageController,
+    scrollDirection: Axis.vertical,
+    onPageChanged: _onPageChanged,
+    itemCount: _itemCount,
+    itemBuilder: (context, index) => VideoPost(
+      onVideoFinished: _onVideoFinished,
+      index: index,
+    ),
+  ),
+);
+```
