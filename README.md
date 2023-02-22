@@ -949,7 +949,7 @@ return RefreshIndicator(
 
 # 8. Comments Section
 
-# 8.0. showModalBottomSheet
+## 8.0. showModalBottomSheet
 
 - prev bug: after refreshing it should not play again affected by visibility
 
@@ -988,3 +988,19 @@ showModalBottomSheet.backgroundColor: Colors.transparent,
 // lib/features/videos/widgets/video_comments.dart
 Container.decoration.borderRadius: BorderRadius.circular(Sizes.size14),
 ```
+
+## 8.1. Comments
+
+- ListView.builder() => separated()
+
+```dart
+body: ListView.separated(
+          padding: const EdgeInsets.symmetric(
+            vertical: Sizes.size10,
+            horizontal: Sizes.size16,
+          ),
+          separatorBuilder: (context, index) => Gaps.v20,
+```
+
+- BottomNavigationBar
+  - showModalBottomSheet has new scaffold so that we can use BottomNavigationBar
