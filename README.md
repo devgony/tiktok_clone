@@ -1003,4 +1003,34 @@ body: ListView.separated(
 ```
 
 - BottomNavigationBar
-  - showModalBottomSheet has new scaffold so that we can use BottomNavigationBar
+
+## 8.2. Add Comment
+
+- should set width => put inside SizedBox or `Expanded` widget
+- move input to top
+- open keyboard => video squashed
+  resizeToAvoidBottomInset: false
+
+```dart
+// lib/features/main_navigation/main_navigation_screen.dart
+showModalBottomSheet has new scaffold so that we can use BottomNavigationBar
+```
+
+- replace bottomNavigationBar => wrap ListView with Stack + Positioned.bottom: 0
+  - get width from MediaQuery
+
+```dart
+// lib/features/videos/widgets/video_comments.dart
+final size = MediaQuery.of(context).size;
+    return Container(
+      height: size.height * 0.75,
+```
+
+- isScrollControlled: true => mutable height of showModalBottomSheet
+
+```dart
+// lib/features/videos/widgets/video_post.dart
+await showModalBottomSheet(
+    context: context,
+      isScrollControlled: true,
+```
