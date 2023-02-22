@@ -31,6 +31,8 @@ class Gaps {
 ..
 ```
 
+# 4 Authentication
+
 ## 4.0. Sign Up Screen
 
 - Scafold makes contents configurable like font size, color ..
@@ -486,6 +488,8 @@ void _onPanEnd(DragEndDetails detail) {
 }
 ```
 
+# 6. Tab Navigation
+
 ## 6.1. pushAndRemoveUntil
 
 - pushAndRemoveUntil: push and remove until predicate return false
@@ -778,7 +782,7 @@ void _onVideoFinished() {
 
 - should we manually dispose even controller?
 
-# 7.4. VisibilityDetector
+## 7.4. VisibilityDetector
 
 - install
 
@@ -941,4 +945,46 @@ return RefreshIndicator(
     ),
   ),
 );
+```
+
+# 8. Comments Section
+
+# 8.0. showModalBottomSheet
+
+- prev bug: after refreshing it should not play again affected by visibility
+
+```dart
+// lib/features/videos/widgets/video_post.dart
+if (info.visibleFraction == 1 &&
+      !_isPaused &&
+      !_videoPlayerController.value.isPlaying) {
+```
+
+- showModalBottomSheet
+- remove back button
+
+```dart
+// lib/features/videos/widgets/video_comments.dart
+child: Scaffold(
+        backgroundColor: Colors.grey.shade50,
+        appBar: AppBar(
+          backgroundColor: Colors.grey.shade50,
+          automaticallyImplyLeading: false,
+          title: const Text("22796 comments"),
+          actions: [
+            IconButton(
+              onPressed: _onClosePressed,
+              icon: const FaIcon(FontAwesomeIcons.xmark),
+            ),
+          ],
+```
+
+- border-radius
+
+```dart
+// lib/features/videos/widgets/video_post.dart
+showModalBottomSheet.backgroundColor: Colors.transparent,
+
+// lib/features/videos/widgets/video_comments.dart
+Container.decoration.borderRadius: BorderRadius.circular(Sizes.size14),
 ```
