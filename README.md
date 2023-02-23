@@ -1055,4 +1055,20 @@ contentPadding: const EdgeInsets.symmetric(
 ## 8.4. Conclusions
 
 - positioned inside stack => give margine at the bottom
+
+```dart
+padding: const EdgeInsets.only(
+  top: Sizes.size10,
+  bottom: Sizes.size96 + Sizes.size20,
+  left: Sizes.size16,
+  right: Sizes.size16,
+```
+
 - scrollController => show scroll bar
+
+```dart
+Scrollbar(
+  controller: _scrollController,
+  child: ListView.separated(
+    controller: _scrollController,
+```
