@@ -1009,7 +1009,10 @@ body: ListView.separated(
 - should set width => put inside SizedBox or `Expanded` widget
 - move input to top
 - open keyboard => video squashed
-  resizeToAvoidBottomInset: false
+
+```dart
+Scaffold.resizeToAvoidBottomInset: false
+```
 
 ```dart
 // lib/features/main_navigation/main_navigation_screen.dart
@@ -1032,7 +1035,7 @@ final size = MediaQuery.of(context).size;
 // lib/features/videos/widgets/video_post.dart
 await showModalBottomSheet(
     context: context,
-      isScrollControlled: true,
+    isScrollControlled: true,
 ```
 
 ## 8.3. Text Input Actions
