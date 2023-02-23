@@ -1034,3 +1034,25 @@ await showModalBottomSheet(
     context: context,
       isScrollControlled: true,
 ```
+
+## 8.3. Text Input Actions
+
+- contentPadding.vertical does not work at separated => wrap text with SizedBox
+
+```diff
++child: SizedBox(
++  height: Sizes.size44,
+..
+contentPadding: const EdgeInsets.symmetric(
+-   vertical: Sizes.size10,
+```
+
+- textAction
+  - newline => enter button
+  - expands: true => can expand text input with new line
+- `_isWriting` state => activate send button
+
+## 8.4. Conclusions
+
+- positioned inside stack => give margine at the bottom
+- scrollController => show scroll bar
