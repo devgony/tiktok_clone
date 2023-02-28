@@ -1087,3 +1087,7 @@ Scrollbar(
 void _onTogglePause() {
 if (!mounted) return;
 ```
+
+## 9.1. Light Navigation
+
+- convert color of NavTab on clicking Discover
