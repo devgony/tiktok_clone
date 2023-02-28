@@ -1168,3 +1168,26 @@ const Text(
   ),
 ),
 ```
+
+## 9.5. CupertinoSearchTextField
+
+- border radius
+
+```dart
+Container(
+  clipBehavior: Clip.hardEdge,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(Sizes.size4),
+  ),
+```
+
+- CupertinoSearchTextField: One liner text input
+- init text => controller => dispose
+- textSelectionTheme from main
+- dismiss keyboard onDrag
+- resizeToAvoidBottomInset: false to keep image size
+
+### challenge
+
+1. dismiss keyboard on change tab
+2. manual search bar
