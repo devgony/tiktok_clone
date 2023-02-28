@@ -1091,3 +1091,24 @@ if (!mounted) return;
 ## 9.1. Light Navigation
 
 - convert color of NavTab on clicking Discover
+
+## 9.2. TabBar
+
+- bottom: PreferredSizeWidget => TabBar => needs TabController
+- scrollable
+- remove splash effect
+
+```dart
+return DefaultTabController(
+      length: tabs.length,
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 1,
+          title: const Text('Discover'),
+          bottom: TabBar(
+            splashFactory: NoSplash.splashFactory,
+            padding: const EdgeInsets.symmetric(
+              horizontal: Sizes.size16,
+            ),
+            isScrollable: true,
+```
