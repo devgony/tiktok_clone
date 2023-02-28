@@ -1075,3 +1075,15 @@ Scrollbar(
   child: ListView.separated(
     controller: _scrollController,
 ```
+
+# 9. Discover
+
+## 9.0. Introduction
+
+- moving to discover should pause video
+  - but unmounted case should be handled?
+
+```dart
+void _onTogglePause() {
+if (!mounted) return;
+```
