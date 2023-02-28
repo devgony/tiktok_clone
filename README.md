@@ -1112,3 +1112,30 @@ return DefaultTabController(
             ),
             isScrollable: true,
 ```
+
+## 9.3. GridView
+
+- skip(1)
+- Sliver
+- childAspectRatio 9/16
+
+```dart
+GridView.builder(
+  itemCount: 20,
+  padding: const EdgeInsets.all(
+    Sizes.size6,
+  ),
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    crossAxisCount: 2,
+    crossAxisSpacing: Sizes.size10,
+    mainAxisSpacing: Sizes.size10,
+    childAspectRatio: 9 / 16,
+  ),
+  itemBuilder: (context, index) => Container(
+    color: Colors.teal,
+    child: Center(
+      child: Text("$index"),
+    ),
+  ),
+),
+```
