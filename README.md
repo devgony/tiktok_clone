@@ -1139,3 +1139,32 @@ GridView.builder(
   ),
 ),
 ```
+
+## 9.4. Grid Item
+
+- register image at `pubspec.yaml` => restart
+- FadeInImage: fade in from placeholer to image
+- AspectRatio + BoxFit.cover
+- ellipsis: Text.maxLines + `overflow: TextOverflow.ellipsis`
+- DefaultTextStyle: adjust TextStyle to children
+
+```dart
+// lib/features/discover/discover_screen.dart
+AspectRatio(
+  aspectRatio: 9 / 16,
+  child: FadeInImage.assetNetwork(
+    fit: BoxFit.cover,
+    placeholder: "assets/images/placeholder.jpg",
+    image: ".."
+),
+Gaps.v10,
+const Text(
+  "This is a very long caption for my tiktok that im upload just now currently.",
+  overflow: TextOverflow.ellipsis,
+  maxLines: 2,
+  style: TextStyle(
+    fontSize: Sizes.size16 + Sizes.size2,
+    fontWeight: FontWeight.bold,
+  ),
+),
+```
