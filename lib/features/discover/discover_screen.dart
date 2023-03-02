@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-
-import '../../constants/gaps.dart';
+import 'package:tiktok_clone/constants/gaps.dart';
 
 final tabs = [
   "Top",
@@ -24,10 +22,14 @@ class DiscoverScreen extends StatefulWidget {
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
   final TextEditingController _textEditingController =
-      TextEditingController(text: "Initial Text");
+      TextEditingController(text: "Today's top");
+  bool _writing = true;
 
   void _onSearchChanged(String value) {
     print("Searching form $value");
+    setState(() {
+      _writing = value.isNotEmpty;
+    });
   }
 
   void _onSearchSubmitted(String value) {
@@ -40,6 +42,17 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     super.dispose();
   }
 
+  void _onTabBarTap(int _) {
+    FocusScope.of(context).unfocus();
+  }
+
+  void _onXmarkTap() {
+    _textEditingController.clear();
+    setState(() {
+      _writing = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -48,12 +61,43 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 1,
-          title: CupertinoSearchTextField(
+          title: TextField(
             controller: _textEditingController,
             onChanged: _onSearchChanged,
             onSubmitted: _onSearchSubmitted,
+            decoration: InputDecoration(
+              hintText: "Search",
+              hintStyle: const TextStyle(color: Colors.grey),
+              filled: true,
+              fillColor: Colors.grey.shade200,
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: Sizes.size12,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(
+                  Sizes.size12,
+                ),
+                borderSide: BorderSide.none,
+              ),
+              prefixIcon: const Icon(
+                FontAwesomeIcons.magnifyingGlass,
+                color: Colors.grey,
+                size: 20,
+              ),
+              suffixIcon: _writing
+                  ? GestureDetector(
+                      onTap: _onXmarkTap,
+                      child: const Icon(
+                        FontAwesomeIcons.solidCircleXmark,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
+                    )
+                  : null,
+            ),
           ),
           bottom: TabBar(
+            onTap: _onTabBarTap,
             splashFactory: NoSplash.splashFactory,
             padding: const EdgeInsets.symmetric(
               horizontal: Sizes.size16,

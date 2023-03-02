@@ -1187,7 +1187,65 @@ Container(
 - dismiss keyboard onDrag
 - resizeToAvoidBottomInset: false to keep image size
 
-### challenge
+### Challenge
 
 1. dismiss keyboard on change tab
-2. manual search bar
+
+```dart
+void _onTabBarTap(int _) {
+  FocusScope.of(context).unfocus();
+}
+```
+
+2. manual search bar instead of CupertinoSearchTextField
+
+- show Xmark if only search text is not empty
+
+```dart
+setState(() {
+  _writing = value.isNotEmpty;
+});
+```
+
+- `_textEditingController.clear()` was usefull to implement `onXmarkTap`
+
+```dart
+TextField(
+  controller: _textEditingController,
+  onChanged: _onSearchChanged,
+  onSubmitted: _onSearchSubmitted,
+  decoration: InputDecoration(
+    hintText: "Search",
+    hintStyle: const TextStyle(color: Colors.grey),
+    filled: true,
+    fillColor: Colors.grey.shade200,
+    contentPadding: const EdgeInsets.symmetric(
+      horizontal: Sizes.size12,
+    ),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(
+        Sizes.size12,
+      ),
+      borderSide: BorderSide.none,
+    ),
+    prefixIcon: const Icon(
+      FontAwesomeIcons.magnifyingGlass,
+      color: Colors.grey,
+      size: 20,
+    ),
+    suffixIcon: GestureDetector(
+      onTap: _onXmarkTap,
+      child: const Icon(
+        FontAwesomeIcons.solidCircleXmark,
+        color: Colors.grey,
+        size: 20,
+      ),
+    ),
+  ),
+)
+```
+
+- CupertinoSearchTextField
+  ![prev_search_bar](/md_images/2023-03-02-10-53-16.png)
+- my manual search bar
+  ![my_search_bar](/md_images/2023-03-02-14-05-40.png)
