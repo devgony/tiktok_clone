@@ -1429,3 +1429,55 @@ RotationTransition(
 )
 ..
 ```
+
+## 10.5. SlideTransition
+
+- still use same controller
+
+```dart
+late final Animation<Offset> _panelAnimation = Tween(
+  begin: const Offset(0, -1),
+  end: Offset.zero,
+).animate(_animationController);
+..
+SlideTransition(
+  position: _panelAnimation,
+  child: Container(
+    decoration: const BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.only(
+        bottomLeft: Radius.circular(
+          Sizes.size5,
+        ),
+        bottomRight: Radius.circular(
+          Sizes.size5,
+        ),
+      ),
+    ),
+    child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        for (var tab in _tabs)
+          ListTile(
+            title: Row(
+              children: [
+                FaIcon(
+                  tab["icon"],
+                  color: Colors.black,
+                  size: Sizes.size16,
+                ),
+                Gaps.h20,
+                Text(
+                  tab["title"],
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+      ],
+    ),
+  ),
+)
+```
