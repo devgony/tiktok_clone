@@ -1481,3 +1481,34 @@ SlideTransition(
   ),
 )
 ```
+
+## 10.6. AnimatedModalBarrier
+
+- AnimatedModalBarrier
+
+```dart
+if (_showBarrier)
+  AnimatedModalBarrier(
+    color: _barrierAnimation,
+    dismissible: true,
+    onDismiss: _toggleAnimations,
+  ),
+```
+
+- await
+  - onForward: expose barrier directly
+  - onReverse: await till animation is completed then, expose barrier
+
+```dart
+void _toggleAnimations() async {
+  if (_animationController.isCompleted) {
+    await _animationController.reverse();
+  } else {
+    _animationController.forward();
+  }
+
+  setState(() {
+    _showBarrier = !_showBarrier;
+  });
+}
+```
