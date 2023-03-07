@@ -1249,3 +1249,47 @@ TextField(
   ![prev_search_bar](/md_images/2023-03-02-10-53-16.png)
 - my manual search bar
   ![my_search_bar](/md_images/2023-03-02-14-05-40.png)
+
+# 10. Inbox
+
+## 10.0. ListTile
+
+- elevation like z-index
+- ListTile supports..
+  - leading, title, subtitle, trailing
+
+```dart
+ListTile(
+  leading: Container(
+    width: Sizes.size52,
+    decoration: const BoxDecoration(
+      shape: BoxShape.circle,
+      color: Colors.blue,
+    ),
+    child: const Center(
+      child: FaIcon(
+        FontAwesomeIcons.users,
+        color: Colors.white,
+      ),
+    ),
+  ),
+  title: const Text(
+    'New followers',
+    style: TextStyle(
+      fontWeight: FontWeight.w600,
+      fontSize: Sizes.size16,
+    ),
+  ),
+  subtitle: const Text(
+    'Messages from followers will appear here',
+    style: TextStyle(
+      fontSize: Sizes.size14,
+    ),
+  ),
+  trailing: const FaIcon(
+    FontAwesomeIcons.chevronRight,
+    size: Sizes.size14,
+    color: Colors.black,
+  ),
+)
+```
