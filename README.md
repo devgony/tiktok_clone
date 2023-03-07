@@ -1373,3 +1373,20 @@ Dismissible(
   child: ListTile(
     ..
 ```
+
+## 10.3. onDismissed
+
+- onDismissed => remove not only render but also real data
+
+```dart
+final List<String> _notifications = List.generate(20, (index) => "${index}h");
+
+void _onDismissed(String notification) {
+  _notifications.remove(notification);
+  setState(() {});
+}
+..
+for (var notification in _notifications)
+  Dismissible(
+    ..
+```
