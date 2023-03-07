@@ -1333,4 +1333,43 @@ RichText(
 )
 ```
 
-<!-- - dismissable widget -->
+## 10.2. Dismissible
+
+- Dismissable widget
+  - background: exposed when dragged down or to the right
+  - secondaryBackground: exposed when dragged up or to the left
+
+```dart
+Dismissible(
+  key: const Key("x"),
+  background: Container(
+    alignment: Alignment.centerLeft,
+    color: Colors.green,
+    child: const Padding(
+      padding: EdgeInsets.only(
+        left: Sizes.size10,
+      ),
+      child: FaIcon(
+        FontAwesomeIcons.checkDouble,
+        color: Colors.white,
+        size: Sizes.size32,
+      ),
+    ),
+  ),
+  secondaryBackground: Container(
+    alignment: Alignment.centerRight,
+    color: Colors.red,
+    child: const Padding(
+      padding: EdgeInsets.only(
+        right: Sizes.size10,
+      ),
+      child: FaIcon(
+        FontAwesomeIcons.trashCan,
+        color: Colors.white,
+        size: Sizes.size32,
+      ),
+    ),
+  ),
+  child: ListTile(
+    ..
+```
