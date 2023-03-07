@@ -1293,3 +1293,44 @@ ListTile(
   ),
 )
 ```
+
+## 10.1. RichText
+
+- onTap action splash => transparent at main
+
+```dart
+// lib/main.dart
+ThemeData.splashColor: Colors.transparent,
+```
+
+- RichText: TextStyle within other Text
+
+```dart
+RichText(
+  text: TextSpan(
+    text: "Account updates:",
+    style: const TextStyle(
+      fontWeight: FontWeight.w600,
+      color: Colors.black,
+      fontSize: Sizes.size16,
+    ),
+    children: [
+      const TextSpan(
+        text: " Upload longer videos",
+        style: TextStyle(
+          fontWeight: FontWeight.normal,
+        ),
+      ),
+      TextSpan(
+        text: " 1h",
+        style: TextStyle(
+          fontWeight: FontWeight.normal,
+          color: Colors.grey.shade500,
+        ),
+      ),
+    ],
+  ),
+)
+```
+
+<!-- - dismissable widget -->
