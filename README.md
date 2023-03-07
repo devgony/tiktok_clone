@@ -1390,3 +1390,42 @@ for (var notification in _notifications)
   Dismissible(
     ..
 ```
+
+## 10.4. RotationTransition
+
+- animation
+  1. setState
+  2. animationBuilder + listener
+  3. RotationTransition
+
+```dart
+late final AnimationController _animationController = AnimationController(
+  vsync: this,
+  duration: const Duration(milliseconds: 200),
+);
+
+late final Animation<double> _animation =
+    Tween(begin: 0.0, end: 0.5).animate(_animationController);
+
+void _onDismissed(String notification) {
+  _notifications.remove(notification);
+  setState(() {});
+}
+
+void _onTitleTap() {
+  if (_animationController.isCompleted) {
+    _animationController.reverse();
+  } else {
+    _animationController.forward();
+  }
+}
+..
+RotationTransition(
+  turns: _animation,
+  child: const FaIcon(
+    FontAwesomeIcons.chevronDown,
+    size: Sizes.size14,
+  ),
+)
+..
+```
