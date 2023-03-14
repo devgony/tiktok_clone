@@ -1568,3 +1568,27 @@ itemBuilder: (context, index, animation) {
       sizeFactor: animation,
       child: ListTile(
 ```
+
+## 11.3. AnimatedList part Two
+
+- deleteOnLongPress
+
+```dart
+// chats_screen.dart
+void _deleteItem(int index) {
+  if (_key.currentState != null) {
+    _key.currentState!.removeItem(
+      index,
+      (context, animation) => SizeTransition(
+        sizeFactor: animation,
+        child: Container(
+          color: Colors.red,
+          child: _makeTile(index),
+        ),
+      ),
+      duration: _duration,
+    );
+    _items.removeAt(index);
+  }
+}
+```
