@@ -1532,3 +1532,39 @@ Widget build(BuildContext context) {
         child: Row(
 +         mainAxisSize: MainAxisSize.min,
 ```
+
+## 11.2. AnimatedList
+
+- AnimatedList: ListViewBuilder + Animation
+- GlobalKey for AnimatedListState
+
+```dart
+// chats_screen.dart
+final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
+
+final List<int> _items = [];
+
+void _addItem() {
+  if (_key.currentState != null) {
+    _key.currentState!.insertItem(
+      _items.length,
+      duration: const Duration(milliseconds: 500),
+    );
+    _items.add(_items.length);
+  }
+}
+```
+
+- set UniqueKey not to confused
+- FaceTransition & SizedTransition
+
+```dart
+// chats_screen.dart
+itemBuilder: (context, index, animation) {
+  return FadeTransition(
+    key: UniqueKey(),
+    opacity: animation,
+    child: SizeTransition(
+      sizeFactor: animation,
+      child: ListTile(
+```
