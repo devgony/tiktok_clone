@@ -1592,3 +1592,43 @@ void _deleteItem(int index) {
   }
 }
 ```
+
+## 11.4. Chat Detail
+
+- isMine with modulo by 2
+- message container with BorderRaduis
+
+```dart
+// chat_detail_screen.dart
+final isMine = index % 2 == 0;
+return Row(
+  mainAxisSize: MainAxisSize.min,
+  mainAxisAlignment:
+      isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
+  children: [
+    Container(
+      padding: const EdgeInsets.all(Sizes.size14),
+      decoration: BoxDecoration(
+        color:
+            isMine ? Colors.blue : Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.only(
+          topLeft: const Radius.circular(
+            Sizes.size20,
+          ),
+          topRight: const Radius.circular(
+            Sizes.size20,
+          ),
+          bottomLeft: Radius.circular(
+            isMine ? Sizes.size20 : Sizes.size5,
+          ),
+          bottomRight: Radius.circular(
+            !isMine ? Sizes.size20 : Sizes.size5,
+```
+
+- should give width to solve error
+
+```dart
+Positioned(
+  bottom: 0,
+  width: MediaQuery.of(context).size.width,
+```
