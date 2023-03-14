@@ -1396,7 +1396,7 @@ for (var notification in _notifications)
 - animation
   1. setState
   2. animationBuilder + listener
-  3. RotationTransition
+  3. Animation + RotationTransition
 
 ```dart
 late final AnimationController _animationController = AnimationController(
@@ -1511,4 +1511,24 @@ void _toggleAnimations() async {
     _showBarrier = !_showBarrier;
   });
 }
+```
+
+# 11. CHATS
+
+## 11.1. Direct Messages
+
+- stateless: onSth hook should get context by args
+- statefull: context is served from state
+- mainAxisSize: MainAxisSize.min => min size not to be affected by other button => certralized
+
+```diff
+# activity_screen.dart
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: GestureDetector(
+        onTap: _toggleAnimations,
+        child: Row(
++         mainAxisSize: MainAxisSize.min,
 ```
