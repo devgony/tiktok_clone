@@ -1632,3 +1632,20 @@ Positioned(
   bottom: 0,
   width: MediaQuery.of(context).size.width,
 ```
+
+### Challenge: status circle & message input bar
+
+1. status circle
+
+- Goal  
+  ![goal_status_circle](/md_images/2023-03-14-18-08-59.png)
+- Mine  
+  ![my_status_circle](/md_images/2023-03-15-13-02-38.png)
+
+2. message input bar
+
+- Goal  
+  ![goal_input_bar](/md_images/2023-03-14-18-12-59.png)
+- Mine  
+  ![my_input_bar_normal](/md_images/2023-03-15-13-03-55.png)  
+  ![my_input_bar_insert](/md_images/2023-03-15-13-04-48.png)
