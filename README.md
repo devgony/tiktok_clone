@@ -1715,3 +1715,51 @@ SliverGrid(
   ),
 )
 ```
+
+## 12.4. SliverPersistentHeader
+
+- can pin silvers like header
+- pull down => maxExtent
+- pull up => minExtent
+
+```dart
+..
+SliverPersistentHeader(
+  delegate: CustomDelegate(),
+  floating: true,
+),
+..
+class CustomDelegate extends SliverPersistentHeaderDelegate {
+  @override
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return Container(
+      color: Colors.indigo,
+      child: const FractionallySizedBox(
+        heightFactor: 1,
+        child: Center(
+          child: Text(
+            'Title!!!!!',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  double get maxExtent => 150;
+
+  @override
+  double get minExtent => 80;
+
+  @override
+  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
+    return false;
+  }
+}
+```
+
+- [bonus]SliverToBoxAdapter: To put any widget, it should be wrapped with SilverToBoxAdapter
