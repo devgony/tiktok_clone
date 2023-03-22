@@ -1692,3 +1692,26 @@ return CustomScrollView(
 - pinned: true -> background color + FlexibleSpaceBar
 - snap + floating: true -> faster than floating, just snap at once
 - stretch: true -> ZoomIn or fade Bar
+
+## 12.3. SliverGrid
+
+```dart
+SliverGrid(
+  delegate: SliverChildBuilderDelegate(
+    childCount: 50,
+    (context, index) => Container(
+      color: Colors.blue[100 * (index % 9)],
+      child: Align(
+        alignment: Alignment.center,
+        child: Text("Item $index"),
+      ),
+    ),
+  ),
+  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+    maxCrossAxisExtent: 100,
+    mainAxisSpacing: Sizes.size20,
+    crossAxisSpacing: Sizes.size20,
+    childAspectRatio: 1,
+  ),
+)
+```
