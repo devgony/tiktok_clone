@@ -1685,3 +1685,10 @@ return CustomScrollView(
   ],
 );
 ```
+
+## 12.2. SliverAppBar
+
+- floating: true -> As soon as goes up, whole Bar shows up slowly
+- pinned: true -> background color + FlexibleSpaceBar
+- snap + floating: true -> faster than floating, just snap at once
+- stretch: true -> ZoomIn or fade Bar
