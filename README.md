@@ -1763,3 +1763,16 @@ class CustomDelegate extends SliverPersistentHeaderDelegate {
 ```
 
 - [bonus]SliverToBoxAdapter: To put any widget, it should be wrapped with SilverToBoxAdapter
+
+## 12.5. VerticalDivider
+
+```dart
+// user_profile_screen.dart
+VerticalDivider(
+  width: Sizes.size32,
+  thickness: Sizes.size1,
+  color: Colors.grey.shade400,
+  indent: Sizes.size14,
+  endIndent: Sizes.size14,
+),
+```
