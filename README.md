@@ -1766,6 +1766,8 @@ class CustomDelegate extends SliverPersistentHeaderDelegate {
 
 ## 12.5. VerticalDivider
 
+- VerticalDivider should have hight => use sizeBox
+
 ```dart
 // user_profile_screen.dart
 VerticalDivider(
@@ -1776,3 +1778,9 @@ VerticalDivider(
   endIndent: Sizes.size14,
 ),
 ```
+
+## 12.6. TabBar
+
+- FractionallySizedBox: width/height of parents \* fraction
+- Cannot use SlivGrid in Another slive -> use GridView builder
+- Can only scroll slivers but not grid view builder -> NeverScrollableScrollPhysic -> Nested scroll view(?)
