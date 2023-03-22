@@ -1651,3 +1651,37 @@ Positioned(
   ![my_input_bar_insert](/md_images/2023-03-15-13-04-48.png)
 
 # 12. USER PROFILE
+
+## 12.1. CustomScrollView
+
+- slivers: elements inside scroll view
+- collapsedHeight
+- flexibleSpace
+  - title
+- stretch mode
+
+```dart
+return CustomScrollView(
+  slivers: [
+    SliverAppBar(
+      floating: true,
+      stretch: true,
+      pinned: true,
+      backgroundColor: Colors.teal,
+      collapsedHeight: 80,
+      expandedHeight: 200,
+      flexibleSpace: FlexibleSpaceBar(
+        stretchModes: const [
+          StretchMode.blurBackground,
+          StretchMode.zoomBackground,
+        ],
+        background: Image.asset(
+          "assets/images/placeholder.jpg",
+          fit: BoxFit.cover,
+        ),
+        title: const Text("Hello!"),
+      ),
+    )
+  ],
+);
+```
