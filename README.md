@@ -1784,3 +1784,9 @@ VerticalDivider(
 - FractionallySizedBox: width/height of parents \* fraction
 - Cannot use SlivGrid in Another slive -> use GridView builder
 - Can only scroll slivers but not grid view builder -> NeverScrollableScrollPhysic -> Nested scroll view(?)
+
+## 12.7. PersistentTabBar
+
+- Replace CustomScrollView to NestedScrollView
+- SliverPersistentHeader to pin
+- SafeArea
