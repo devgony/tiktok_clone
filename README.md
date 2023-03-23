@@ -1790,3 +1790,31 @@ VerticalDivider(
 - Replace CustomScrollView to NestedScrollView
 - SliverPersistentHeader to pin
 - SafeArea
+
+### Challenge: youtube button & view numbers + pinned on image
+
+1. Youtube and dropdown button
+
+- FractionallySizedBox should be wrapped with Flexible to be in Row
+- To use HeightFactor of FractionallySizedBox, parent should have physical height like `SizedBox`
+- To set vertical & horizontal align center of Text, wrap with `Align` and `alignment: Alignment.center`
+
+- Goal
+
+![youtube-and-dropdown](/md_images/2023-03-23-09-23-11.png)
+
+- Mine
+
+![my-youtube-and-dropdown](/md_images/2023-03-23-10-21-16.png)
+
+2. Play icon and view numbers + pinned on image
+
+   - Stack > aspectRatio > image > positioned > Row
+
+- Goal
+
+![play-and-viewNumber](/md_images/2023-03-23-09-24-09.png)
+
+- Mine
+
+![my-play-and-viewNumber](/md_images/2023-03-27-10-02-46.png)

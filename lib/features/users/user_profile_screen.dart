@@ -137,26 +137,70 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                       ),
                     ),
                     Gaps.v14,
-                    FractionallySizedBox(
-                      widthFactor: 0.33,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: Sizes.size12,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).primaryColor,
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(Sizes.size4),
+                    SizedBox(
+                      height: Sizes.size40,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Flexible(
+                            child: FractionallySizedBox(
+                              widthFactor: 0.33,
+                              heightFactor: 1,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Theme.of(context).primaryColor,
+                                  borderRadius: const BorderRadius.all(
+                                    Radius.circular(Sizes.size4),
+                                  ),
+                                ),
+                                child: const Align(
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    'Follow',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
-                        child: const Text(
-                          'Follow',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
+                          Gaps.h2,
+                          Container(
+                            height: double.infinity,
+                            width: Sizes.size40,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: Colors.grey.shade400,
+                              width: Sizes.size1,
+                            )),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.youtube,
+                                size: Sizes.size20,
+                              ),
+                            ),
                           ),
-                          textAlign: TextAlign.center,
-                        ),
+                          Gaps.h2,
+                          Container(
+                            height: double.infinity,
+                            width: Sizes.size40,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                              color: Colors.grey.shade400,
+                              width: Sizes.size1,
+                            )),
+                            child: const Align(
+                              alignment: Alignment.center,
+                              child: FaIcon(
+                                FontAwesomeIcons.caretDown,
+                                size: Sizes.size20,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     Gaps.v14,
@@ -209,14 +253,59 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
                 ),
                 itemBuilder: (context, index) => Column(
                   children: [
-                    AspectRatio(
-                      aspectRatio: 9 / 14,
-                      child: FadeInImage.assetNetwork(
-                        fit: BoxFit.cover,
-                        placeholder: "assets/images/placeholder.jpg",
-                        image:
-                            "https://images.unsplash.com/photo-1673844969019-c99b0c933e90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
-                      ),
+                    Stack(
+                      children: [
+                        AspectRatio(
+                          aspectRatio: 9 / 14,
+                          child: FadeInImage.assetNetwork(
+                            fit: BoxFit.cover,
+                            placeholder: "assets/images/placeholder.jpg",
+                            image:
+                                "https://images.unsplash.com/photo-1673844969019-c99b0c933e90?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
+                          ),
+                        ),
+                        index == 0
+                            ? Positioned(
+                                top: Sizes.size4,
+                                left: Sizes.size4,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: Sizes.size4,
+                                    vertical: Sizes.size2,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Theme.of(context).primaryColor,
+                                    borderRadius: const BorderRadius.all(
+                                      Radius.circular(Sizes.size3),
+                                    ),
+                                  ),
+                                  child: const Text("Pinned",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      )),
+                                ),
+                              )
+                            : Container(),
+                        Positioned(
+                            bottom: Sizes.size4,
+                            left: Sizes.size4,
+                            child: Row(
+                              children: const [
+                                FaIcon(
+                                  FontAwesomeIcons.circlePlay,
+                                  size: Sizes.size20,
+                                  color: Colors.white,
+                                ),
+                                Gaps.h8,
+                                Text(
+                                  "4.1M",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ))
+                      ],
                     ),
                   ],
                 ),
