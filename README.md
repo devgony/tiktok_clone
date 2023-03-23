@@ -1818,3 +1818,18 @@ VerticalDivider(
 - Mine
 
 ![my-play-and-viewNumber](/md_images/2023-03-27-10-02-46.png)
+
+## 12.8. Conclusions
+
+### fix Home - scrolling video crash bug
+
+- `_onVisibilityChanged`
+  - all statefull widget has `mount`
+  - check if not mounted => return
+
+```dart
+//! ../video_post.dart
+void _onVisibilityChanged(VisibilityInfo info) {
+  if (!mounted) return;
+..
+```
