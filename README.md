@@ -1833,3 +1833,40 @@ void _onVisibilityChanged(VisibilityInfo info) {
   if (!mounted) return;
 ..
 ```
+
+# 13. SETTINGS
+
+## 13.0. ListWheelScrollView
+
+- ListWheelScrollView
+  - diameterRatio: diameter of wheel
+  - useMagnifier & magnification: zoom in
+  - offAxisFraction: left of right
+- CupertinoActivityIndicator: ios
+- CircularProgressIndicator.adaptive(): adaptive to divice(ios or android)
+
+```dart
+//! settings_screen.dart
+body: ListWheelScrollView(
+  diameterRatio: 1.5,
+  offAxisFraction: 1.5,
+  itemExtent: 200,
+  children: [
+    for (var x in [1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1])
+      FractionallySizedBox(
+        widthFactor: 1,
+        child: Container(
+          color: Colors.teal,
+          alignment: Alignment.center,
+          child: const Text(
+            'Pick me',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 39,
+            ),
+          ),
+        ),
+      )
+  ],
+));
+```
