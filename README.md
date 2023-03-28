@@ -1870,3 +1870,33 @@ body: ListWheelScrollView(
   ],
 ));
 ```
+
+## 13.1. AboutListTile
+
+- manual showAboutDialog or AboutListTile
+  - VIEW LICENSES: summarize
+
+### Manual showAboutDialog
+
+```dart
+ListTile(
+  onTap: () => showAboutDialog(
+    context: context,
+    applicationVersion: "1.0",
+    applicationLegalese: "All rights reseverd. Please dont copy me.",
+  ),
+  title: const Text(
+    "About",
+    style: TextStyle(
+      fontWeight: FontWeight.w600,
+    ),
+  ),
+  subtitle: const Text("About this app....."),
+),
+```
+
+### AboutListTile: showAboutDialog was already implemented
+
+```dart
+const AboutListTile(),
+```
