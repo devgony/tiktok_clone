@@ -1941,3 +1941,26 @@ ListTile(
   title: const Text("What is your birthday?"),
 ),
 ```
+
+## 13.3. SwitchListTile
+
+- Switch, CupertinoSwitch
+  - Switch.adaptive
+- SwitchListTile.adaptive
+- Checkbox
+- CheckboxListTile
+
+```dart
+SwitchListTile.adaptive(
+  value: _notifications,
+  onChanged: _onNotificationsChanged,
+  title: const Text("Enable notifications"),
+  subtitle: const Text("Enable notifications"),
+),
+CheckboxListTile(
+  activeColor: Colors.black,
+  value: _notifications,
+  onChanged: _onNotificationsChanged,
+  title: const Text("Enable notifications"),
+),
+```
