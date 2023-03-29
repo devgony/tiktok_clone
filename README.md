@@ -1903,9 +1903,10 @@ const AboutListTile(),
 
 ## 13.2. showDateRangePicker
 
-- showDataPicker
+- showDatePicker
 - showTimePicker
 - showDateRangePicker
+  - default color can conflict with PrimaryTheme -> use builder to set foreground, background color
 
 ```dart
 ListTile(
