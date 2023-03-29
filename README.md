@@ -2020,3 +2020,37 @@ ListTile(
   },
 ),
 ```
+
+## 13.5. CupertinoActionSheet
+
+- showCupertinoModalPopup: dismissable to bottom
+- isDefaultAction: bold
+- isDestructiveAction: red
+
+```dart
+ListTile(
+  title: const Text("Log out (iOS / Bottom)"),
+  textColor: Colors.red,
+  onTap: () {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) => CupertinoActionSheet(
+        title: const Text("Are you sure?"),
+        message: const Text("Please dooooont gooooo"),
+        actions: [
+          CupertinoActionSheetAction(
+            isDefaultAction: true,
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text("Not log out"),
+          ),
+          CupertinoActionSheetAction(
+            isDestructiveAction: true,
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text("Yes plz."),
+          )
+        ],
+      ),
+    );
+  },
+),
+```
