@@ -2055,3 +2055,81 @@ ListTile(
   },
 ),
 ```
+
+# 14. RESPONSIVE FLUTTER WEB
+
+# 14.1. OrientationBuilder
+
+- breakpoints from tailwind
+
+```dart
+class Breakpoints {
+  static const sm = 640;
+  static const md = 768;
+  static const lg = 1024;
+  static const xl = 1280;
+  static const xxl = 1536;
+}
+```
+
+- orientationBuilder
+
+```dart
+//! ../sign_up_screen.dart
+@override
+Widget build(BuildContext context) {
+    return builder: (context, orientation) {
+      return Scaffold(
+        ..
+```
+
+- collection if + ...[widget1, widget2]
+- box width infinity error => FractionallySizeBox? => wrap with Expanded
+
+```dart
+//! ../sign_up_screen.dart
+Expanded(
+  child: AuthButton(
+    icon: const FaIcon(FontAwesomeIcons.user),
+    text: "Use email & password",
+    onTap: _onEmailTap,
+  ),
+),
+```
+
+- lock orientation.landscape with early return
+
+```dart
+//! ../sign_up_screen.dart
+if (orientation == Orientation.landscape) {
+  return const Scaffold(
+    body: Center(
+      child: Text("Please use portrait mode"),
+    ),
+  );
+}
+```
+
+### Before runApp
+
+1. make sure connection between widget and engine is initialized
+
+```dart
+WidgetsFlutterBinding.ensureInitialized();
+```
+
+2. SystemChrome
+   - lock portrait
+   - statusbar black or white => good for videos page
+
+```dart
+await SystemChrome.setPreferredOrientations(
+  [
+    DeviceOrientation.portraitUp,
+  ],
+);
+
+SystemChrome.setSystemUIOverlayStyle(
+  SystemUiOverlayStyle.dark,
+);
+```
