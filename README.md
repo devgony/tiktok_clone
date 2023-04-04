@@ -2133,3 +2133,17 @@ SystemChrome.setSystemUIOverlayStyle(
   SystemUiOverlayStyle.dark,
 );
 ```
+
+## 14.2. kIsWeb
+
+- `_selectedIndex: 0` => `_videoElement error` => if web, should be muted due to abuse
+- constant k + isWeb
+
+```dart
+//! ../video_post.dart
+void _initVideoPlayer() async {
+  ..
+  if (kIsWeb) {
+    await _videoPlayerController.setVolume(0);
+  }
+```
