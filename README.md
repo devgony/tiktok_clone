@@ -2159,3 +2159,14 @@ void _initVideoPlayer() async {
 2. unmute
 
    ![unmute](/md_images/2023-04-04-17-55-35.png)
+
+## 14.3. MediaQuery
+
+```dart
+//! lib/features/discover/discover_screen.dart
+Widget build(BuildContext context) {
+  final width = MediaQuery.of(context).size.width;
+  ..
+  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: width > Breakpoints.lg ? 5 : 2,
+```
