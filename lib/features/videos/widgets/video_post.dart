@@ -101,6 +101,15 @@ class _VideoPostState extends State<VideoPost>
     });
   }
 
+  void _onMuteTap() {
+    if (_videoPlayerController.value.volume == 0) {
+      _videoPlayerController.setVolume(0.1);
+    } else {
+      _videoPlayerController.setVolume(0);
+    }
+    setState(() {});
+  }
+
   void _onCommentsTap(BuildContext context) async {
     if (_videoPlayerController.value.isPlaying) {
       _onTogglePause();
@@ -235,6 +244,15 @@ class _VideoPostState extends State<VideoPost>
             right: 10,
             child: Column(
               children: [
+                GestureDetector(
+                  onTap: () => _onMuteTap(),
+                  child: VideoButton(
+                    icon: _videoPlayerController.value.volume > 0
+                        ? FontAwesomeIcons.volumeHigh
+                        : FontAwesomeIcons.volumeXmark,
+                  ),
+                ),
+                Gaps.v24,
                 const CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.black,

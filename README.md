@@ -2147,3 +2147,15 @@ void _initVideoPlayer() async {
     await _videoPlayerController.setVolume(0);
   }
 ```
+
+### Challenge: implement mute button on video_post
+
+- implemented result
+
+1. mute
+
+   ![mute](/md_images/2023-04-04-17-55-19.png)
+
+2. unmute
+
+   ![unmute](/md_images/2023-04-04-17-55-35.png)
