@@ -2170,3 +2170,10 @@ Widget build(BuildContext context) {
   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: width > Breakpoints.lg ? 5 : 2,
 ```
+
+## 14.4. LayoutBuilder
+
+- MediaQuery: screen size
+- LayoutBuilder: how big this container can be
+- Usage: if there are cases which cannot be handled by only windows
+  - photo size less than 300 can be in both of grid-col-2 and grid-col-5
