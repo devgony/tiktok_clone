@@ -64,39 +64,44 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           elevation: 1,
-          title: TextField(
-            controller: _textEditingController,
-            onChanged: _onSearchChanged,
-            onSubmitted: _onSearchSubmitted,
-            decoration: InputDecoration(
-              hintText: "Search",
-              hintStyle: const TextStyle(color: Colors.grey),
-              filled: true,
-              fillColor: Colors.grey.shade200,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: Sizes.size12,
-              ),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(
-                  Sizes.size12,
+          title: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: Breakpoints.sm,
+            ),
+            child: TextField(
+              controller: _textEditingController,
+              onChanged: _onSearchChanged,
+              onSubmitted: _onSearchSubmitted,
+              decoration: InputDecoration(
+                hintText: "Search",
+                hintStyle: const TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.grey.shade200,
+                contentPadding: const EdgeInsets.symmetric(
+                  horizontal: Sizes.size12,
                 ),
-                borderSide: BorderSide.none,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(
+                    Sizes.size12,
+                  ),
+                  borderSide: BorderSide.none,
+                ),
+                prefixIcon: const Icon(
+                  FontAwesomeIcons.magnifyingGlass,
+                  color: Colors.grey,
+                  size: 20,
+                ),
+                suffixIcon: _writing
+                    ? GestureDetector(
+                        onTap: _onXmarkTap,
+                        child: const Icon(
+                          FontAwesomeIcons.solidCircleXmark,
+                          color: Colors.grey,
+                          size: 20,
+                        ),
+                      )
+                    : null,
               ),
-              prefixIcon: const Icon(
-                FontAwesomeIcons.magnifyingGlass,
-                color: Colors.grey,
-                size: 20,
-              ),
-              suffixIcon: _writing
-                  ? GestureDetector(
-                      onTap: _onXmarkTap,
-                      child: const Icon(
-                        FontAwesomeIcons.solidCircleXmark,
-                        color: Colors.grey,
-                        size: 20,
-                      ),
-                    )
-                  : null,
             ),
           ),
           bottom: TabBar(

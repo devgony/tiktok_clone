@@ -2177,3 +2177,13 @@ Widget build(BuildContext context) {
 - LayoutBuilder: how big this container can be
 - Usage: if there are cases which cannot be handled by only windows
   - photo size less than 300 can be in both of grid-col-2 and grid-col-5
+
+## 14.5. ConstrainedBox
+
+```dart
+title: ConstrainedBox(
+  constraints: const BoxConstraints(
+    maxWidth: Breakpoints.sm,
+```
+
+- `Container` also has maxWidth
