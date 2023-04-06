@@ -2058,7 +2058,7 @@ ListTile(
 
 # 14. RESPONSIVE FLUTTER WEB
 
-# 14.1. OrientationBuilder
+## 14.1. OrientationBuilder
 
 - breakpoints from tailwind
 
@@ -2181,9 +2181,35 @@ Widget build(BuildContext context) {
 ## 14.5. ConstrainedBox
 
 ```dart
+//! discover_screen.dart
 title: ConstrainedBox(
   constraints: const BoxConstraints(
     maxWidth: Breakpoints.sm,
 ```
 
 - `Container` also has maxWidth
+
+## 14.6. Code Challenge
+
+### Profile
+
+- Render horizontal profile widgets(id, follow, youtube, following, description..)
+- GridView pictures from grid-col-3 to 5
+
+#### width =< 768
+
+![profile_width_less_than_768](/md_images/2023-04-06-09-56-37.png)
+
+#### width > 768
+
+![profile_width_more_than_768](/md_images/2023-04-06-09-57-20.png)
+
+### Setting
+
+- ConstrainedBox
+  ![setting_constrained](/md_images/2023-04-06-09-58-20.png)
+
+### Video comments
+
+- showModalBottomSheet.constraints
+  ![video_comments_constrained](/md_images/2023-04-06-09-59-06.png)
