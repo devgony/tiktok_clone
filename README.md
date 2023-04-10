@@ -2213,3 +2213,43 @@ title: ConstrainedBox(
 
 - showModalBottomSheet.constraints
   ![video_comments_constrained](/md_images/2023-04-06-09-59-06.png)
+
+# 15. DARK MODE
+
+- toggle dark mode: shift + ⌘ + a
+
+## 15.1. ThemeMode
+
+### using default color => ThemeData
+
+### highly customized
+
+1. utils.dart.isDartMode => ternary
+
+```dart
+//! utils.dart
+bool isDarkMode(BuildContext context) =>
+    MediaQuery.of(context).platformBrightness == Brightness.dark;
+```
+
+```dart
+//! sign_up_screen.dart
+bottomNavigationBar: BottomAppBar(
+  color: isDarkMode(context) ? null : Colors.grey.shade50,
+```
+
+2. use black + opacity
+
+```dart
+//! sign_up_screen.dart
+const Opacity(
+  opacity: 0.7,
+  child: Text(
+    "Create a profile, follow other accounts, make your own videos, and more.",
+    style: TextStyle(
+      fontSize: Sizes.size16,
+    ),
+    textAlign: TextAlign.center,
+  ),
+),
+```
