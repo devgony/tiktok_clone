@@ -2283,3 +2283,31 @@ Theme.of(context)
 .headlineSmall!
 .copyWith(color: Colors.red)
 ```
+
+## 15.3. Google Fonts
+
+- set textTheme from lib
+
+```dart
+//! main.dart
+return MaterialApp(
+  theme: ThemeData(
+    textTheme: GoogleFonts.itimTextTheme(),
+  ..
+  darkTheme: ThemeData(
+    textTheme: GoogleFonts.itimTextTheme(
+      ThemeData(brightness: Brightness.dark).textTheme,
+    ),
+```
+
+- use specific font different with theme
+
+```dart
+//! sign_up_screen.dart
+GoogleFonts.abrilFatface(
+  textStyle: const TextStyle(
+    fontSize: Sizes.size24,
+    fontWeight: FontWeight.w700,
+  ),
+),
+```
