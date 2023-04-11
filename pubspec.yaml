@@ -38,6 +38,7 @@ dependencies:
   font_awesome_flutter: 10.3.0
   video_player: ^2.5.1
   visibility_detector: ^0.3.3
+  google_fonts: 4.0.1
 
 dev_dependencies:
   flutter_test:

@@ -2253,3 +2253,33 @@ const Opacity(
   ),
 ),
 ```
+
+## 15.2. TextTheme
+
+- google font
+
+```yaml
+#! pubspec.yaml
+dependencies:
+  google_fonts: 4.0.1
+```
+
+- [material design font guide](https://m2.material.io/design/typography/the-type-system.html#type-scale)
+- TextTheme
+
+```dart
+textTheme: TextTheme(
+  displayLarge: GoogleFonts.openSans(
+      fontSize: 95, fontWeight: FontWeight.w300, letterSpacing: -1.5),
+      ..
+```
+
+- copyWith: extends TextTheme
+
+```dart
+//! sign_up_screen.dart
+Theme.of(context)
+.textTheme
+.headlineSmall!
+.copyWith(color: Colors.red)
+```
