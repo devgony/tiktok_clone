@@ -2311,3 +2311,16 @@ GoogleFonts.abrilFatface(
   ),
 ),
 ```
+
+## 15.4. Typography
+
+- typography: server colors and font without geometry like weight... => fit with our custom geometry codes
+
+```dart
+return MaterialApp(
+  theme: ThemeData(
+    textTheme: Typography.blackMountainView,
+  ..
+  darkTheme: ThemeData(
+    textTheme: Typography.whiteMountainView,
+```
