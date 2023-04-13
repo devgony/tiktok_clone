@@ -2350,3 +2350,16 @@ darkTheme: ThemeData(
     cursorColor: Color(0xFFE9435A),
   ),
 ```
+
+## 15.6. Dark Mode part Two
+
+- Scaffold, AppBar has custom background -> remove
+- listTileTheme
+
+```dart
+//! main.dart
+theme: ThemeData(
+  listTileTheme: const ListTileThemeData(
+            iconColor: Colors.black,
+  ),
+```
