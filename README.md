@@ -2324,3 +2324,29 @@ return MaterialApp(
   darkTheme: ThemeData(
     textTheme: Typography.whiteMountainView,
 ```
+
+## 15.5. Dark Mode part One
+
+- upgrade to 3.7.1 to use TabBarTheme.indicatorColor
+
+```
+flutter upgrade
+```
+
+- TabBarTheme
+  - lightTheme.tabBarTheme.indicatorColor => bug?
+
+```dart
+//! main.dart
+theme: ThemeData(
+  tabBarTheme: TabBarTheme(
+    labelColor: Colors.black,
+    unselectedLabelColor: Colors.grey.shade500,
+    indicatorColor: Colors.black,
+..
+darkTheme: ThemeData(
+  tabBarTheme: const TabBarTheme(indicatorColor: Colors.white),
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: Color(0xFFE9435A),
+  ),
+```

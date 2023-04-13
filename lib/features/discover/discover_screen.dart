@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
+import 'package:tiktok_clone/utils.dart';
 
 import '../../constants/breakpoints.dart';
 
@@ -58,6 +59,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final isDark = isDarkMode(context);
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(
@@ -74,9 +76,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               onSubmitted: _onSearchSubmitted,
               decoration: InputDecoration(
                 hintText: "Search",
-                hintStyle: const TextStyle(color: Colors.grey),
+                hintStyle: TextStyle(
+                  color: isDark ? Colors.grey.shade300 : Colors.grey.shade600,
+                ),
                 filled: true,
-                fillColor: Colors.grey.shade200,
+                fillColor: isDark ? Colors.grey.shade800 : Colors.grey.shade200,
                 contentPadding: const EdgeInsets.symmetric(
                   horizontal: Sizes.size12,
                 ),
@@ -94,9 +98,11 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                 suffixIcon: _writing
                     ? GestureDetector(
                         onTap: _onXmarkTap,
-                        child: const Icon(
+                        child: Icon(
                           FontAwesomeIcons.solidCircleXmark,
-                          color: Colors.grey,
+                          color: isDark
+                              ? Colors.grey.shade300
+                              : Colors.grey.shade600,
                           size: 20,
                         ),
                       )
@@ -115,9 +121,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               fontWeight: FontWeight.w600,
               fontSize: Sizes.size16,
             ),
-            indicatorColor: Colors.black,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey.shade500,
+            indicatorColor: Theme.of(context).tabBarTheme.indicatorColor,
             tabs: [
               for (var tab in tabs)
                 Tab(
@@ -169,42 +173,44 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       ),
                     ),
                     Gaps.v8,
-                    if (constraints.maxWidth < 200 ||
-                        constraints.maxWidth > 250)
-                      DefaultTextStyle(
-                        style: TextStyle(
-                          color: Colors.grey.shade600,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        child: Row(
-                          children: [
-                            const CircleAvatar(
-                              radius: 12,
-                              backgroundImage: NetworkImage(
-                                "https://avatars.githubusercontent.com/u/51254761?v=4",
-                              ),
+                    // if (constraints.maxWidth < 200 ||
+                    // constraints.maxWidth > 250)
+                    DefaultTextStyle(
+                      style: TextStyle(
+                        color: isDark
+                            ? Colors.grey.shade300
+                            : Colors.grey.shade600,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      child: Row(
+                        children: [
+                          const CircleAvatar(
+                            radius: 12,
+                            backgroundImage: NetworkImage(
+                              "https://avatars.githubusercontent.com/u/51254761?v=4",
                             ),
-                            Gaps.h4,
-                            const Expanded(
-                              child: Text(
-                                "My avatar is going to be very long",
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
+                          ),
+                          Gaps.h4,
+                          const Expanded(
+                            child: Text(
+                              "My avatar is going to be very long",
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            Gaps.h4,
-                            FaIcon(
-                              FontAwesomeIcons.heart,
-                              size: Sizes.size16,
-                              color: Colors.grey.shade600,
-                            ),
-                            Gaps.h2,
-                            const Text(
-                              "2.5M",
-                            )
-                          ],
-                        ),
-                      )
+                          ),
+                          Gaps.h4,
+                          FaIcon(
+                            FontAwesomeIcons.heart,
+                            size: Sizes.size16,
+                            color: Colors.grey.shade600,
+                          ),
+                          Gaps.h2,
+                          const Text(
+                            "2.5M",
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 ),
               ),
