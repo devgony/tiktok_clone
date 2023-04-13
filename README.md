@@ -2363,3 +2363,14 @@ theme: ThemeData(
             iconColor: Colors.black,
   ),
 ```
+
+## 15.7. Dark Mode part Three
+
+- create child Scafoold and set backgroundColor to sync with AppBar color
+
+```dart
+//! use_profile_screen.dart
+return Scaffold(
+  backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
+  body: SafeArea(
+```
