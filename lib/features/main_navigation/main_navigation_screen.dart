@@ -65,53 +65,58 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
           )
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
+      bottomNavigationBar: Container(
         color: _selectedIndex == 0 || isDark ? Colors.black : Colors.white,
         child: Padding(
-          padding: const EdgeInsets.all(Sizes.size12),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              NavTab(
-                text: "Home",
-                isSelected: _selectedIndex == 0,
-                icon: FontAwesomeIcons.house,
-                selectedIcon: FontAwesomeIcons.house,
-                onTap: () => _onTap(0),
-                selectedIndex: _selectedIndex,
-              ),
-              NavTab(
-                text: "Discover",
-                isSelected: _selectedIndex == 1,
-                icon: FontAwesomeIcons.compass,
-                selectedIcon: FontAwesomeIcons.solidCompass,
-                onTap: () => _onTap(1),
-                selectedIndex: _selectedIndex,
-              ),
-              Gaps.h24,
-              GestureDetector(
-                child: PostVideoButton(
-                    onTap: _onPostVideoButtonTap,
-                    inverted: _selectedIndex != 0),
-              ),
-              Gaps.h24,
-              NavTab(
-                text: "Inbox",
-                isSelected: _selectedIndex == 3,
-                icon: FontAwesomeIcons.message,
-                selectedIcon: FontAwesomeIcons.solidMessage,
-                onTap: () => _onTap(3),
-                selectedIndex: _selectedIndex,
-              ),
-              NavTab(
-                text: "Profile",
-                isSelected: _selectedIndex == 4,
-                icon: FontAwesomeIcons.user,
-                selectedIcon: FontAwesomeIcons.solidUser,
-                onTap: () => _onTap(4),
-                selectedIndex: _selectedIndex,
-              ),
-            ],
+          padding: const EdgeInsets.only(
+            bottom: Sizes.size32,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(Sizes.size12),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                NavTab(
+                  text: "Home",
+                  isSelected: _selectedIndex == 0,
+                  icon: FontAwesomeIcons.house,
+                  selectedIcon: FontAwesomeIcons.house,
+                  onTap: () => _onTap(0),
+                  selectedIndex: _selectedIndex,
+                ),
+                NavTab(
+                  text: "Discover",
+                  isSelected: _selectedIndex == 1,
+                  icon: FontAwesomeIcons.compass,
+                  selectedIcon: FontAwesomeIcons.solidCompass,
+                  onTap: () => _onTap(1),
+                  selectedIndex: _selectedIndex,
+                ),
+                Gaps.h24,
+                GestureDetector(
+                  child: PostVideoButton(
+                      onTap: _onPostVideoButtonTap,
+                      inverted: _selectedIndex != 0),
+                ),
+                Gaps.h24,
+                NavTab(
+                  text: "Inbox",
+                  isSelected: _selectedIndex == 3,
+                  icon: FontAwesomeIcons.message,
+                  selectedIcon: FontAwesomeIcons.solidMessage,
+                  onTap: () => _onTap(3),
+                  selectedIndex: _selectedIndex,
+                ),
+                NavTab(
+                  text: "Profile",
+                  isSelected: _selectedIndex == 4,
+                  icon: FontAwesomeIcons.user,
+                  selectedIcon: FontAwesomeIcons.solidUser,
+                  onTap: () => _onTap(4),
+                  selectedIndex: _selectedIndex,
+                ),
+              ],
+            ),
           ),
         ),
       ),

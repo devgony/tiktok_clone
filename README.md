@@ -2374,3 +2374,11 @@ return Scaffold(
   backgroundColor: Theme.of(context).appBarTheme.backgroundColor,
   body: SafeArea(
 ```
+
+## 15.8. Material 3 Migration
+
+- BottomAppBar not any more => use Container + more padding
+- AppBar color -> sufaceTintColor: cOlors.white
+- sync titleTextStyle to DarkTheme
+- icon default purple(labelColor)
+- text overflown
