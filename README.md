@@ -2382,3 +2382,8 @@ return Scaffold(
 - sync titleTextStyle to DarkTheme
 - icon default purple(labelColor)
 - text overflown
+
+## 15.9. Conclusions
+
+- minimized external lib but use [flex_color_scheme](https://pub.dev/packages/flex_color_scheme)
+- [flex_color_scheme playground](https://rydmike.com/flexcolorscheme/themesplayground-v7/#/)
