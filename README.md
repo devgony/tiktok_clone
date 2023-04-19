@@ -2387,3 +2387,68 @@ return Scaffold(
 
 - minimized external lib but use [flex_color_scheme](https://pub.dev/packages/flex_color_scheme)
 - [flex_color_scheme playground](https://rydmike.com/flexcolorscheme/themesplayground-v7/#/)
+
+# 16. APP TRANSLATION
+
+## 16.1. Localizations
+
+### refactoring
+
+- kDebugMode
+
+```dart
+//! settings_screen.dart
+if (kDebugMode) {
+  print(booking);
+}
+```
+
+- check isMounted
+
+```dart
+//! settings_screen.dart
+if (!mounted) return;
+
+final time = await showTimePicker(
+  context: context,
+  initialTime: TimeOfDay.now(),
+);
+```
+
+### localization
+
+- install intl
+
+```yaml
+#! pubspec.yaml
+dependencies:
+  flutter_localizations:
+    sdk: flutter
+
+  intl: any
+```
+
+```dart
+//! main.dart
+return MaterialApp(
+  ..
+  localizationsDelegates: const [
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ],
+  supportedLocales: const [
+    Locale("en"),
+    Locale("ko"),
+    Locale("es"),
+  ],
+```
+
+- change language
+
+```dart
+return Localizations.override(
+  context: context,
+  locale: const Locale('ko'),
+  child: Scaffold(
+```
