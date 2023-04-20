@@ -2529,6 +2529,12 @@ Widget build(BuildContext context) {
 }
 ```
 
+```dart
+//! sign_up_screen.dart
+Text(
+  AppLocalizations.of(context)!.signUpTitle("TikTok"),
+```
+
 ## 16.4. Flutter Intl
 
 - rollback
