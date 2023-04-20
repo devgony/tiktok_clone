@@ -2453,7 +2453,7 @@ return Localizations.override(
   child: Scaffold(
 ```
 
-## 16.2 l10n
+## 16.2. l10n
 
 - install l10n
 
@@ -2491,3 +2491,40 @@ Widget build(BuildContext context) {
 - `flutter gen-l10n`
 
   generate localizations at `.dart_tool/flutter_gen/gen_l10n/*`
+
+## 16.3. AppLocalizations
+
+- supportedLocales
+
+```diff
+- localizationsDelegates: const [
+-   AppLocalizations.delegate,
+-   GlobalMaterialLocalizations.delegate,
+-   GlobalCupertinoLocalizations.delegate,
+-   GlobalWidgetsLocalizations.delegate,
+- ],
+- supportedLocales: const [
+-   Locale("en"),
+-   Locale("ko"),
+- ],
++ localizationsDelegates: AppLocalizations.localizationsDelegates,
++ supportedLocales: AppLocalizations.supportedLocales,
+```
+
+- placeholder `{}` + description
+
+```
+//! intl_en.arb
+{
+    "signUpTitle": "Sign up for {nameOfTheApp}",
+    "@signUpTitle": {
+        "description":"The title people see when they open the app for the first time.",
+        "placeholders": {
+            "nameOfTheApp": {
+                "type":"String",
+                "example":"TikTok"
+            }
+        }
+    }
+}
+```
