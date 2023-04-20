@@ -2641,3 +2641,22 @@ S.of(context).logIn("female"),
 
 "commentTitle": "{value} {value2, plural, =1{comment} other{comments}}", // numbers + plural
 ```
+
+## 16.7. Date l10n
+
+- [DateFormat](https://api.flutter.dev/flutter/intl/DateFormat-class.html)
+
+```json
+//! lib/l10n/intl_en.arb
+  "signUpTitle": "Sign up for {nameOfTheApp} {when}",
+  "@signUpTitle": {
+    "description": "The title people see when they open the app for the first time.",
+    "placeholders": {
+      "nameOfTheApp": {
+        ..
+      },
+      "when": {
+        "type":"DateTime",
+        "format": "💖 LLLL 😱 Hm",
+        "isCustomDateFormat":"true"
+```
