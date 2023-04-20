@@ -2452,3 +2452,42 @@ return Localizations.override(
   locale: const Locale('ko'),
   child: Scaffold(
 ```
+
+## 16.2 l10n
+
+- install l10n
+
+```yaml
+#! touch l10n.yaml
+arb-dir: lib/intl
+template-arb-file: intl_en.arb
+output-localization-file: intl_generated.dart
+
+#! mkdir -p lib/intl/
+#! touch lib/intl/intl_en.arb
+{
+    "signUpTitle":"Sign up for TikTok"
+}
+
+#! touch lib/intl/intl_ko.arb
+{
+    "signUpTitle":"TikTok에 가입하세요"
+}
+
+#! pubspec.yaml
+flutter:
+  generate: true
+```
+
+- add delegate
+
+```dart
+Widget build(BuildContext context) {
+  return MaterialApp(
+      ..
+      AppLocalizations.delegate,
+```
+
+- `flutter gen-l10n`
+
+  generate localizations at `.dart_tool/flutter_gen/gen_l10n/*`
