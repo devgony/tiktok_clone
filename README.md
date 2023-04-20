@@ -2587,3 +2587,37 @@ return MaterialApp(
 //! sign_up_screen.dart
 S.of(context).signUpTitle("TikTok"),
 ```
+
+## 16.5. Pluralize and Select
+
+- change language
+
+```dart
+//! main.dart
+Widget build(BuildContext context) {
+  S.load(const Locale("en"));
+```
+
+- plural
+
+```
+# intl_en.arb
+"signUpSubtitle": "Create a profile, follow other accounts, make your own {videoCount, plural, =0{no videos} =1{video} other{videos}}, and more.",
+```
+
+```dart
+//! sign_up_screen.dart
+S.of(context).signUpSubtitle(11),
+```
+
+- select
+
+```
+# intl_en.arb
+"logIn": "Log in {gender, select, male{sir} female{madam} other{human}}."
+```
+
+```dart
+//! sign_up_screen.dart
+S.of(context).logIn("female"),
+```
