@@ -2621,3 +2621,23 @@ S.of(context).signUpSubtitle(11),
 //! sign_up_screen.dart
 S.of(context).logIn("female"),
 ```
+
+## 16.6. Numbers l10n
+
+- numbers
+
+```json
+//! intl_en.arb
+"likeCount": "{potato}",
+"@likeCount": {
+  "description": "Anything you want",
+  "placeholders": {
+    "potato": {
+      "type": "int",
+      "format": "compact"
+    }
+  }
+},
+
+"commentTitle": "{value} {value2, plural, =1{comment} other{comments}}", // numbers + plural
+```

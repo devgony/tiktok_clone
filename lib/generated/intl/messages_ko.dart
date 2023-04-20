@@ -20,21 +20,31 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ko';
 
-  static String m0(gender) => "로그인";
+  static String m0(potato) => "${potato}";
 
-  static String m2(videoCount) => "프로필을 생성하고, 다른 계정을 팔로우하고 자신의 비디오를 만들어보세요.";
+  static String m1(value, value2) =>
+      "${value} ${Intl.plural(value2, one: 'comment', other: 'comments')}";
 
-  static String m3(nameOfTheApp) => "${nameOfTheApp}에 가입하세요";
+  static String m2(potato) => "${potato}";
+
+  static String m3(gender) => "로그인";
+
+  static String m5(videoCount) => "프로필을 생성하고, 다른 계정을 팔로우하고 자신의 비디오를 만들어보세요.";
+
+  static String m6(nameOfTheApp) => "${nameOfTheApp}에 가입하세요";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "alreadyHaveAnAccount":
             MessageLookupByLibrary.simpleMessage("계정이 있으신가요?"),
         "appleButton": MessageLookupByLibrary.simpleMessage("Apple로 계속하기"),
+        "commentCount": m0,
+        "commentTitle": m1,
         "emailPasswordButton":
             MessageLookupByLibrary.simpleMessage("이메일 또는 비밀번호로 가입하기"),
-        "logIn": m0,
-        "signUpSubtitle": m2,
-        "signUpTitle": m3
+        "likeCount": m2,
+        "logIn": m3,
+        "signUpSubtitle": m5,
+        "signUpTitle": m6
       };
 }
