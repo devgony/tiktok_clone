@@ -2528,3 +2528,62 @@ Widget build(BuildContext context) {
     }
 }
 ```
+
+## 16.4. Flutter Intl
+
+- rollback
+
+```
+rm l10n.yaml
+```
+
+- install flutter intl extension and..
+
+```yaml
+#! pubspec.yaml
+flutter_intl:
+  enabled: true
+```
+
+save -> lib/{generated, l10n} is created.
+
+```
+cat lib/intl/intl_en.arb > lib/l10n/intl_en.arb
+```
+
+- create arb file by extension
+
+  > Command palette > Flutter Intl: Add locale
+
+```
+cat lib/intl/intl_ko.arb > lib/l10n/intl_ko.arb
+rm -r lib/intl
+```
+
+- Use l10n with `S`
+
+```diff
+#! main.dart
++ import 'package:tiktok_clone/generated/l10n.dart';
+return MaterialApp(
+  ..
+- localizationsDelegates: AppLocalizations.localizationsDelegates,
+- supportedLocales: AppLocalizations.supportedLocales,
++ localizationsDelegates: const [
++   S.delegate,
++   GlobalWidgetsLocalizations.delegate,
++   GlobalCupertinoLocalizations.delegate,
++   GlobalMaterialLocalizations.delegate,
++ ],
++ supportedLocales: const [
++   Locale('en'),
++   Locale('ko'),
++ ],
+```
+
+- on String, code action => Extract ARB
+
+```dart
+//! sign_up_screen.dart
+S.of(context).signUpTitle("TikTok"),
+```
