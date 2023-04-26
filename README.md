@@ -2757,3 +2757,51 @@ void _onEmailTap(BuildContext context) {
   Navigator.of(context).pushNamed(UsernameScreen.routeName);
 }
 ```
+
+## 17.4. pushNamed Args
+
+1. legacy `MaterialPageRoute` version
+
+- context as a 1st arg is possible instead of `Navigator.of(context).push..`
+
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => const EmailScreen(username: _username),
+  ),
+);
+```
+
+2. `pushName` version
+
+- define type EmailScreenParams
+
+```dart
+class EmailScreenArgs {
+  final String username;
+
+  EmailScreenArgs({required this.username});
+}
+```
+
+- send arguments
+
+```dart
+//! username_screen.dart
+Navigator.pushNamed(
+  context,
+  EmailScreen.routeName,
+  arguments: EmailScreenArgs(username: _username),
+);
+```
+
+- get args + type casting
+
+```dart
+//! email_screen.dart
+final args = ModalRoute.of(context)!.settings.arguments as EmailScreenArgs;
+..
+Text(
+  "What is your email, ${args.username}?",
+```
