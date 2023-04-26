@@ -2666,3 +2666,29 @@ S.of(context).logIn("female"),
         "format": "💖 LLLL 😱 Hm",
         "isCustomDateFormat":"true"
 ```
+
+# 17. NAVIGATOR DEEP DIVE
+
+## 17.1. await push()
+
+- Usage: send to a page and comeback with result
+- async push and await for result
+
+```dart
+void _onLoginTap(BuildContext context) async {
+  final result = await Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => const LoginScreen(),
+    ),
+  );
+  print(result);
+}
+```
+
+- pop(go back) with result
+
+```dart
+void _onSignUpTap(BuildContext context) {
+  Navigator.of(context).pop("Hello!");
+}
+```
