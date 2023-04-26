@@ -2692,3 +2692,45 @@ void _onSignUpTap(BuildContext context) {
   Navigator.of(context).pop("Hello!");
 }
 ```
+
+## 17.2. PageRouteBuilder
+
+: build custom animation
+
+- transitionDuration
+- FadeTransition
+- ScaleTransition
+  - alignment
+- SlideTransition
+  - offsetAnimation
+  - opacityAnimation
+
+```dart
+void _onEmailTap(BuildContext context) {
+  Navigator.of(context).push(
+    PageRouteBuilder(
+      transitionDuration: const Duration(seconds: 1),
+      reverseTransitionDuration: const Duration(seconds: 1),
+      pageBuilder: (context, animation, secondaryAnimation) =>
+          const UsernameScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        final offsetAnimation = Tween(
+          begin: const Offset(1, 0),
+          end: Offset.zero,
+        ).animate(animation);
+        final opacityAnimation = Tween(
+          begin: 0.5,
+          end: 1.0,
+        ).animate(animation);
+        return SlideTransition(
+          position: offsetAnimation,
+          child: FadeTransition(
+            opacity: opacityAnimation,
+            child: child,
+          ),
+        );
+      },
+    ),
+  );
+}
+```
