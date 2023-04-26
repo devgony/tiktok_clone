@@ -2734,3 +2734,26 @@ void _onEmailTap(BuildContext context) {
   );
 }
 ```
+
+## 17.3. pushNamed
+
+- define static routeName inside each widgets
+
+```dart
+//! main.dart
+initialRoute: SignUpScreen.routeName,
+routes: {
+  SignUpScreen.routeName: (context) => const SignUpScreen(),
+  UsernameScreen.routeName: (context) => const UsernameScreen(),
+  LoginScreen.routeName: (context) => const LoginScreen(),
+},
+```
+
+- push by route
+
+```dart
+//! sign_up_screen.dart
+void _onEmailTap(BuildContext context) {
+  Navigator.of(context).pushNamed(UsernameScreen.routeName);
+}
+```
