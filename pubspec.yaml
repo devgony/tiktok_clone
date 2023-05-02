@@ -44,6 +44,8 @@ dependencies:
   visibility_detector: ^0.3.3
   google_fonts: 4.0.1
 
+  go_router: 6.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

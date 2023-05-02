@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:tiktok_clone/router.dart';
 
 import 'constants/sizes.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
-
-import 'features/authentication/email_screen.dart';
-import 'features/authentication/login_screen.dart';
-import 'features/authentication/sign_up_screen.dart';
-import 'features/authentication/username_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -31,7 +27,8 @@ class TikTokApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // S.load(const Locale("en"));
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       title: 'TikTok Clone',
       localizationsDelegates: const [
         S.delegate,
@@ -110,13 +107,6 @@ class TikTokApp extends StatelessWidget {
       ),
       // home: const MainNavigationScreen(),
       // home: const SignUpScreen(),
-      initialRoute: SignUpScreen.routeName,
-      routes: {
-        SignUpScreen.routeName: (context) => const SignUpScreen(),
-        UsernameScreen.routeName: (context) => const UsernameScreen(),
-        LoginScreen.routeName: (context) => const LoginScreen(),
-        EmailScreen.routeName: (context) => const EmailScreen()
-      },
     );
   }
 }

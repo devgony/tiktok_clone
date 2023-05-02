@@ -2805,3 +2805,68 @@ final args = ModalRoute.of(context)!.settings.arguments as EmailScreenArgs;
 Text(
   "What is your email, ${args.username}?",
 ```
+
+# 18. NAVIGATOR 2
+
+## 18.1. GoRouter
+
+- pushName (named router) is good for flutter web, but it does not support re-forward
+- => use GoRouter
+
+```yaml
+dependencies:
+  ..
+  go_router: 6.0.2
+```
+
+```dart
+//! touch lib/router.dart
+final router = GoRouter(
+  routes: [
+    GoRoute(
+      path: SignUpScreen.routeName,
+      builder: (context, state) => const SignUpScreen(),
+    ),
+    GoRoute(
+      path: LoginScreen.routeName,
+      builder: (context, state) => const LoginScreen(),
+    ),
+    GoRoute(
+      path: UsernameScreen.routeName,
+      builder: (context, state) => const UsernameScreen(),
+    ),
+    GoRoute(
+      path: EmailScreen.routeName,
+      builder: (context, state) => const EmailScreen(),
+    )
+  ],
+);
+```
+
+```dart
+//! main.dart
+return MaterialApp.router(
+  routerConfig: router,
+```
+
+### context.push VS context.go:
+
+1. push: stack
+2. go:
+
+- remove stack and it becomes root
+- it does not have backward
+
+```dart
+//! sign_up_screen.dart
+void _onLoginTap(BuildContext context) async {
+  context.go(LoginScreen.routeName);
+}
+```
+
+```dart
+//! login_screen.dart
+void _onSignUpTap(BuildContext context) {
+  context.pop(); // what about pop result?
+}
+```
