@@ -2870,3 +2870,25 @@ void _onSignUpTap(BuildContext context) {
   context.pop(); // what about pop result?
 }
 ```
+
+## 18.2. Parameters
+
+```dart
+//! lib/router.dart
+GoRoute(
+  path: "/users/:username",
+  builder: (context, state) {
+    final username = state.params['username'];
+
+    return UserProfileScreen(username: username!);
+  },
+)
+```
+
+```dart
+//! main_navigation_screen.dart
+Offstage(
+  offstage: _selectedIndex != 4,
+  child: const UserProfileScreen(username: "henry"),
+)
+```
