@@ -2892,3 +2892,46 @@ Offstage(
   child: const UserProfileScreen(username: "henry"),
 )
 ```
+
+## 18.3. queryParams
+
+- send query params by `endpoint/?query=value`
+
+```dart
+//! lib/router.dart
+GoRoute(
+  path: "/users/:username",
+  builder: (context, state) {
+    final username = state.params['username'];
+    final tab = state.queryParams["show"];
+
+    return UserProfileScreen(username: username!, tab: tab!);
+  },
+)
+```
+
+- go to `http://localhost:60553/#/users/henry?show=likes`
+
+- extra param: like post, hide body
+
+```dart
+//! lib/router.dart
+GoRoute(
+  path: EmailScreen.routeName,
+  builder: (context, state) {
+    final args = state.extra as EmailScreenArgs;
+    return EmailScreen(username: args.username);
+  },
+),
+```
+
+```dart
+//! username_screen.dart
+void _onNextTap() {
+  if (_username.isEmpty) return;
+  context.push(
+    EmailScreen.routeName,
+    extra: EmailScreenArgs(username: _username),
+  );
+}
+```
