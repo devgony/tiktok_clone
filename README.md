@@ -2935,3 +2935,91 @@ void _onNextTap() {
   );
 }
 ```
+
+## 18.4. CustomTransitionPage
+
+- builder -> pageBuilder
+  - fade
+  - scale
+
+```dart
+//! lib/router.dart
+GoRoute(
+  name: "username_screen",
+  path: UsernameScreen.routeName,
+  pageBuilder: (context, state) {
+    return CustomTransitionPage(
+      child: const UsernameScreen(),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: animation,
+          child: ScaleTransition(
+            scale: animation,
+            child: child,
+          ),
+        );
+      },
+    );
+  },
+),
+```
+
+- namedRoute
+
+  - assign nickname to route
+
+  ```dart
+  //! email_screen.dart
+  class EmailScreen extends StatefulWidget {
+    static String routeName = "email";
+    static String routeURL = "email";
+  ```
+
+  - set name fild
+
+  ```dart
+  //! lib/router.dart
+  GoRoute(
+    name: EmailScreen.routeName,
+    path: EmailScreen.routeURL,
+  ```
+
+  - use pushNamed(routeName) or goNamed(routeName) instead of routeURL
+
+  ```dart
+  //! email_screen.dart
+  void _onEmailTap(BuildContext context) {
+    context.pushNamed(UsernameScreen.routeName);
+  }
+  ```
+
+- nestedRoute
+  - `/`(signUp)
+  - `/username`
+  - `/username/email/`
+
+```dart
+GoRoute(
+  name: SignUpScreen.routeName,
+  path: SignUpScreen.routeURL,
+  builder: (context, state) => const SignUpScreen(),
+  routes: [
+    GoRoute(
+      path: UsernameScreen.routeURL,
+      name: UsernameScreen.routeName,
+      builder: (context, state) => const UsernameScreen(),
+      routes: [
+        GoRoute(
+          name: EmailScreen.routeName,
+          path: EmailScreen.routeURL,
+          builder: (context, state) {
+            final args = state.extra as EmailScreenArgs;
+
+            return EmailScreen(username: args.username);
+          },
+        ),
+      ],
+    ),
+  ],
+),
+```
