@@ -3123,3 +3123,26 @@ Future<void> initCamera() async {
 - camera to center
 
 ### Challenge: show denied permissions
+
+## 19.3. Selfie Mode
+
+- available camera[1]
+
+```dart
+//! lib/features/videos/video_recording_screen.dart
+_cameraController = CameraController(
+  cameras[_isSelfieMode ? 1 : 0],
+  ResolutionPreset.ultraHigh,
+);
+```
+
+- initialize camera again
+
+```dart
+//! lib/features/videos/video_recording_screen.dart
+Future<void> _toggleSelfieMode() async {
+  _isSelfieMode = !_isSelfieMode;
+  await initCamera();
+  setState(() {});
+}
+```
