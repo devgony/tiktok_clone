@@ -3023,3 +3023,56 @@ GoRoute(
   ],
 ),
 ```
+
+# 19. VIDEO RECORDING
+
+### Miscellaneous
+
+- GoRouter only with /
+
+```dart
+final router = GoRouter(
+  routes: [
+    GoRoute(
+        path: "/", builder: (context, state) => const VideoRecordingScreen())
+  ],
+);
+```
+
+## 19.1. Installation
+
+- install camera & permission_handler
+
+```yaml
+#! pubspec.yaml
+dependencies:
+  ..
+  camera: ^0.10.3
+
+  permission_handler: ^10.2.0
+```
+
+### Android setup
+
+```json
+//! android/app/build.gradle
+
+android {
+  defaultConfig {
+    ..
+    minSdkVersion 21
+  }
+}
+```
+
+```
+brew install --cask android-studio
+```
+
+- launch android studio app and install latest SDK
+- Preferences > Appearance & behavior > System Settings > Android SDK > SDK Tools > Android SDK Command-line Tools (latest) check and apply
+
+```
+flutter doctor --android-licenses
+flutter doctor
+```
