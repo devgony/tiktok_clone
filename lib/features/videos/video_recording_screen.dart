@@ -13,6 +13,7 @@ class VideoRecordingScreen extends StatefulWidget {
 
 class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
   bool _hasPermission = false;
+  List<String> _deniedPermissions = [];
 
   late final CameraController _cameraController;
 
@@ -44,8 +45,13 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
     if (!cameraDenied && !micDenied) {
       _hasPermission = true;
       await initCamera();
-      setState(() {});
+    } else {
+      _deniedPermissions = [
+        if (cameraDenied) "Camera",
+        if (micDenied) "Microphone",
+      ];
     }
+    setState(() {});
   }
 
   @override
@@ -64,14 +70,28 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen> {
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Initializing...",
                     style:
                         TextStyle(color: Colors.white, fontSize: Sizes.size20),
                   ),
                   Gaps.v20,
-                  CircularProgressIndicator.adaptive()
+                  const CircularProgressIndicator.adaptive(),
+                  Gaps.v20,
+                  const Text(
+                    "Please grant the following permissions:",
+                    style:
+                        TextStyle(color: Colors.white, fontSize: Sizes.size20),
+                  ),
+                  Gaps.v20,
+                  _deniedPermissions.isEmpty
+                      ? const SizedBox()
+                      : Text(
+                          "• ${_deniedPermissions.join(", ")}",
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: Sizes.size20),
+                        ),
                 ],
               )
             : CameraPreview(_cameraController),

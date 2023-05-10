@@ -3122,6 +3122,4 @@ Future<void> initCamera() async {
 
 - camera to center
 
-### Code Challenge
-
-- show denied permissions
+### Challenge: show denied permissions
