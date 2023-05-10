@@ -29,14 +29,14 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   bool _writing = true;
 
   void _onSearchChanged(String value) {
-    print("Searching form $value");
+    // print("Searching form $value");
     setState(() {
       _writing = value.isNotEmpty;
     });
   }
 
   void _onSearchSubmitted(String value) {
-    print("Submitted $value");
+    // print("Submitted $value");
   }
 
   @override
