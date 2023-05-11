@@ -3211,3 +3211,56 @@ final video = await _cameraController.stopVideoRecording();
     ..
     enableAudio: false
   ```
+- Navigator.push with async get's error???
+
+```dart
+Navigator.push(
+  context,
+  MaterialPageRoute(
+    builder: (context) => VideoPreviewScreen(
+      video: video,
+    ),
+  ),
+);
+```
+
+```
+Don't use 'BuildContext's across async gaps.
+Try rewriting the code to not reference the 'BuildContext'.
+```
+
+## 19.7. GallerySaver
+
+```yaml
+#! pubspec.yaml
+gallery_saver: 2.3.2
+```
+
+- set gallery permission
+
+```xml
+<!-- android/app/src/main/AndroidManifest.xml -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.tiktok_clone">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+```
+
+- for dynamic asking, call `request()`
+
+- save
+
+```dart
+//! lib/features/videos/video_preview_screen.dart
+Future<void> _saveToGallery() async {
+  if (_savedVideo) return;
+
+  await GallerySaver.saveVideo(
+    widget.video.path,
+    albumName: "TikTok Clone!",
+  );
+
+  _savedVideo = true;
+
+  setState(() {});
+}
+```
