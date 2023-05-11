@@ -3229,6 +3229,8 @@ Don't use 'BuildContext's across async gaps.
 Try rewriting the code to not reference the 'BuildContext'.
 ```
 
+- solution: if !mounted return
+
 ## 19.7. GallerySaver
 
 ```yaml
@@ -3264,3 +3266,12 @@ Future<void> _saveToGallery() async {
   setState(() {});
 }
 ```
+
+## 19.8. ImagePicker
+
+```yaml
+#! pubspec.yaml
+image_picker: 0.8.6+1
+```
+
+- add state `isPicked` on `VideoPreviewScreen` to distinguish `first recorded` vs `picked video`
