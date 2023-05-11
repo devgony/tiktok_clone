@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/videos/widgets/video_flash_button.dart';
 
 class VideoRecordingScreen extends StatefulWidget {
   const VideoRecordingScreen({super.key});
@@ -162,44 +163,32 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                           ),
                         ),
                         Gaps.v10,
-                        IconButton(
-                          color: _flashMode == FlashMode.off
-                              ? Colors.amber.shade200
-                              : Colors.white,
-                          onPressed: () => _setFlashMode(FlashMode.off),
-                          icon: const Icon(
-                            Icons.flash_off_rounded,
-                          ),
+                        VideoFlashButton(
+                          flashMode: _flashMode,
+                          targetMode: FlashMode.off,
+                          setFlashMode: _setFlashMode,
+                          icon: Icons.flash_off_rounded,
                         ),
                         Gaps.v10,
-                        IconButton(
-                          color: _flashMode == FlashMode.always
-                              ? Colors.amber.shade200
-                              : Colors.white,
-                          onPressed: () => _setFlashMode(FlashMode.always),
-                          icon: const Icon(
-                            Icons.flash_on_rounded,
-                          ),
+                        VideoFlashButton(
+                          flashMode: _flashMode,
+                          targetMode: FlashMode.always,
+                          setFlashMode: _setFlashMode,
+                          icon: Icons.flash_on_rounded,
                         ),
                         Gaps.v10,
-                        IconButton(
-                          color: _flashMode == FlashMode.auto
-                              ? Colors.amber.shade200
-                              : Colors.white,
-                          onPressed: () => _setFlashMode(FlashMode.auto),
-                          icon: const Icon(
-                            Icons.flash_auto_rounded,
-                          ),
+                        VideoFlashButton(
+                          flashMode: _flashMode,
+                          targetMode: FlashMode.auto,
+                          setFlashMode: _setFlashMode,
+                          icon: Icons.flash_auto_rounded,
                         ),
                         Gaps.v10,
-                        IconButton(
-                          color: _flashMode == FlashMode.torch
-                              ? Colors.amber.shade200
-                              : Colors.white,
-                          onPressed: () => _setFlashMode(FlashMode.torch),
-                          icon: const Icon(
-                            Icons.flashlight_on_rounded,
-                          ),
+                        VideoFlashButton(
+                          flashMode: _flashMode,
+                          targetMode: FlashMode.torch,
+                          setFlashMode: _setFlashMode,
+                          icon: Icons.flashlight_on_rounded,
                         ),
                       ],
                     ),
