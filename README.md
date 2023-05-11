@@ -3191,3 +3191,23 @@ void initState() {
 ```
 
 ### Challenge: reusable flashMode widget
+
+## 19.6. startVideoRecording
+
+- prepareForVideoRecording for ios
+- stop recording returns file
+
+```dart
+//! video_recording_screen.dart
+final video = await _cameraController.stopVideoRecording();
+```
+
+- VideoPreviewScreen
+- MediaRecorder is not working on emulator
+  workaround
+  ```dart
+  //! video_recording_screen.dart
+  Future<void> initCamera() async {
+    ..
+    enableAudio: false
+  ```
