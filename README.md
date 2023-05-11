@@ -3297,3 +3297,20 @@ void didChangeAppLifecycleState(AppLifecycleState state) {
 - permission Asking => also inactive => handle early return in `didChangeAppLifecycleState`
 
 - setState inside `initCamera` => `didChangeAppLifecycleState` don't need return Future
+
+## 19.10. Code Challenge
+
+### Challenge: zoom in on dragUp & zoom out on dragDown
+
+- hint
+
+```dart
+onVerticalDragUpdate:
+or
+onPanUpdate: (DragUpdateDetails details) => {}
+```
+
+- initCamera
+- getMaxZoomLevel()
+- setZoomLevel()
+- camerawesome 1.2.1 is recomanded on production
