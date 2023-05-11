@@ -3146,3 +3146,7 @@ Future<void> _toggleSelfieMode() async {
   setState(() {});
 }
 ```
+
+## 19.4. Flash Mode
+
+- flash mode can be tested on physical phone only
