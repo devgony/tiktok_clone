@@ -20,6 +20,10 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   bool _hasPermission = false;
   List<String> _deniedPermissions = [];
   bool _isSelfieMode = false;
+  double _maximumZoomLevel = 0.0;
+  double _minimumZoomLevel = 0.0;
+  double _currentZoomLevel = 0.0;
+  final double _zoomLevelStep = 0.05;
 
   late final AnimationController _buttonAnimationController =
       AnimationController(
@@ -92,6 +96,10 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     await _cameraController.prepareForVideoRecording(); // for IOS
 
     _flashMode = _cameraController.value.flashMode;
+    _maximumZoomLevel = await _cameraController.getMaxZoomLevel();
+    _minimumZoomLevel = await _cameraController.getMinZoomLevel();
+    // _currentZoomLevel = 1.0;
+    // await _cameraController.setZoomLevel(5.0);
 
     setState(() {});
   }
@@ -177,6 +185,19 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
         ),
       ),
     );
+  }
+
+  onVerticalDragUpdate(DragUpdateDetails details, BuildContext context) async {
+    if (details.delta.dy < 0 && _currentZoomLevel < _maximumZoomLevel) {
+      _currentZoomLevel += _zoomLevelStep;
+    } else if (details.delta.dy > 0 && _currentZoomLevel > _minimumZoomLevel) {
+      _currentZoomLevel -= _zoomLevelStep;
+    }
+    _currentZoomLevel =
+        _currentZoomLevel.clamp(_minimumZoomLevel, _maximumZoomLevel);
+    _cameraController.setZoomLevel(_currentZoomLevel);
+
+    setState(() {});
   }
 
   @override
@@ -267,6 +288,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                       children: [
                         const Spacer(),
                         GestureDetector(
+                          onVerticalDragUpdate: (details) =>
+                              onVerticalDragUpdate(details, context),
                           onTapDown: _starRecording,
                           onTapUp: (details) => _stopRecording(),
                           child: ScaleTransition(
