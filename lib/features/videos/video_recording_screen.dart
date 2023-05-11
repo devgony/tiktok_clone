@@ -20,6 +20,10 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   bool _hasPermission = false;
   List<String> _deniedPermissions = [];
   bool _isSelfieMode = false;
+  double _maximumZoomLevel = 0.0;
+  double _minimumZoomLevel = 0.0;
+  double _currentZoomLevel = 1.0;
+  final double _zoomStep = 0.05;
 
   late final AnimationController _buttonAnimationController =
       AnimationController(
@@ -92,6 +96,10 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     await _cameraController.prepareForVideoRecording(); // for IOS
 
     _flashMode = _cameraController.value.flashMode;
+    _maximumZoomLevel = await _cameraController.getMaxZoomLevel();
+    _minimumZoomLevel = await _cameraController.getMinZoomLevel();
+    _currentZoomLevel = 1.0;
+    await _cameraController.setZoomLevel(5.0);
 
     setState(() {});
   }
@@ -177,6 +185,38 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
         ),
       ),
     );
+  }
+
+  onVerticalDragUpdate(DragUpdateDetails details, BuildContext context) async {
+    if (details.delta.dy < 0 && _currentZoomLevel < _maximumZoomLevel) {
+      _currentZoomLevel += _zoomStep;
+    } else if (details.delta.dy > 0 && _currentZoomLevel > 1.0) {
+      _currentZoomLevel -= _zoomStep;
+    }
+    _currentZoomLevel = _currentZoomLevel.clamp(1.0, _maximumZoomLevel);
+    _cameraController.setZoomLevel(_currentZoomLevel);
+    setState(() {});
+
+    // final dy = details.localPosition.dy;
+    // final maxZoom = await _cameraController.getMaxZoomLevel();
+    // final minZoom = await _cameraController.getMinZoomLevel();
+
+    // if (dy > 0) {
+    //   // zoom out
+    //   // if (_currentZoom <= minZoom) return;
+    //   // setState(() {
+    //   //   _currentZoom = _currentZoom - 0.1;
+    //   // });
+    //   // await _cameraController.setZoomLevel(_currentZoom);
+    // } else {
+    //   // zoom in
+    //   setState(() {
+    //     _currentZoom = _currentZoom + 0.1;
+    //   });
+    //   if (_currentZoom >= maxZoom) return;
+    //   print(":+:+:+:+:$_currentZoom");
+    // }
+    //   await _cameraController.setZoomLevel(_currentZoom);
   }
 
   @override
@@ -267,6 +307,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
                       children: [
                         const Spacer(),
                         GestureDetector(
+                          onPanUpdate: (details) =>
+                              onVerticalDragUpdate(details, context),
                           onTapDown: _starRecording,
                           onTapUp: (details) => _stopRecording(),
                           child: ScaleTransition(
