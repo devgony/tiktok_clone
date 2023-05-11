@@ -3150,3 +3150,44 @@ Future<void> _toggleSelfieMode() async {
 ## 19.4. Flash Mode
 
 - flash mode can be tested on physical phone only
+
+## 19.5. Recording Animation
+
+- Two ticker provider + controller
+
+```dart
+//! lib/features/videos/video_recording_screen.dart
+late final AnimationController _buttonAnimationController =
+    AnimationController(
+  vsync: this,
+  duration: const Duration(milliseconds: 200),
+);
+
+late final AnimationController _progressAnimationController =
+    AnimationController(
+  vsync: this,
+  duration: const Duration(seconds: 10),
+  lowerBound: 0.0,
+  upperBound: 1.0,
+);
+```
+
+- addStatusListener: OnAnimationFinished
+
+```dart
+//! lib/features/videos/video_recording_screen.dart
+void initState() {
+  super.initState();
+  initPermissions();
+  _progressAnimationController.addListener(() {
+    setState(() {});
+  });
+  _progressAnimationController.addStatusListener((status) {
+    if (status == AnimationStatus.completed) {
+      _stopRecording();
+    }
+  });
+}
+```
+
+### Challenge: reusable flashMode widget
