@@ -3275,3 +3275,25 @@ image_picker: 0.8.6+1
 ```
 
 - add state `isPicked` on `VideoPreviewScreen` to distinguish `first recorded` vs `picked video`
+
+## 19.9. AppLifecycleState
+
+- should control lifecycle manually => override `didChangeApplifecycleState` + with `WidgetsBindingObserver`
+- inactive: dispose, resumed: initCamera
+
+```dart
+@override
+void didChangeAppLifecycleState(AppLifecycleState state) {
+  if (!_hasPermission) return;
+  if (!_cameraController.value.isInitialized) return;
+  if (state == AppLifecycleState.inactive) {
+    _cameraController.dispose();
+  } else if (state == AppLifecycleState.resumed) {
+    initCamera();
+  }
+}
+```
+
+- permission Asking => also inactive => handle early return in `didChangeAppLifecycleState`
+
+- setState inside `initCamera` => `didChangeAppLifecycleState` don't need return Future
