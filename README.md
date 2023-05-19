@@ -3314,3 +3314,13 @@ onPanUpdate: (DragUpdateDetails details) => {}
 - getMaxZoomLevel()
 - setZoomLevel()
 - camerawesome 1.2.1 is recomanded on production
+
+# 20. STATE MANAGEMENT
+
+## 20.1. \_noCamera
+
+- handle noCamera
+  > if noCamera just set `_hasPermission = true;`?
+- add IOS privilege
+  > already has?
+- dispose videoController

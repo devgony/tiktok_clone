@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:camera/camera.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -25,6 +28,8 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   double _currentZoomLevel = 1.0;
   final double _zoomStep = 0.05;
 
+  late final bool _noCamera = kDebugMode && Platform.isIOS;
+
   late final AnimationController _buttonAnimationController =
       AnimationController(
     vsync: this,
@@ -42,13 +47,19 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     upperBound: 1.0,
   );
 
-  late CameraController _cameraController;
   late FlashMode _flashMode;
+  late CameraController _cameraController;
 
   @override
   void initState() {
     super.initState();
-    initPermissions();
+    if (!_noCamera) {
+      initPermissions();
+    } else {
+      setState(() {
+        _hasPermission = true;
+      });
+    }
     WidgetsBinding.instance.addObserver(this);
     _progressAnimationController.addListener(() {
       setState(() {});
@@ -93,6 +104,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
     );
 
     await _cameraController.initialize();
+
     await _cameraController.prepareForVideoRecording(); // for IOS
 
     _flashMode = _cameraController.value.flashMode;
@@ -225,7 +237,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
       backgroundColor: Colors.black,
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
-        child: !_hasPermission || !_cameraController.value.isInitialized
+        child: !_hasPermission
             ? Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -256,50 +268,52 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
             : Stack(
                 alignment: Alignment.center,
                 children: [
-                  CameraPreview(_cameraController),
-                  Positioned(
-                    top: Sizes.size20,
-                    right: Sizes.size20,
-                    child: Column(
-                      children: [
-                        IconButton(
-                          color: Colors.white,
-                          onPressed: _toggleSelfieMode,
-                          icon: const Icon(
-                            Icons.cameraswitch,
+                  if (!_noCamera && _cameraController.value.isInitialized)
+                    CameraPreview(_cameraController),
+                  if (!_noCamera)
+                    Positioned(
+                      top: Sizes.size20,
+                      right: Sizes.size20,
+                      child: Column(
+                        children: [
+                          IconButton(
+                            color: Colors.white,
+                            onPressed: _toggleSelfieMode,
+                            icon: const Icon(
+                              Icons.cameraswitch,
+                            ),
                           ),
-                        ),
-                        Gaps.v10,
-                        VideoFlashButton(
-                          flashMode: _flashMode,
-                          targetMode: FlashMode.off,
-                          setFlashMode: _setFlashMode,
-                          icon: Icons.flash_off_rounded,
-                        ),
-                        Gaps.v10,
-                        VideoFlashButton(
-                          flashMode: _flashMode,
-                          targetMode: FlashMode.always,
-                          setFlashMode: _setFlashMode,
-                          icon: Icons.flash_on_rounded,
-                        ),
-                        Gaps.v10,
-                        VideoFlashButton(
-                          flashMode: _flashMode,
-                          targetMode: FlashMode.auto,
-                          setFlashMode: _setFlashMode,
-                          icon: Icons.flash_auto_rounded,
-                        ),
-                        Gaps.v10,
-                        VideoFlashButton(
-                          flashMode: _flashMode,
-                          targetMode: FlashMode.torch,
-                          setFlashMode: _setFlashMode,
-                          icon: Icons.flashlight_on_rounded,
-                        ),
-                      ],
+                          Gaps.v10,
+                          VideoFlashButton(
+                            flashMode: _flashMode,
+                            targetMode: FlashMode.off,
+                            setFlashMode: _setFlashMode,
+                            icon: Icons.flash_off_rounded,
+                          ),
+                          Gaps.v10,
+                          VideoFlashButton(
+                            flashMode: _flashMode,
+                            targetMode: FlashMode.always,
+                            setFlashMode: _setFlashMode,
+                            icon: Icons.flash_on_rounded,
+                          ),
+                          Gaps.v10,
+                          VideoFlashButton(
+                            flashMode: _flashMode,
+                            targetMode: FlashMode.auto,
+                            setFlashMode: _setFlashMode,
+                            icon: Icons.flash_auto_rounded,
+                          ),
+                          Gaps.v10,
+                          VideoFlashButton(
+                            flashMode: _flashMode,
+                            targetMode: FlashMode.torch,
+                            setFlashMode: _setFlashMode,
+                            icon: Icons.flashlight_on_rounded,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
                   Positioned(
                     bottom: Sizes.size40,
                     width: MediaQuery.of(context).size.width,
