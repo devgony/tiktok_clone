@@ -3418,5 +3418,70 @@ pageBuilder: (context, state) => CustomTransitionPage(
 ## 20.7. InheritedWidget part Two
 
 - Theme.of and MediaQuery.of are also InheritedWidget
-- Combine InheritedWidget and StatefulWidget  
-  refer to `lib/common/widgets/video_config/video_config.dart`
+- Combine InheritedWidget and StatefulWidget
+
+```dart
+//! lib/common/widgets/video_config/video_config.dart
+import 'package:flutter/widgets.dart';
+
+class VideoConfigData extends InheritedWidget {
+  final bool autoMute;
+
+  final void Function() toggleMuted;
+
+  const VideoConfigData({
+    super.key,
+    required this.toggleMuted,
+    required this.autoMute,
+    required super.child,
+  });
+
+  static VideoConfigData of(BuildContext context) {
+    return context.dependOnInheritedWidgetOfExactType<VideoConfigData>()!;
+  }
+
+  @override
+  bool updateShouldNotify(covariant InheritedWidget oldWidget) {
+    return true;
+  }
+}
+
+class VideoConfig extends StatefulWidget {
+  final Widget child;
+
+  const VideoConfig({
+    super.key,
+    required this.child,
+  });
+
+  @override
+  State<VideoConfig> createState() => _VideoConfigState();
+}
+
+class _VideoConfigState extends State<VideoConfig> {
+  bool autoMute = false;
+
+  void toggleMuted() {
+    setState(() {
+      autoMute = !autoMute;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return VideoConfigData(
+      toggleMuted: toggleMuted,
+      autoMute: autoMute,
+      child: widget.child,
+    );
+  }
+}
+```
+
+## 20.9. ChangeNotifier
+
+- Encapsulate InheritedWidget + StatefulWidget
+- expose method
+- notifyListeners
+- To use, wrap with AnimatedBuilder or set videoConfig.addListener
+- it rebuild only AnimatedBuilder part => performance efficiency
