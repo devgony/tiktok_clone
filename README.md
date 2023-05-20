@@ -3506,3 +3506,40 @@ final videoConfig = VideoConfig();
 
 - if just one value? use ValueNotifier
 - ValueListenableBuilder
+
+```dart
+//! lib/common/widgets/video_config/video_config.dart
+import 'package:flutter/widgets.dart';
+
+final videoConfig = ValueNotifier(false);
+```
+
+```dart
+//! lib/features/videos/widgets/video_post.dart
+bool _autoMute = videoConfig.value;
+
+@override
+  void initState() {
+    ..
+
+    videoConfig.addListener(() {
+      setState(() {
+        _autoMute = videoConfig.value;
+      });
+    });
+  }
+```
+
+## 20.11. Provider
+
+- Provider is a wrapper around `InheritedWidget`
+- install
+
+```dart
+dependencies:
+  provider: 6.0.5
+```
+
+- wrap main with `ChangeNotifierProvider`
+- value: context.watch<VideoConfig> => get?
+- onChanged: context.read<VideoConfig> => set?
