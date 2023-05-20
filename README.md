@@ -3324,3 +3324,19 @@ onPanUpdate: (DragUpdateDetails details) => {}
 - add IOS privilege
   > already has?
 - dispose videoController
+
+## 20.2. Router part One
+
+- use goRouter => change url
+- not use goRouter => not change url
+- common/widget/
+- pushNamed: which is different with `push`?
+- pushReplacedmentNamed: no way to go back, substitute for `pushAndRemoveUntil`
+- move files to common
+
+```sh
+mkdir -p lib/common/widgets/main_navigation/widgets
+mv lib/features/main_navigation/main_navigation_screen.dart lib/common/widgets/main_navigation/main_navigation_screen.dart
+mv lib/features/main_navigation/widgets/nav_tab.dart lib/common/widgets/main_navigation/widgets/nav_tab.dart
+mv lib/features/main_navigation/widgets/post_video_button.dart lib/common/widgets/main_navigation/widgets/post_video_button.dart
+```
