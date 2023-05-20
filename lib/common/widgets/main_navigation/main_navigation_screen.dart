@@ -10,6 +10,7 @@ import 'package:tiktok_clone/features/videos/video_timeline_screen.dart';
 
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
+import '../../../features/videos/video_recording_screen.dart';
 import '../../../utils.dart';
 
 class MainNavigationScreen extends StatefulWidget {
@@ -43,14 +44,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
   }
 
   void _onPostVideoButtonTap() {
-    Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => Scaffold(
-          appBar: AppBar(title: const Text('Record video')),
-        ),
-        fullscreenDialog: true,
-      ),
-    );
+    context.pushNamed(VideoRecordingScreen.routeName);
   }
 
   @override
