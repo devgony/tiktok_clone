@@ -3359,3 +3359,25 @@ GoRoute(
   },
 )
 ```
+
+## 20.4. Router part Three
+
+```dart
+GoRoute(
+  name: ChatsScreen.routeName,
+  path: ChatsScreen.routeURL,
+  builder: (context, state) => const ChatsScreen(),
+  routes: [
+    GoRoute(
+      name: ChatDetailScreen.routeName,
+      path: ChatDetailScreen.routeURL,
+      builder: (context, state) {
+        final chatId = state.params["chatId"]!;
+        return ChatDetailScreen(
+          chatId: chatId,
+        );
+      },
+    )
+  ],
+),
+```
