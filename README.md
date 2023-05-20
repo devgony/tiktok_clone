@@ -3340,3 +3340,22 @@ mv lib/features/main_navigation/main_navigation_screen.dart lib/common/widgets/m
 mv lib/features/main_navigation/widgets/nav_tab.dart lib/common/widgets/main_navigation/widgets/nav_tab.dart
 mv lib/features/main_navigation/widgets/post_video_button.dart lib/common/widgets/main_navigation/widgets/post_video_button.dart
 ```
+
+## 20.3. Router part Two
+
+- push: stack history
+- go: replace
+- it works on web as well
+- enum-like path
+
+```dart
+//! lib/router.dart
+GoRoute(
+  path: "/:tab(home|discover|inbox|profile)",
+  name: MainNavigationScreen.routeName,
+  builder: (context, state) {
+    final tab = state.params["tab"]!;
+    return MainNavigationScreen(tab: tab);
+  },
+)
+```
