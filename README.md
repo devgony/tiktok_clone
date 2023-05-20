@@ -3485,3 +3485,24 @@ class _VideoConfigState extends State<VideoConfig> {
 - notifyListeners
 - To use, wrap with AnimatedBuilder or set videoConfig.addListener
 - it rebuild only AnimatedBuilder part => performance efficiency
+
+```dart
+//! lib/common/widgets/video_config/video_config.dart
+import 'package:flutter/widgets.dart';
+
+class VideoConfig extends ChangeNotifier {
+  bool autoMute = false;
+
+  void toggleAutoMute() {
+    autoMute = !autoMute;
+    notifyListeners();
+  }
+}
+
+final videoConfig = VideoConfig();
+```
+
+## 20.10. ValueNotifier
+
+- if just one value? use ValueNotifier
+- ValueListenableBuilder
