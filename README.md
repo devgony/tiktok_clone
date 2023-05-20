@@ -3405,3 +3405,12 @@ pageBuilder: (context, state) => CustomTransitionPage(
   },
 ),
 ```
+
+## 20.6. InheritedWidget
+
+- like primary color
+  - so many dependencies
+- video config
+- extends InheritedWidget
+- get child
+- update should notify
