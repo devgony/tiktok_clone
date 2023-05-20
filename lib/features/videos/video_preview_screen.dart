@@ -31,6 +31,7 @@ class _VideoPreviewScreenState extends State<VideoPreviewScreen> {
 
     await _videoPlayerController.initialize();
     await _videoPlayerController.setLooping(true);
+    await _videoPlayerController.setVolume(0);
     await _videoPlayerController.play();
 
     setState(() {});
