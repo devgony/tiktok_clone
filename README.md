@@ -3414,3 +3414,9 @@ pageBuilder: (context, state) => CustomTransitionPage(
 - extends InheritedWidget
 - get child
 - update should notify
+
+## 20.7. InheritedWidget part Two
+
+- Theme.of and MediaQuery.of are also InheritedWidget
+- Combine InheritedWidget and StatefulWidget  
+  refer to `lib/common/widgets/video_config/video_config.dart`
