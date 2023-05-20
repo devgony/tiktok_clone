@@ -3363,6 +3363,7 @@ GoRoute(
 ## 20.4. Router part Three
 
 ```dart
+//! lib/router.dart
 GoRoute(
   name: ChatsScreen.routeName,
   path: ChatsScreen.routeURL,
@@ -3379,5 +3380,28 @@ GoRoute(
       },
     )
   ],
+),
+```
+
+## 20.5. Router part Four
+
+- solve camera dispose issue
+- custom transition from bottom to top
+
+```dart
+//! lib/router.dart
+pageBuilder: (context, state) => CustomTransitionPage(
+  transitionDuration: const Duration(milliseconds: 200),
+  child: const VideoRecordingScreen(),
+  transitionsBuilder: (context, animation, secondaryAnimation, child) {
+    final position = Tween(
+      begin: const Offset(0, 1),
+      end: Offset.zero,
+    ).animate(animation);
+    return SlideTransition(
+      position: position,
+      child: child,
+    );
+  },
 ),
 ```
