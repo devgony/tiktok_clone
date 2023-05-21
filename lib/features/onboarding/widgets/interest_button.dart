@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tiktok_clone/utils.dart';
+import '../../../common/widgets/dark_config/dark_mode_config.dart';
 import '../../../constants/sizes.dart';
 
 class InterestButton extends StatefulWidget {
@@ -36,7 +36,7 @@ class _InterestButtonState extends State<InterestButton> {
         decoration: BoxDecoration(
           color: _isSelected
               ? Theme.of(context).primaryColor
-              : isDarkMode(context)
+              : darkModeConfig.value
                   ? Colors.grey.shade700
                   : Colors.white,
           borderRadius: BorderRadius.circular(
