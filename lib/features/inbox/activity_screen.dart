@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import '../../utils.dart';
+import '../../common/widgets/dark_config/dark_mode_config.dart';
 
 class ActivityScreen extends StatefulWidget {
   static const String routeName = "activity";
@@ -90,7 +90,7 @@ class _ActivityScreenState extends State<ActivityScreen>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
+    final isDark = darkModeConfig.value;
     return Scaffold(
       appBar: AppBar(
         title: GestureDetector(

@@ -4,8 +4,8 @@ import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/authentication/widgets/auth_button.dart';
-import 'package:tiktok_clone/utils.dart';
 
+import '../../common/widgets/dark_config/dark_mode_config.dart';
 import 'login_form_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -71,7 +71,7 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        color: isDarkMode(context) ? null : Colors.grey.shade50,
+        color: darkModeConfig.value ? null : Colors.grey.shade50,
         child: Padding(
           padding: const EdgeInsets.only(
             top: Sizes.size32,

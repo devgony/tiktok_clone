@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:tiktok_clone/common/widgets/dark_config/dark_mode_config.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/utils.dart';
 
 class PostVideoButton extends StatefulWidget {
   final Function onTap;
@@ -54,7 +54,7 @@ class _PostVideoButtonState extends State<PostVideoButton>
 
   @override
   Widget build(BuildContext context) {
-    final isDark = isDarkMode(context);
+    final isDark = darkModeConfig.value;
     _scale = 1 + _controller.value;
     return GestureDetector(
       onTapDown: _tapDown,

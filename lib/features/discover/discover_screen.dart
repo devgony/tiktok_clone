@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
-import 'package:tiktok_clone/utils.dart';
 
+import '../../common/widgets/dark_config/dark_mode_config.dart';
 import '../../constants/breakpoints.dart';
 
 final tabs = [
@@ -59,7 +59,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final isDark = isDarkMode(context);
+    final isDark = darkModeConfig.value;
     return DefaultTabController(
       length: tabs.length,
       child: Scaffold(

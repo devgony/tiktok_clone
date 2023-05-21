@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
-import 'package:tiktok_clone/utils.dart';
+
+import '../../common/widgets/dark_config/dark_mode_config.dart';
 
 enum Direction { right, left }
 
@@ -104,7 +105,7 @@ class _TutorialScreenState extends State<TutorialScreen> {
           ),
         ),
         bottomNavigationBar: Container(
-          color: isDarkMode(context) ? Colors.black : Colors.white,
+          color: darkModeConfig.value ? Colors.black : Colors.white,
           child: Padding(
               padding: const EdgeInsets.only(
                 top: Sizes.size32,
