@@ -3543,3 +3543,11 @@ dependencies:
 - wrap main with `ChangeNotifierProvider`
 - value: context.watch<VideoConfig> => get?
 - onChanged: context.read<VideoConfig> => set?
+
+# 21. MVVM WITH PROVIDER
+
+## 21.0. Introduction
+
+### MVVM architecture
+
+- separation of concern
