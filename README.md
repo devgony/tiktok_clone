@@ -3593,3 +3593,12 @@ flutter pub add shared_preferences
 mkdir -p lib/features/videos/repos/
 touch lib/features/videos/repos/playback_config_repo.dart
 ```
+
+## 21.3. PlaybackConfigViewModel
+
+- persist on the disk
+- modify data
+- notifyListeners
+- remove provider dependency for now
+- should access shared preferences first
+- should watch not read
