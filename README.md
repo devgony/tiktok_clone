@@ -3607,3 +3607,22 @@ touch lib/features/videos/repos/playback_config_repo.dart
 
 - addListener for `_onPlaybackConfigChanged` => context.read<PlaybackConfigViewModel>().muted;
 - `_onVisibilityChanged` => context.read<PlaybackConfigViewModel>().autoplay;
+
+## 21.5. Code Challenge: local mute
+
+- onMute => mute only local state for a single video
+- talk to controller
+- inital value should come from settings
+
+### caching
+
+- If API takes longer, it would be better to cache to local state
+
+```dart
+//! playback_config_vm.dart
+bool get muted => _model.muted;
+// bool get muted => _repository.isMuted();
+
+bool get autoplay => _model.autoplay;
+// bool get autoplay => _repository.isAutoplay();
+```

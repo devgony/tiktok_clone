@@ -13,8 +13,10 @@ class PlaybackConfigViewModel extends ChangeNotifier {
   PlaybackConfigViewModel(this._repository);
 
   bool get muted => _model.muted;
+  // bool get muted => _repository.isMuted();
 
   bool get autoplay => _model.autoplay;
+  // bool get autoplay => _repository.isAutoplay();
 
   void setMuted(bool value) {
     _repository.setMuted(value);
