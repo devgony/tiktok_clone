@@ -4,7 +4,7 @@ import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 
-import '../../../common/widgets/dark_config/dark_mode_config.dart';
+import '../../../../common/widgets/dark_config/dark_mode_config.dart';
 
 class VideoComments extends StatefulWidget {
   const VideoComments({super.key});

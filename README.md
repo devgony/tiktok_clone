@@ -3551,3 +3551,45 @@ dependencies:
 ### MVVM architecture
 
 - separation of concern
+
+## 21.2. VideoPlaybackConfigRepository
+
+- move files to views
+
+```
+mkdir -p lib/features/videos/views
+mv lib/features/videos/video_preview_screen.dart lib/features/videos/views/video_preview_screen.dart
+mv lib/features/videos/video_recording_screen.dart lib/features/videos/views/video_recording_screen.dart
+mv lib/features/videos/video_timeline_screen.dart lib/features/videos/views/video_timeline_screen.dart
+mv lib/features/videos/widgets/video_button.dart lib/features/videos/views/widgets/video_button.dart
+mv lib/features/videos/widgets/video_comments.dart lib/features/videos/views/widgets/video_comments.dart
+mv lib/features/videos/widgets/video_post.dart lib/features/videos/views/widgets/video_post.dart
+mv lib/features/videos/widgets/video_flash_button.dart lib/features/videos/views/widgets/video_flash_button.dart
+```
+
+- create PlaybacConfigModel
+
+```
+mkdir -p lib/features/videos/models/
+touch lib/features/videos/models/playback_config_model.dart
+```
+
+- create PlaybackConfigViewModel extending ChangeNotifier
+
+```
+mkdir -p lib/features/videos/view_models/
+touch lib/features/videos/view_models/playback_config_vm.dart
+```
+
+- install shared_preferences
+
+```sh
+flutter pub add shared_preferences
+```
+
+- create repos for methods of PlaybacConfigModel
+
+```
+mkdir -p lib/features/videos/repos/
+touch lib/features/videos/repos/playback_config_repo.dart
+```
