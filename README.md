@@ -3602,3 +3602,8 @@ touch lib/features/videos/repos/playback_config_repo.dart
 - remove provider dependency for now
 - should access shared preferences first
 - should watch not read
+
+## 21.4. Views
+
+- addListener for `_onPlaybackConfigChanged` => context.read<PlaybackConfigViewModel>().muted;
+- `_onVisibilityChanged` => context.read<PlaybackConfigViewModel>().autoplay;
