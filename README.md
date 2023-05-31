@@ -3626,3 +3626,60 @@ bool get muted => _model.muted;
 bool get autoplay => _model.autoplay;
 // bool get autoplay => _repository.isAutoplay();
 ```
+
+# 22. RIVERPOD
+
+## 22.0. Introduction
+
+- anagram of Provider
+- but breacking change
+- fixed listening from multiple provider?
+
+```yaml
+#! pubspec.yaml
+flutter_riverpod: ^2.1.3
+```
+
+## 22.1. NotifierProvider
+
+- to separate business logic from view
+- replace context::{read, watch} with false just for now
+- replace ChangeNotifier -> Notifier
+- to mutate state: re-create Model
+
+```dart
+void setMuted(bool value) {
+  _repository.setMuted(value);
+  state = PlaybackConfigModel(
+    muted: value,
+    autoplay: state.autoplay,
+  );
+}
+```
+
+- to await and access to shared-preferences, unimplementedError first and overide
+  - is it defined at global level?
+  - ViewModel with Unimplemented -> shared preferences loded -> override ViewModel with Repository(preferences)
+
+```dart
+//! playback_config_vm.dart
+final playbackConfigProvider =
+    NotifierProvider<PlaybackConfigViewModel, PlaybackConfigModel>(
+  () => throw UnimplementedError(),
+);
+```
+
+- Replace MultiProvdier -> ProviderScope
+
+```dart
+//! main.dart
+runApp(
+  ProviderScope(
+    overrides: [
+      playbackConfigProvider
+          .overrideWith(() => PlaybackConfigViewModel(repository))
+    ],
+    child: const TikTokApp(),
+  ),
+);
+```

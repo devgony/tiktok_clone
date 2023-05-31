@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tiktok_clone/common/widgets/dark_config/dark_mode_config.dart';
-import 'package:provider/provider.dart';
 import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
 import 'package:tiktok_clone/router.dart';
 
@@ -24,14 +24,15 @@ void main() async {
   final preferences = await SharedPreferences.getInstance();
   final repository = PlaybackConfigRepository(preferences);
 
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(
-        create: (context) => PlaybackConfigViewModel(repository),
-      )
-    ],
-    child: const TikTokApp(),
-  ));
+  runApp(
+    ProviderScope(
+      overrides: [
+        playbackConfigProvider
+            .overrideWith(() => PlaybackConfigViewModel(repository))
+      ],
+      child: const TikTokApp(),
+    ),
+  );
 }
 
 class TikTokApp extends StatefulWidget {

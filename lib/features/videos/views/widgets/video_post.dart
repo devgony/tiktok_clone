@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
 import 'package:tiktok_clone/features/videos/views/widgets/video_button.dart';
 import 'package:tiktok_clone/features/videos/views/widgets/video_comments.dart';
@@ -11,7 +10,6 @@ import 'package:tiktok_clone/generated/l10n.dart';
 
 import '../../../../constants/gaps.dart';
 import '../../../../constants/sizes.dart';
-import '../../view_models/playback_config_vm.dart';
 
 class VideoPost extends StatefulWidget {
   final Function onVideoFinished;
@@ -73,11 +71,7 @@ class _VideoPostState extends State<VideoPost>
       duration: _animationDuration,
     );
 
-    context
-        .read<PlaybackConfigViewModel>()
-        .addListener(_onPlaybackConfigChanged);
-
-    _isMuted = context.read<PlaybackConfigViewModel>().muted;
+    _isMuted = false; // just for now
   }
 
   @override
@@ -101,7 +95,7 @@ class _VideoPostState extends State<VideoPost>
     if (info.visibleFraction == 1 &&
         !_isPaused &&
         !_videoPlayerController.value.isPlaying) {
-      final autoplay = context.read<PlaybackConfigViewModel>().autoplay;
+      const autoplay = false; // just for now
       if (autoplay) {
         _videoPlayerController.play();
       }
@@ -218,7 +212,7 @@ class _VideoPostState extends State<VideoPost>
                 color: Colors.white,
               ),
               onPressed: () => setState(() {
-                _isMuted = !_isMuted;
+                // _isMuted = !_isMuted;
               }),
             ),
           ),

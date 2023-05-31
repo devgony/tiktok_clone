@@ -2,9 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
-import 'package:tiktok_clone/features/videos/view_models/playback_config_vm.dart';
 
 import '../../common/widgets/dark_config/dark_mode_config.dart';
 
@@ -51,16 +49,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               SwitchListTile.adaptive(
-                value: context.watch<PlaybackConfigViewModel>().muted,
-                onChanged: (value) =>
-                    context.read<PlaybackConfigViewModel>().setMuted(value),
+                value: false,
+                onChanged: (value) => {},
                 title: const Text("Mute Video"),
                 subtitle: const Text("Video will be muted by default"),
               ),
               SwitchListTile.adaptive(
-                value: context.watch<PlaybackConfigViewModel>().autoplay,
-                onChanged: (value) =>
-                    context.read<PlaybackConfigViewModel>().setAutoplay(value),
+                value: false,
+                onChanged: (value) => {},
                 title: const Text("Autoplay"),
                 subtitle: const Text("Videos will start playing automatically"),
               ),
