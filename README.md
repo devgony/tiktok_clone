@@ -3761,3 +3761,7 @@ Widget build(BuildContext context) {
       );
 }
 ```
+
+## 22.5. Conclusions
+
+- refactor later: ViewModel should be separated with each screen
