@@ -3683,3 +3683,16 @@ runApp(
   ),
 );
 ```
+
+## 22.2. ConsumerWidget
+
+- should move the setState logics at `lib/features/settings/settings_screen.dart` (remove for now)
+- ConsumerWidget
+  - widgetRef::{watch, read}
+- NotifierProviderImpl.notifier: listen state chagnes
+- install extension: Flutter Riverpod Snippets
+
+```
+usage:
+stl => stlessConsumer
+```
