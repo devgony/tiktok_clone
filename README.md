@@ -3696,3 +3696,7 @@ runApp(
 usage:
 stl => stlessConsumer
 ```
+
+## 22.3. Recap
+
+- In ConsumerStatefulWidget, we can access to ref anywhere like context of StatefulWidget
