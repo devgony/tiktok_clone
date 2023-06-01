@@ -3700,3 +3700,64 @@ stl => stlessConsumer
 ## 22.3. Recap
 
 - In ConsumerStatefulWidget, we can access to ref anywhere like context of StatefulWidget
+
+## 22.4. AsyncNotifierProvider
+
+- Async for API
+  - FutureOr
+  - AsyncValue.loading
+  - AsyncValue.data
+
+```
+touch lib/features/videos/models/video_model.dart
+touch lib/features/videos/view_models/timeline_view_model.dart
+```
+
+```dart
+//! lib/features/videos/view_models/timeline_view_model.dart
+class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
+  List<VideoModel> _list = [];
+
+  Future<void> uploadVideo() async {
+    state = const AsyncValue.loading();
+    await Future.delayed(const Duration(seconds: 2));
+    final newVideo = VideoModel(title: "${DateTime.now()}");
+    _list = [..._list, newVideo];
+    state = AsyncValue.data(_list);
+  }
+
+  @override
+  FutureOr<List<VideoModel>> build() async {
+    await Future.delayed(const Duration(seconds: 5));
+    return _list;
+  }
+}
+
+final timelineProvider =
+    AsyncNotifierProvider<TimelineViewModel, List<VideoModel>>(
+  () => TimelineViewModel(),
+);
+```
+
+- ref.watch.when
+  - loading, error, data
+
+```dart
+//! lib/features/videos/views/video_timeline_screen.dart
+Widget build(BuildContext context) {
+  return ref.watch(timelineProvider).when(
+        loading: () => const Center(
+          child: CircularProgressIndicator(),
+        ),
+        error: (error, stackTrace) => Center(
+          child: Text(
+            'Could not load videos: $error',
+            style: const TextStyle(color: Colors.white),
+          ),
+        ),
+        data: (videos) => RefreshIndicator(
+          ..
+        ),
+      );
+}
+```
