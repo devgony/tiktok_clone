@@ -3766,7 +3766,7 @@ Widget build(BuildContext context) {
 
 - refactor later: ViewModel should be separated with each screen
 
-## 23. FIREBASE SETUP
+# 23. FIREBASE SETUP
 
 ## 23.0. Introduction
 
@@ -3803,4 +3803,42 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+```
+
+## 23.2. AuthenticationRepository
+
+- create AuthenticationRepository
+  - getter looks like property
+
+```dart
+// mkdir -p lib/features/authentication/repos/
+// touch lib/features/authentication/repos/authentication_repo.dart
+class AuthenticationRepository {
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  bool get isLoggedIn => user != null;
+  User? get user => _firebaseAuth.currentUser;
+}
+
+final authRepo = Provider((ref) => AuthenticationRepository());
+```
+
+- replace StatefulWidget to ComsumerStatefulWidget at `main.dart`
+- wrap GoRouter with Provider and expose routerProvider
+
+```dart
+//! lib/router.dart
+final routerProvider = Provider((ref) {
+  return GoRouter(
+    initialLocation: "/home",
+    redirect: (context, state) {
+      final isLoggedIn = ref.read(authRepo).isLoggedIn;
+      if (!isLoggedIn) {
+        if (state.subloc != SignUpScreen.routeURL &&
+            state.subloc != LoginScreen.routeURL) {
+          return SignUpScreen.routeURL;
+        }
+      }
+      return null;
+    },
 ```
