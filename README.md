@@ -3772,3 +3772,35 @@ Widget build(BuildContext context) {
 
 - Good for prototype
 - champagne problem => should find out custom solution with delight
+
+## 23.1. Installation
+
+- [install firebase](https://firebase.google.com/docs/flutter/setup?platform=ios)
+
+```sh
+curl -sL https://firebase.tools | bash # looks like find with brew install firebase-cli
+```
+
+- create project with unique name on web console
+- [install flutterfire and configure](https://firebase.google.com/docs/flutter/setup?platform=ios)
+
+```sh
+firebase login
+dart pub global activate flutterfire_cli
+flutterfire configure # put project name
+flutter pub add firebase_core
+flutter pub add firebase_auth
+flutter pub add cloud_firestore
+flutter pub add firebase_storage
+flutterfire configure
+```
+
+- init firebase on main
+
+```dart
+void main() async {
+  ..
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+```
