@@ -3765,3 +3765,10 @@ Widget build(BuildContext context) {
 ## 22.5. Conclusions
 
 - refactor later: ViewModel should be separated with each screen
+
+## 23. FIREBASE SETUP
+
+## 23.0. Introduction
+
+- Good for prototype
+- champagne problem => should find out custom solution with delight
