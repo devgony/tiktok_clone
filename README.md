@@ -3888,3 +3888,24 @@ static Future<AsyncValue<T>> guard<T>(Future<T> Function() future) async {
 - Stream: connection between client and server
 - expose with StreamProvider
 - AuthenticationRepository: break rule cuz it is so small. Access directly to repository without viewModel
+
+## 24.2. signInWithEmailAndPassword (16:34)
+
+- SnackBar: display message at the bottom (needs context)
+
+```dart
+//! utils.dart
+void showFirebaseErrorSnack(
+  BuildContext context,
+  Object? error,
+) {
+  ScaffoldMessenger.of(context).showSnackBar(
+    SnackBar(
+      showCloseIcon: true,
+      content: Text(
+        (error as FirebaseException).message ?? "Something wen't wrong.",
+      ),
+    ),
+  );
+}
+```
