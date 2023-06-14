@@ -3842,3 +3842,43 @@ final routerProvider = Provider((ref) {
       return null;
     },
 ```
+
+# 24. FIREBASE AUTHENTICATION
+
+## 24.0. createUserWithEmailAndPassword
+
+- it supports social providers like github, but we will use email/password
+
+```
+mkdir -p lib/features/authentication/view_models/
+touch lib/features/authentication/view_models/signup_view_model.dart
+```
+
+- replace {emailScreen, BirthdayScreen, PasswordScreen} to ConsumerStatefulWidget
+- impl signUp to {SignUpViewModel, AuthenticationRepository}
+- guard catches any error
+
+```dart
+//! signup_view_model.dart
+Future<void> signUp() async {
+  state = const AsyncValue.loading();
+  final form = ref.read(signUpForm);
+  state = await AsyncValue.guard(
+    () async => await _authRepo.signUp(
+      form["email"],
+      form["password"],
+    ),
+  );
+}
+```
+
+```dart
+//! guard
+static Future<AsyncValue<T>> guard<T>(Future<T> Function() future) async {
+  try {
+    return AsyncValue.data(await future());
+  } catch (err, stack) {
+    return AsyncValue.error(err, stack);
+  }
+}
+```
