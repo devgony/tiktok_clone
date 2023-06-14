@@ -3882,3 +3882,9 @@ static Future<AsyncValue<T>> guard<T>(Future<T> Function() future) async {
   }
 }
 ```
+
+## 24.1. signOut
+
+- Stream: connection between client and server
+- expose with StreamProvider
+- AuthenticationRepository: break rule cuz it is so small. Access directly to repository without viewModel
