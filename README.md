@@ -3889,7 +3889,7 @@ static Future<AsyncValue<T>> guard<T>(Future<T> Function() future) async {
 - expose with StreamProvider
 - AuthenticationRepository: break rule cuz it is so small. Access directly to repository without viewModel
 
-## 24.2. signInWithEmailAndPassword (16:34)
+## 24.2. signInWithEmailAndPassword
 
 - SnackBar: display message at the bottom (needs context)
 
@@ -3909,3 +3909,34 @@ void showFirebaseErrorSnack(
   );
 }
 ```
+
+## 24.3. Social Auth Config
+
+### Connect github and Firebase
+
+- https://github.com/settings/applications/new
+- https://console.firebase.google.com/u/0/project/tiktok-devgony/authentication/providers
+  - github > set ClientID and Client secret
+
+### Install
+
+- https://firebase.google.com/docs/auth/flutter/federated-auth
+
+#### IOS
+
+- `open ~/Dart/tiktok_clone/ios/Runner.xcworkspace` (with xcode)
+  - Runner > Info > URL Types
+    - name: REVERSED_CLIENT_ID
+    - value: copied from `Runner > GoogleService-info`
+
+#### Android
+
+- startup Android debug mode at least once
+
+```
+cd android
+./gradlew signinReport
+```
+
+- copy SHA1 signature (only for debugging)
+  - https://console.firebase.google.com/u/0/project/tiktok-devgony/settings/general/android:com.example.<projectName>

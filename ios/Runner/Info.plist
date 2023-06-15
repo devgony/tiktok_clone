@@ -22,10 +22,29 @@
 	<string>$(FLUTTER_BUILD_NAME)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>REVERSED_CLIENT_ID</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.885100442553-a6hk70eg76b92sho3k6u3p54l71a8kvb</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Upload Video for TiktokClone</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Upload Video for TiktokClone</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Plz let me see yout photos</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -47,11 +66,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>Upload Video for TiktokClone</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>Upload Video for TiktokClone</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Plz let me see yout photos</string>
 </dict>
 </plist>
