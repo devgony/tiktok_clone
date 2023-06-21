@@ -3927,13 +3927,12 @@ void showFirebaseErrorSnack(
 - `open ~/Dart/tiktok_clone/ios/Runner.xcworkspace` (with xcode)
   - Runner > Info > URL Types
     1. first way
-      - name: `REVERSED_CLIENT_ID`
-      - value: copy from `Runner > GoogleService-info`
+    - name: `REVERSED_CLIENT_ID`
+    - value: copy from `Runner > GoogleService-info`
     2. second way
-      - name: ``
-      - value: copy from `firebase console > Project settings > General > ios > Encoded App ID`
-        - https://console.firebase.google.com/u/0/project/tiktok-devgony/settings/general/ios:com.example.<projectName>
-
+    - name: ``
+    - value: copy from `firebase console > Project settings > General > ios > Encoded App ID`
+      - https://console.firebase.google.com/u/0/project/tiktok-devgony/settings/general/ios:com.example.<projectName>
 
 #### Android
 
@@ -3950,11 +3949,12 @@ cd android
 ## 24.4 Github Login
 
 - impl SocialAuthViewModel and githubSignIn
+
 ```
 touch lib/features/authentication/view_models/social_auth_view_model.dart
 ```
 
-- extract common method `githubSignIn` at `utils.dart` 
+- extract common method `githubSignIn` at `utils.dart`
   - but flutter web gets error?
 
 ```dart
@@ -3962,3 +3962,12 @@ Future<void> githubSignIn(BuildContext context, WidgetRef ref) async {
   await ref.read(socialAuthProvider.notifier).githubSignIn(context);
 }
 ```
+
+# 25. USER PROFILE
+
+## 25.0. Introduction
+
+- create firestore
+  - console > Cloud Firestore > Create database > Start in test mode > Cloud Firestore location: Seoul > Enable
+- enable storage
+  - build > storage > Get started > Start in test mode > sample location with firestore
