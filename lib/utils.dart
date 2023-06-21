@@ -1,5 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'features/authentication/view_models/social_auth_view_model.dart';
 
 void showFirebaseErrorSnack(
   BuildContext context,
@@ -13,4 +16,8 @@ void showFirebaseErrorSnack(
       ),
     ),
   );
+}
+
+Future<void> githubSignIn(BuildContext context, WidgetRef ref) async {
+  await ref.read(socialAuthProvider.notifier).githubSignIn(context);
 }

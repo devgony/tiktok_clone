@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-class AuthButton extends StatelessWidget {
+class AuthButton extends ConsumerWidget {
   final String text;
   final FaIcon icon;
   final Function? onTap;
@@ -15,9 +16,9 @@ class AuthButton extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
-      onTap: () => onTap == null ? (context) => {} : onTap!(context),
+      onTap: () => onTap == null ? () => {} : onTap!(context, ref),
       child: FractionallySizedBox(
         widthFactor: 1,
         child: Container(
