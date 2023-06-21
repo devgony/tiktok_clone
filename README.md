@@ -3971,3 +3971,8 @@ Future<void> githubSignIn(BuildContext context, WidgetRef ref) async {
   - console > Cloud Firestore > Create database > Start in test mode > Cloud Firestore location: Seoul > Enable
 - enable storage
   - build > storage > Get started > Start in test mode > sample location with firestore
+
+## 25.1. FireStore Intro
+
+- Start collection: users > Document ID: Auto-ID > Field: {bio: string, link: string, name: string}
+  - Start collection: likes > Document ID: Auto-ID > Field: {video: ref(`/videos/abc`)}
