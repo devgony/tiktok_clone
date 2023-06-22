@@ -4010,3 +4010,10 @@ mv lib/features/users/widgets lib/features/users/views
 ## 25.3. createProfile
 
 - if privilege error > firestore console > Rules > Edit rules > `allow read, write // remove if condition`
+
+## 25.4. findProfile
+
+- impl fromJson at `lib/features/users/models/user_profile_model.dart`
+- impl findProfile at `lib/features/users/repos/user_repo.dart`
+- add findProfile logic at `lib/features/users/view_models/users_view_model.dart`
+- Challege: save username and birthday on createProfile
