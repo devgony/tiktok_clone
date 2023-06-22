@@ -4016,4 +4016,9 @@ mv lib/features/users/widgets lib/features/users/views
 - impl fromJson at `lib/features/users/models/user_profile_model.dart`
 - impl findProfile at `lib/features/users/repos/user_repo.dart`
 - add findProfile logic at `lib/features/users/view_models/users_view_model.dart`
-- Challege: save username and birthday on createProfile
+
+## Challenge: save username and birthday on createProfile
+
+- add `name` to state on Submit at `email_screen`
+- add `birthday` to state onNextTap at `birthday_screen`
+- createProfile takes name andn birthday at `users_view_model`
