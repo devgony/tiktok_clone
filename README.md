@@ -4022,3 +4022,15 @@ mv lib/features/users/widgets lib/features/users/views
 - add `name` to state on Submit at `email_screen`
 - add `birthday` to state onNextTap at `birthday_screen`
 - createProfile takes name andn birthday at `users_view_model`
+
+## 25.5. AvatarViewModel
+
+- impl uploadAvatar at `lib/features/users/repos/user_repo.dart`
+- separate avatarViewModel
+
+```
+touch lib/features/users/view_models/avatar_view_model.dart
+touch lib/features/users/views/widgets/avatar.dart
+```
+
+- replace widget.username to data.name at `user_profile_screen`

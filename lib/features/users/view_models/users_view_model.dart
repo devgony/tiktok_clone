@@ -13,6 +13,8 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
 
   @override
   FutureOr<UserProfileModel> build() async {
+    await Future.delayed(const Duration(seconds: 10)); // TODO: just for now
+
     _usersRepository = ref.read(userRepo);
     _authenticationRepository = ref.read(authRepo);
 
