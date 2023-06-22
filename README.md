@@ -4042,3 +4042,11 @@ touch lib/features/users/views/widgets/avatar.dart
 - impl onAvatarUpload at `users_view_model`
 - call onAvatarUpload after upload at `avatar_view_model`
 - get image from firebase storage at `lib/features/users/views/widgets/avatar.dart`
+
+## 25.7. Code Challenge
+
+### fix: remove image caching
+
+- how not to cache image by workaround: put DataTime at the end of url
+
+<!-- ## Challenge: edit bio and link -->
