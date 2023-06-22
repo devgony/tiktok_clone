@@ -3976,3 +3976,37 @@ Future<void> githubSignIn(BuildContext context, WidgetRef ref) async {
 
 - Start collection: users > Document ID: Auto-ID > Field: {bio: string, link: string, name: string}
   - Start collection: likes > Document ID: Auto-ID > Field: {video: ref(`/videos/abc`)}
+
+## 25.2. UserProfileModel
+
+- create profile
+- get profile
+
+```
+mkdir -p lib/features/users/models/
+touch lib/features/users/models/user_profile_model.dart
+mkdir -p lib/features/users/repos/
+touch lib/features/users/repos/user_repo.dart
+mkdir -p lib/features/users/view_models/
+touch lib/features/users/view_models/users_view_model.dart
+```
+
+```
+mkdir -p lib/features/authentication/views
+mv lib/features/authentication/*.dart lib/features/authentication/views
+mv lib/features/authentication/widgets lib/features/authentication/views
+
+mkdir -p lib/features/users/views
+mv lib/features/users/user_profile_screen.dart lib/features/users/views
+mv lib/features/users/widgets lib/features/users/views
+```
+
+### Challenge
+
+- update avatar
+- update bio
+- update link
+
+## 25.3. createProfile
+
+- if privilege error > firestore console > Rules > Edit rules > `allow read, write // remove if condition`
