@@ -4034,3 +4034,11 @@ touch lib/features/users/views/widgets/avatar.dart
 ```
 
 - replace widget.username to data.name at `user_profile_screen`
+
+## 25.6. onAvatarUpload
+
+- add hasAvatar at `lib/features/users/models/user_profile_model.dart`
+- impl updateUser at `user_repo`
+- impl onAvatarUpload at `users_view_model`
+- call onAvatarUpload after upload at `avatar_view_model`
+- get image from firebase storage at `lib/features/users/views/widgets/avatar.dart`
