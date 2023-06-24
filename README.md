@@ -4001,9 +4001,12 @@ mv lib/features/users/user_profile_screen.dart lib/features/users/views
 mv lib/features/users/widgets lib/features/users/views
 ```
 
-### Challenge
+### Included in upcoming lecture
 
 - update avatar
+
+### Challenge at the end of lecture
+
 - update bio
 - update link
 
@@ -4047,7 +4050,7 @@ touch lib/features/users/views/widgets/avatar.dart
 
 ### fix: remove image caching
 
-- how not to cache image by workaround: put DataTime at the end of url
+- how not to cache image by workaround: put DateTime at the end of url
 
 ### Challenge: edit bio and link
 
