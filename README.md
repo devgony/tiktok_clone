@@ -4049,4 +4049,11 @@ touch lib/features/users/views/widgets/avatar.dart
 
 - how not to cache image by workaround: put DataTime at the end of url
 
-<!-- ## Challenge: edit bio and link -->
+### Challenge: edit bio and link
+
+- [x] implement UserProfileEditScreen
+- [x] implement updateProfile at users_view_model
+
+![profile](/md_images/2023-06-24-21-02-23.png)
+![edit-profile](/md_images/2023-06-24-21-03-30.png)
+![edited-profile](/md_images/2023-06-24-21-04-26.png)

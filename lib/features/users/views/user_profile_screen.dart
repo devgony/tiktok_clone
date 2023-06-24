@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/breakpoints.dart';
+import 'package:tiktok_clone/features/users/views/user_profile_edit_screen.dart';
 import 'package:tiktok_clone/features/users/views/widgets/avatar.dart';
 import '../../../constants/gaps.dart';
 import '../../../constants/sizes.dart';
@@ -29,6 +30,14 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const SettingsScreen(),
+      ),
+    );
+  }
+
+  void _onEditPressed() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const UserProfileEditScreen(),
       ),
     );
   }
@@ -61,6 +70,13 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                           SliverAppBar(
                             title: Text(data.name),
                             actions: [
+                              IconButton(
+                                onPressed: _onEditPressed,
+                                icon: const FaIcon(
+                                  FontAwesomeIcons.penToSquare,
+                                  size: Sizes.size20,
+                                ),
+                              ),
                               IconButton(
                                 onPressed: _onGearPressed,
                                 icon: const FaIcon(
@@ -257,12 +273,12 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                         ),
                                       ),
                                       Gaps.v14,
-                                      const Padding(
-                                        padding: EdgeInsets.symmetric(
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
                                           horizontal: Sizes.size32,
                                         ),
                                         child: Text(
-                                          "All highlights and where to watch live matches on FIFA+ I wonder how it would loook",
+                                          data.bio,
                                           textAlign: TextAlign.center,
                                         ),
                                       ),
@@ -270,15 +286,15 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
-                                        children: const [
-                                          FaIcon(
+                                        children: [
+                                          const FaIcon(
                                             FontAwesomeIcons.link,
                                             size: Sizes.size12,
                                           ),
                                           Gaps.h4,
                                           Text(
-                                            "https://nomadcoders.co",
-                                            style: TextStyle(
+                                            data.link,
+                                            style: const TextStyle(
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
@@ -496,23 +512,23 @@ class _UserProfileScreenState extends ConsumerState<UserProfileScreen> {
                                                 ],
                                               ),
                                               Gaps.v10,
-                                              const Text(
-                                                "All highlights and where to watch live matches on FIFA+ I wonder how it would loook",
+                                              Text(
+                                                data.bio,
                                                 textAlign: TextAlign.center,
                                               ),
                                               Gaps.v14,
                                               Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
-                                                children: const [
-                                                  FaIcon(
+                                                children: [
+                                                  const FaIcon(
                                                     FontAwesomeIcons.link,
                                                     size: Sizes.size12,
                                                   ),
                                                   Gaps.h4,
                                                   Text(
-                                                    "https://nomadcoders.co",
-                                                    style: TextStyle(
+                                                    data.link,
+                                                    style: const TextStyle(
                                                       fontWeight:
                                                           FontWeight.w600,
                                                     ),

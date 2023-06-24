@@ -27,14 +27,17 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
   }
 
   Future<void> createProfile(
-      UserCredential credential, String name, String birthday) async {
+    UserCredential credential,
+    String name,
+    String birthday,
+  ) async {
     if (credential.user == null) {
       throw Exception("Account not created");
     }
     state = const AsyncValue.loading();
     final profile = UserProfileModel(
-      bio: "undefined",
-      link: "undefined",
+      bio: "describe yourself!",
+      link: "your link to show",
       email: credential.user!.email ?? "anon@anon.com",
       uid: credential.user!.uid,
       name: name,
@@ -49,6 +52,13 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
     if (state.value == null) return;
     state = AsyncValue.data(state.value!.copyWith(hasAvatar: true));
     await _usersRepository.updateUser(state.value!.uid, {"hasAvatar": true});
+  }
+
+  Future<void> updateProfile(String? bio, String? link) async {
+    if (state.value == null) return;
+    state = AsyncValue.data(state.value!.copyWith(bio: bio, link: link));
+    await _usersRepository
+        .updateUser(state.value!.uid, {"bio": bio, "link": link});
   }
 }
 
