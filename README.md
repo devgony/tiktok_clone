@@ -4084,3 +4084,9 @@ touch lib/features/users/views/widgets/avatar.dart
 touch lib/features/videos/repos/videos_repo.dart
 touch lib/features/videos/view_models/upload_video_view_model.dart
 ```
+
+## 26.2. uploadVideoProvider
+
+- impl Serde at viddoe_model.dart
+- impl saveVideo at videos_repo.dart
+- if uploadVideoFile completed, saveVideo in db at upload_video_view_model.dart

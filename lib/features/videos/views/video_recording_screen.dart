@@ -77,7 +77,7 @@ class _VideoRecordingScreenState extends State<VideoRecordingScreen>
   void dispose() {
     _progressAnimationController.dispose();
     _buttonAnimationController.dispose();
-    _cameraController.dispose();
+
     if (!_noCamera) {
       _cameraController.dispose();
     }
