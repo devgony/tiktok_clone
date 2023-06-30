@@ -4060,3 +4060,13 @@ touch lib/features/users/views/widgets/avatar.dart
 ![profile](/md_images/2023-06-24-21-02-23.png)
 ![edit-profile](/md_images/2023-06-24-21-03-30.png)
 ![edited-profile](/md_images/2023-06-24-21-04-26.png)
+
+# 26. VIDEO UPLOAD
+
+## 26.0. Introduction
+
+- upload video => firebase functions listening and set only thumbnail
+
+### purchase
+
+- Get Started => Continue => set $1
