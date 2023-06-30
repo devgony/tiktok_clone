@@ -4070,3 +4070,17 @@ touch lib/features/users/views/widgets/avatar.dart
 ### purchase
 
 - Get Started => Continue => set $1
+
+## 26.1. VideosRepository
+
+- challenge: form on preview video
+
+### VideoModel
+
+- add more fields at `lib/features/videos/models/video_model.dart`
+- impl videos_repo, upload_video_view_model
+
+```
+touch lib/features/videos/repos/videos_repo.dart
+touch lib/features/videos/view_models/upload_video_view_model.dart
+```
