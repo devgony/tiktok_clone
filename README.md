@@ -4143,3 +4143,50 @@ flutter run
 ```
 
 - try to upload video > cloud function update {hello: "from functions"}
+
+## 26.4. ffmpeg
+
+- extract thumbnail
+- system packages included in cloud function
+
+  - ffmpeg: handle video and audio
+  - spawn subprocess
+
+  ```
+  cd functions
+  npm i child-process-promise
+  ```
+
+- it can access to temporary file storage
+
+```ts
+export const onVideoCreated = functions.firestore
+  .document("videos/{videoId}")
+  .onCreate(async (snapshot, context) => {
+    const spawn = require("child-process-promise").spawn;
+    const video = snapshot.data();
+    await spawn("ffmpeg", [
+      "-i",
+      video.fileUrl,
+      "-ss",
+      "00:00:01.000",
+      "-vframes",
+      "1",
+      "-vf",
+      "scale=150:-1",
+      `/tmp/${snapshot.id}.jpg`,
+    ]);
+    const storage = admin.storage();
+    await storage.bucket().upload(`/tmp/${snapshot.id}.jpg`, {
+      destination: `thumbnails/${snapshot.id}.jpg`,
+    });
+  });
+```
+
+```
+firebase deploy --only functions
+```
+
+## ffmpeg does not work
+
+- tried to downgrade node 18 to 16 => does not work
