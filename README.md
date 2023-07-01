@@ -4190,3 +4190,9 @@ firebase deploy --only functions
 ## ffmpeg does not work
 
 - tried to downgrade node 18 to 16 => does not work
+
+## 26.5. publicUrl
+
+- save it to video
+- show their post on profile
+  - need only video id
