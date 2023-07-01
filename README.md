@@ -4090,3 +4090,56 @@ touch lib/features/videos/view_models/upload_video_view_model.dart
 - impl Serde at viddoe_model.dart
 - impl saveVideo at videos_repo.dart
 - if uploadVideoFile completed, saveVideo in db at upload_video_view_model.dart
+
+## 26.3 Cloud Functions
+
+- install cloud function
+  - prerequisite: latest nodeJs
+
+```
+flutter pub add cloud_functions
+flutterfire configure
+  all platforms
+  override? => yes
+firebase init functions
+  Use an existing project
+  Typescript
+  ESLint? => n
+  dependencies with npm => Y
+```
+
+- impl listening
+  - snapshot: video which just created
+
+```ts
+// functions/src/index.ts
+import * as functions from "firebase-functions";
+import * as admin from "firebase-admin";
+
+admin.initializeApp();
+
+export const onVideoCreated = functions.firestore
+  .document("videos/{videoId}")
+  .onCreate(async (snapshot, context) => {
+    await snapshot.ref.update({ hello: "from functions" });
+  });
+```
+
+- deploy
+
+```
+firebase deploy --only functions
+```
+
+- fix ios/cocodpod error
+
+```
+cd ios
+rm Podfile.lock
+pod install --repo-update
+cd ../
+flutter clean
+flutter run
+```
+
+- try to upload video > cloud function update {hello: "from functions"}
