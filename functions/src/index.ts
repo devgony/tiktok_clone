@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
+import { logger } from "firebase-functions";
 
 admin.initializeApp();
 
@@ -8,17 +9,27 @@ export const onVideoCreated = functions.firestore
   .onCreate(async (snapshot, context) => {
     const spawn = require("child-process-promise").spawn;
     const video = snapshot.data();
-    await spawn("ffmpeg", [
-      "-i",
-      video.fileUrl,
-      "-ss",
-      "00:00:01.000",
-      "-vframes",
-      "1",
-      "-vf",
-      "scale=150:-1",
-      `/tmp/${snapshot.id}.jpg`,
-    ]);
+    await spawn(
+      "ffmpeg",
+      [
+        "-i",
+        video.fileUrl,
+        "-ss",
+        "00:00:00.001",
+        "-vframes",
+        "1",
+        "-vf",
+        "scale=150:-1",
+        `/tmp/${snapshot.id}.jpg`,
+      ],
+      { capture: ["stdout", "stderr"] }
+    )
+      .then(function (result: any) {
+        logger.debug("[spawn] stdout: ", result.stdout.toString());
+      })
+      .catch(function (err: any) {
+        logger.error("[spawn] stderr: ", err.stderr);
+      });
     const storage = admin.storage();
     const [file, _] = await storage.bucket().upload(`/tmp/${snapshot.id}.jpg`, {
       destination: `thumbnails/${snapshot.id}.jpg`,

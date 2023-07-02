@@ -4065,7 +4065,7 @@ touch lib/features/users/views/widgets/avatar.dart
 
 ## 26.0. Introduction
 
-- upload video => firebase functions listening and set only thumbnail
+- upload video => firebase function keeps listening and set only thumbnail
 
 ### purchase
 
@@ -4169,7 +4169,7 @@ export const onVideoCreated = functions.firestore
       "-i",
       video.fileUrl,
       "-ss",
-      "00:00:01.000",
+      "00:00:00.001",
       "-vframes",
       "1",
       "-vf",
@@ -4189,10 +4189,35 @@ firebase deploy --only functions
 
 ## ffmpeg does not work
 
-- tried to downgrade node 18 to 16 => does not work
+- to extract thumbnail with more than node 18, should try [sharp](https://firebase.google.com/docs/functions/gcp-storage-events?gen%253D2nd) way
+- to keep using ffmpeg, downgrade node 18 to 16
+
+```json
+"engines": {
+  "node": "16"
+},
+```
+
+- `rm -rf node_modules/ package-lock.json` and re-deploy made it works!
+- thumbnail should be early enough like `00:00:00.001`
+  - how to handle error from client side? => listener with `StreamProvider`?
 
 ## 26.5. publicUrl
 
 - save it to video
 - show their post on profile
   - need only video id
+
+## 26.6. Conclusions
+
+- replace ` push to home` to `pop() + pop()`
+  - context.pop() 1: back to camera screen
+  - context.pop() 2: back to main tab nav
+
+```diff
+- context.pushReplacement("/home");
++ context.pop();
++ context.pop();
+```
+
+- use Cloud function > View logs > Stream logs
