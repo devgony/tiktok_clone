@@ -4221,3 +4221,7 @@ firebase deploy --only functions
 ```
 
 - use Cloud function > View logs > Stream logs
+
+## Challenge: implement TextForm for title and description of video
+
+![text-form-title-and-description](<md_images/Simulator Screen Shot - iPhone 13 - 2023-07-09 at 15.52.42.png>)

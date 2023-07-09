@@ -26,6 +26,8 @@ class VideoPreviewScreen extends ConsumerStatefulWidget {
 class VideoPreviewScreenState extends ConsumerState<VideoPreviewScreen> {
   late final VideoPlayerController _videoPlayerController;
   bool _savedVideo = false;
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   Future<void> _initVideo() async {
     _videoPlayerController = VideoPlayerController.file(
@@ -68,6 +70,8 @@ class VideoPreviewScreenState extends ConsumerState<VideoPreviewScreen> {
   void _onUploadPressed() async {
     ref.read(uploadVideoProvider.notifier).uploadVideo(
           File(widget.video.path),
+          _titleController.text,
+          _descriptionController.text,
           context,
         );
   }
@@ -99,7 +103,29 @@ class VideoPreviewScreenState extends ConsumerState<VideoPreviewScreen> {
         ],
       ),
       body: _videoPlayerController.value.isInitialized
-          ? VideoPlayer(_videoPlayerController)
+          ? Stack(children: [
+              VideoPlayer(_videoPlayerController),
+              Column(
+                children: [
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Title',
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.7),
+                    ),
+                    controller: _titleController,
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Description',
+                      filled: true,
+                      fillColor: Colors.white.withOpacity(0.7),
+                    ),
+                    controller: _descriptionController,
+                  ),
+                ],
+              ),
+            ])
           : null,
     );
   }
