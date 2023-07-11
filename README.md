@@ -4225,3 +4225,17 @@ firebase deploy --only functions
 ## Challenge: implement TextForm for title and description of video
 
 ![text-form-title-and-description](<md_images/Simulator Screen Shot - iPhone 13 - 2023-07-09 at 15.52.42.png>)
+
+## 27. VIDEO TIMELINE
+
+## 27.1. VideoPost
+
+- impl fromJson in lib/features/videos/models/video_model.dart
+- impl fetchVideos in lib/features/videos/repos/videos_repo.dart
+- call fetchVideos at build in lib/features/videos/view_models/timeline_view_model.dart
+- render VideoPost with real data in lib/features/videos/views/video_timeline_screen.dart
+
+### In lib/features/videos/views/widgets/video_post.dart
+
+- replace VideoPlayerController.asset("../local.mp4") to network(widget.videoData.fileUrl);
+- BoxFit.cover => strech to fill background
