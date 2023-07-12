@@ -4239,3 +4239,13 @@ firebase deploy --only functions
 
 - replace VideoPlayerController.asset("../local.mp4") to network(widget.videoData.fileUrl);
 - BoxFit.cover => strech to fill background
+
+## 27.2. Infinite Firebase
+
+- impl fetchNextPage in `lib/features/videos/view_models/timeline_view_model.dart`
+- startAfter: order by + startAfter n-th (exclusive) in `lib/features/videos/repos/videos_repo.dart`
+
+### lib/features/videos/views/video_timeline_screen.dart
+
+- Quick fix > convert to block body
+- itemCount => request next page
