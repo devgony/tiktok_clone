@@ -43,6 +43,7 @@ class VideoPostState extends ConsumerState<VideoPost>
   bool _isPaused = false;
   bool _showDetail = false;
   late bool _isMuted;
+  int _likes = 0;
 
   void _onVideoChange() {
     if (_videoPlayerController.value.isInitialized) {
@@ -55,6 +56,19 @@ class VideoPostState extends ConsumerState<VideoPost>
 
   void _onLikeTap() {
     ref.read(videoPostProvider(widget.videoData.id).notifier).likeVideo();
+
+    ref.watch(videoPostProvider(widget.videoData.id)).when(
+        data: (isLiked) {
+          if (isLiked) {
+            _likes--;
+          } else {
+            _likes++;
+          }
+
+          setState(() {});
+        },
+        error: (error, stackTrace) => null,
+        loading: () => null);
   }
 
   void _initVideoPlayer() async {
@@ -82,6 +96,7 @@ class VideoPostState extends ConsumerState<VideoPost>
     );
 
     _isMuted = false; // just for now
+    _likes = widget.videoData.likes;
   }
 
   @override
@@ -314,7 +329,15 @@ class VideoPostState extends ConsumerState<VideoPost>
                   onTap: _onLikeTap,
                   child: VideoButton(
                     icon: FontAwesomeIcons.solidHeart,
-                    text: S.of(context).likeCount(widget.videoData.likes),
+                    color:
+                        ref.watch(videoPostProvider(widget.videoData.id)).when(
+                              data: (isLiked) =>
+                                  isLiked ? Colors.red : Colors.white,
+                              error: (error, stackTrace) => Colors.white,
+                              loading: () => Colors.white,
+                            ),
+                    // widget.videoData.likes > 0 ? Colors.red : Colors.white,
+                    text: S.of(context).likeCount(_likes),
                   ),
                 ),
                 Gaps.v24,

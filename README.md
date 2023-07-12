@@ -4311,3 +4311,10 @@ Future<void> likeVideo(String videoId, String userId) async {
 - impl onLikedCreated, onLikedRemoved in `functions/src/index.ts`
 - looks like there is bug: `like` first video and fetchNextPage => `like`second video sets `-1`
 - Challenge: onLikedCreated => put liked video in profile by cloud function
+
+## 28.6. Challenge: color heart with red when liked video
+
+- hint: video_post_view_models.dart
+- consider: can't we watch likes as well? not by local state but by prodiver
+
+![challenge-28.6](<md_images/Simulator Screen Shot - iPhone 13 - 2023-07-13 at 00.09.02.png>)
