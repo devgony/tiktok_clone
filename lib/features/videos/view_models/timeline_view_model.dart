@@ -16,7 +16,8 @@ class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
     );
     final videos = result.docs.map(
       (doc) => VideoModel.fromJson(
-        doc.data(),
+        json: doc.data(),
+        videoId: doc.id,
       ),
     );
 
@@ -31,12 +32,18 @@ class TimelineViewModel extends AsyncNotifier<List<VideoModel>> {
     return _list;
   }
 
-  fetchNextPage() async {
+  Future<void> fetchNextPage() async {
     final nextPage =
         await _fetchVideos(lastItemCreatedAt: _list.last.createdAt);
 
     _list = [..._list, ...nextPage]; // why should it be held in a variable?
     state = AsyncValue.data(_list);
+  }
+
+  Future<void> refresh() async {
+    final videos = await _fetchVideos(lastItemCreatedAt: null);
+    _list = videos;
+    state = AsyncValue.data(videos);
   }
 }
 
