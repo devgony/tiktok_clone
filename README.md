@@ -4304,3 +4304,10 @@ Future<void> likeVideo(String videoId, String userId) async {
 ```
 
 - another way: keep likes in user
+
+## 27.5. dislikeVideo
+
+- likeVideo handles `dislike case` in `lib/features/videos/repos/videos_repo.dart`
+- impl onLikedCreated, onLikedRemoved in `functions/src/index.ts`
+- Challenge: onLikedCreated => put liked video in profile by cloud function
+- looks like there is bug: `like` first video and fetchNextPage => `like`second video sets `-1`
