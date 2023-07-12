@@ -4281,3 +4281,26 @@ firebase deploy --only functions
     () => VideoPostViewModel(),
   );
   ```
+
+## 27.4. likeVideo
+
+- should check if already checked
+- create ownId and access by it for higher performance and saving money
+  - use path to access: If no [path] is provided, an auto-generated ID is used.
+
+```dart
+Future<void> likeVideo(String videoId, String userId) async {
+  final query = _db.collection("likes").doc("${videoId}000$userId");
+  final like = await query.get();
+
+  if (!like.exists) {
+    await query.set(
+      {
+        "createdAt": DateTime.now().millisecondsSinceEpoch,
+      },
+    );
+  }
+}
+```
+
+- another way: keep likes in user
