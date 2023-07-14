@@ -4318,3 +4318,31 @@ Future<void> likeVideo(String videoId, String userId) async {
 - consider: can't we watch likes as well? not by local state but by prodiver
 
 ![challenge-28.6](<md_images/Simulator Screen Shot - iPhone 13 - 2023-07-13 at 00.09.02.png>)
+
+# 28 DIRECT MESSAGES
+
+## 28.1. Send Message
+
+- create collection
+
+```
+/chat_rooms
+  autoID
+  personA string uid
+  personB string xxx
+```
+
+- impl MVVM for messages
+
+```
+mkdir -p lib/features/inbox/models/
+touch lib/features/inbox/models/message.dart
+mkdir -p lib/features/inbox/repos/
+touch lib/features/inbox/repos/messages_repo.dart
+mkdir -p lib/features/inbox/view_models/
+touch lib/features/inbox/view_models/messages_view_model.dart
+
+mkdir -p lib/features/inbox/views/
+mv lib/features/inbox/*.dart lib/features/inbox/views/
+lib/features/inbox/views/activity_screen.dart
+```

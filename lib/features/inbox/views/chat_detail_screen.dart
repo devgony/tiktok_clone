@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-class ChatDetailScreen extends StatefulWidget {
+import '../view_models/messages_view_model.dart';
+
+class ChatDetailScreen extends ConsumerStatefulWidget {
   static const String routeName = "chatDetail";
   static const String routeURL = ":chatId";
 
@@ -15,10 +18,10 @@ class ChatDetailScreen extends StatefulWidget {
   });
 
   @override
-  State<ChatDetailScreen> createState() => _ChatDetailScreenState();
+  ConsumerState<ChatDetailScreen> createState() => _ChatDetailScreenState();
 }
 
-class _ChatDetailScreenState extends State<ChatDetailScreen> {
+class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
   final TextEditingController _textEditingController = TextEditingController();
   bool _writing = false;
 
@@ -28,7 +31,19 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
     });
   }
 
-  void _stopWriting() {
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
+
+  void _onSendPress() {
+    final text = _textEditingController.text;
+    if (text == "") {
+      return;
+    }
+    ref.read(messagesProvider.notifier).sendMessage(text);
+
     _textEditingController.clear();
     setState(() {
       _writing = false;
@@ -36,13 +51,8 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
   }
 
   @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(messagesProvider).isLoading;
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
@@ -158,43 +168,39 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                 color: Colors.grey.shade50,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: Sizes.size16,
-                    vertical: Sizes.size8,
-                  ),
+                      // horizontal: Sizes.size8,
+                      // vertical: Sizes.size2,
+                      ),
                   child: Row(
                     children: [
                       Expanded(
-                        child: SizedBox(
-                          height: Sizes.size44,
-                          child: TextField(
-                            controller: _textEditingController,
-                            onChanged: _onTextChanged,
-                            textInputAction: TextInputAction.newline,
-                            expands: true,
-                            minLines: null,
-                            maxLines: null,
-                            decoration: InputDecoration(
-                              hintText: 'Send a message...',
-                              hintStyle: const TextStyle(
-                                color: Colors.grey,
+                        child: TextField(
+                          controller: _textEditingController,
+                          onChanged: _onTextChanged,
+                          textInputAction: TextInputAction.newline,
+                          expands: true,
+                          minLines: null,
+                          maxLines: null,
+                          decoration: InputDecoration(
+                            filled: true,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(
+                                Sizes.size12,
                               ),
-                              contentPadding: const EdgeInsets.symmetric(
-                                horizontal: Sizes.size12,
-                              ),
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(
-                                  Sizes.size16,
-                                ),
-                                borderSide: BorderSide.none,
-                              ),
-                              // suffixIcon with smile
-                              suffixIcon: const Icon(
-                                Icons.insert_emoticon,
-                                size: Sizes.size32,
-                                color: Colors.black,
-                              ),
+                              borderSide: BorderSide.none,
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: Sizes.size12,
+                            ),
+                            hintText: 'Send a message...',
+                            hintStyle: const TextStyle(
+                              color: Colors.grey,
+                            ),
+                            fillColor: Colors.white,
+                            suffixIcon: const Icon(
+                              Icons.insert_emoticon,
+                              size: Sizes.size32,
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -208,10 +214,12 @@ class _ChatDetailScreenState extends State<ChatDetailScreen> {
                           color: Colors.grey.shade300,
                         ),
                         child: GestureDetector(
-                          onTap: _stopWriting,
+                          onTap: _onSendPress,
                           child: Center(
                             child: FaIcon(
-                              FontAwesomeIcons.solidPaperPlane,
+                              isLoading
+                                  ? null
+                                  : FontAwesomeIcons.solidPaperPlane,
                               color: _writing
                                   ? Theme.of(context).primaryColor
                                   : Colors.white,

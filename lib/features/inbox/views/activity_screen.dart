@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tiktok_clone/constants/gaps.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 
-import '../../common/widgets/dark_config/dark_mode_config.dart';
+import '../../../common/widgets/dark_config/dark_mode_config.dart';
 
 class ActivityScreen extends StatefulWidget {
   static const String routeName = "activity";
