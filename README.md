@@ -4346,3 +4346,8 @@ mkdir -p lib/features/inbox/views/
 mv lib/features/inbox/*.dart lib/features/inbox/views/
 lib/features/inbox/views/activity_screen.dart
 ```
+
+## 28.2. StreamProvider
+
+- add createdAt
+- orderBy().snapshots(): return stream
