@@ -4351,3 +4351,24 @@ lib/features/inbox/views/activity_screen.dart
 
 - add createdAt
 - orderBy().snapshots(): return stream
+
+## 28.3 autoDispose
+
+### lib/features/inbox/view_models/messages_view_model.dart
+
+- StreamProvider.autoDispose
+  - release resource
+  - when user exits chat => dispose
+
+### lib/features/inbox/views/chat_detail_screen.dart
+
+- watch().when()
+- fake data to real data
+
+  - length
+  - text
+  - isMine
+
+- reverse ui
+- reverse order
+- MediaQuery for cross-platform
