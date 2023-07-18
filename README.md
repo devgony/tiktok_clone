@@ -4372,3 +4372,14 @@ lib/features/inbox/views/activity_screen.dart
 - reverse ui
 - reverse order
 - MediaQuery for cross-platform
+
+# 29. PUSH NOTIFICATIONS
+
+## 29.0. Introduction
+
+```
+flutter pub add firebase_messaging
+flutterfire configure
+```
+
+- Messaging > Create your first campaign > Firebase Notification messages
