@@ -4319,7 +4319,7 @@ Future<void> likeVideo(String videoId, String userId) async {
 
 ![challenge-28.6](<md_images/Simulator Screen Shot - iPhone 13 - 2023-07-13 at 00.09.02.png>)
 
-# 28 DIRECT MESSAGES
+# 28. DIRECT MESSAGES
 
 ## 28.1. Send Message
 
@@ -4372,3 +4372,17 @@ lib/features/inbox/views/activity_screen.dart
 - reverse ui
 - reverse order
 - MediaQuery for cross-platform
+
+## Code Challenge: Chat room CRUD
+
+1. list chat rooms
+
+- (persone name, avartar)
+
+2. press `+`` > show users and choose user to chat > create chat room
+
+3. long press to delete message or [deleted] within 2 min
+
+- hint:
+  - FamilyAsyncNotifier(roomId)
+  - autoDisopse.family
