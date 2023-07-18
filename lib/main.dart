@@ -11,7 +11,6 @@ import 'package:tiktok_clone/router.dart';
 import 'constants/sizes.dart';
 import 'package:tiktok_clone/generated/l10n.dart';
 
-import 'features/notifications/notifications_provider.dart';
 import 'features/videos/repos/playback_config_repo.dart';
 import 'firebase_options.dart';
 
@@ -65,7 +64,6 @@ class TikTokAppState extends ConsumerState<TikTokApp> {
 
   @override
   Widget build(BuildContext context) {
-    ref.watch(notificationsProvider);
     return MaterialApp.router(
       routerConfig: ref.watch(routerProvider),
       debugShowCheckedModeBanner: false,

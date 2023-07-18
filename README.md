@@ -4456,3 +4456,34 @@ FirebaseMessaging.onMessageOpenedApp.listen((notification) {
   print(notification.data['screen']);
 });
 ```
+
+## 29.4. ShellRoute
+
+## lib/features/notifications/notifications_provider.dart
+
+- AsyncNotifier to FamilyAsyncNotifier<void, BuildContext>
+  - Can use BuildContext to send to other page
+
+### lib/router.dart
+
+- give BuildContext with ShellRoute wrapper
+
+```dart
+routes: [
+  ShellRoute(
+    builder: (context, state, child) {
+      ref.read(notificationsProvider(context));
+      return child;
+    },
+    ...prevs
+]
+```
+
+### lib/main.dart
+
+- should remove watch to notificationsProvider
+
+```diff
+Widget build(BuildContext context, WidgetRef ref) {
+- ref.watch(notificationsProvider);
+```
