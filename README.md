@@ -4402,3 +4402,26 @@ _messaging.onTokenRefresh.listen((newToken) async {
 ```
 
 - Messaging > Create your first campaign > Firebase Notification messages > Send test message > put token from Firestore
+
+## 29.2. Foreground Notifications
+
+### Push States
+
+- Foreground
+
+```dart
+Future<void> initListeners() async {
+  final permission = await _messaging.requestPermission();
+  if (permission.authorizationStatus == AuthorizationStatus.denied) {
+    return;
+  }
+  // Foreground
+  FirebaseMessaging.onMessage.listen((RemoteMessage event) {
+    print("I just got a message and I'm in the foreground");
+    print(event.notification?.title);
+  });
+}
+```
+
+- Background
+- Terminated
