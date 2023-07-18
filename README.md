@@ -4382,4 +4382,23 @@ flutter pub add firebase_messaging
 flutterfire configure
 ```
 
-- Messaging > Create your first campaign > Firebase Notification messages
+## 29.1. getToken
+
+- Use Android simulator otherwise pay for apple developer
+- push for specific user > need token
+
+```
+mkdir -p lib/features/notifications/
+touch lib/features/notifications/notifications_provider.dart
+```
+
+- event listen
+
+```dart
+// lib/features/notifications/notifications_provider.dart
+_messaging.onTokenRefresh.listen((newToken) async {
+  await updateToken(newToken);
+});
+```
+
+- Messaging > Create your first campaign > Firebase Notification messages > Send test message > put token from Firestore
