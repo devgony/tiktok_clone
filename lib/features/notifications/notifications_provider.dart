@@ -24,6 +24,10 @@ class NotificationsProvider extends AsyncNotifier {
       print("I just got a message and I'm in the foreground");
       print(event.notification?.title);
     });
+    // Background
+    FirebaseMessaging.onMessageOpenedApp.listen((notification) {
+      print(notification.data['screen']);
+    });
   }
 
   @override

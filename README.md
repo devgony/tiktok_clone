@@ -4405,9 +4405,15 @@ _messaging.onTokenRefresh.listen((newToken) async {
 
 ## 29.2. Foreground Notifications
 
-### Push States
+### Three Push States
 
 - Foreground
+- Background
+- Terminated
+
+### Foreground
+
+- Send to specific user
 
 ```dart
 Future<void> initListeners() async {
@@ -4423,5 +4429,30 @@ Future<void> initListeners() async {
 }
 ```
 
-- Background
-- Terminated
+## 29.3. Background Notification
+
+### Background
+
+```dart
+FirebaseMessaging.onMessageOpenedApp.listen((notification) {
+  print(notification.data['screen']);
+});
+```
+
+- Create your first campaign > Firebase Notification messages > Compose notification > Next > Additoinal options > Custom data
+  ```json
+  { "screen": "chat_room:123" }
+  ```
+- Send to everybody
+- Can decide where to send user by data
+
+### Terminated
+
+- can be fired without push -> nullable
+- build context for snackBar
+
+```dart
+FirebaseMessaging.onMessageOpenedApp.listen((notification) {
+  print(notification.data['screen']);
+});
+```
