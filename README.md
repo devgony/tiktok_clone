@@ -4487,3 +4487,32 @@ routes: [
 Widget build(BuildContext context, WidgetRef ref) {
 - ref.watch(notificationsProvider);
 ```
+
+## 29.5. Targeted Notification
+
+- [Enable Cloud Messaging API](https://console.cloud.google.com/marketplace/product/google/googlecloudmessaging.googleapis.com?q=search&referrer=search&project=tiktok-devgony)
+
+- Send push notification by cloud function
+
+```ts
+// functions/src/index.ts
+const video = await(await db.collection("videos").doc(videoId).get()).data();
+if (video) {
+  const creatorUid = video.creatorUid;
+  const user = await(await db.collection("users").doc(creatorUid).get()).data();
+  if (user) {
+    const token = user.token;
+    await admin.messaging().sendToDevice(token, {
+      data: {
+        screen: "123",
+      },
+      notification: {
+        title: "someone liked you video",
+        body: "Likes + 1 ! Congrats! 💖",
+      },
+    });
+  }
+}
+```
+
+- Test: as soon as click like, make app background > get push!
