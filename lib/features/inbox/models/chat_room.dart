@@ -2,27 +2,27 @@ class ChatRoomModel {
   final String personA;
   final String personB;
   final String lastMessage;
-  final int createdAt;
+  final int updatedAt;
 
   ChatRoomModel({
     required this.personA,
     required this.personB,
     required this.lastMessage,
-    required this.createdAt,
+    required this.updatedAt,
   });
 
   ChatRoomModel.fromJson(Map<String, dynamic> json)
       : personA = json['personA'],
         personB = json['personB'],
         lastMessage = json['lastMessage'],
-        createdAt = json['createdAt'];
+        updatedAt = json['updatedAt'];
 
   Map<String, dynamic> toJson() {
     return {
       "personA": personA,
       "personB": personB,
       "lastMessage": lastMessage,
-      "createdAt": createdAt,
+      "updatedAt": updatedAt,
     };
   }
 }

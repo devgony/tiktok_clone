@@ -4386,3 +4386,7 @@ lib/features/inbox/views/activity_screen.dart
 - hint:
   - FamilyAsyncNotifier(roomId)
   - autoDisopse.family
+
+### Q&A
+
+- For performance, it might better to update chat_room whenever new message was sent

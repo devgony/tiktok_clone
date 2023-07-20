@@ -32,6 +32,7 @@ final messagesProvider = AsyncNotifierProvider<MessagesViewModel, void>(
   () => MessagesViewModel(),
 );
 
+// if there is only GET logic, simple impl without Model
 final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
   final db = FirebaseFirestore.instance;
 
@@ -49,7 +50,7 @@ final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
               ),
             )
             .toList()
-            .reversed
+            .reversed // TODO: can be removed if orderBy("createdAt", descending: true)
             .toList(),
       );
 });

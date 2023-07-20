@@ -1,24 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
+import 'package:tiktok_clone/features/inbox/models/chat_room.dart';
+import 'package:tiktok_clone/features/inbox/repos/chat_rooms_repo.dart';
 import 'chat_detail_screen.dart';
 
-class ChatsScreen extends StatefulWidget {
+class ChatsScreen extends ConsumerStatefulWidget {
   static const String routeName = "chats";
   static const String routeURL = "/chats";
   const ChatsScreen({super.key});
 
   @override
-  State<ChatsScreen> createState() => _ChatsScreenState();
+  ConsumerState<ChatsScreen> createState() => _ChatsScreenState();
 }
 
-class _ChatsScreenState extends State<ChatsScreen> {
+class _ChatsScreenState extends ConsumerState<ChatsScreen> {
   final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
 
   final List<int> _items = [];
 
+  // final List<ChatRoomModel> _chatRooms = [];
+
   final Duration _duration = const Duration(milliseconds: 300);
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   void _addItem() {
     if (_key.currentState != null) {
@@ -38,7 +48,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
           sizeFactor: animation,
           child: Container(
             color: Colors.red,
-            child: _makeTile(index),
+            // child: _makeTile(index),
           ),
         ),
         duration: _duration,
@@ -54,10 +64,10 @@ class _ChatsScreenState extends State<ChatsScreen> {
     );
   }
 
-  Widget _makeTile(int index) {
+  Widget _makeTile(ChatRoomModel chatRoom) {
     return ListTile(
-      onLongPress: () => _deleteItem(index),
-      onTap: () => _onChatTap(index),
+      // onLongPress: () => _deleteItem(index),
+      // onTap: () => _onChatTap(index),
       leading: const CircleAvatar(
         radius: 30,
         foregroundImage: NetworkImage(
@@ -70,7 +80,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            "Henry ($index)",
+            chatRoom.lastMessage,
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           Text(
@@ -82,7 +92,7 @@ class _ChatsScreenState extends State<ChatsScreen> {
           ),
         ],
       ),
-      subtitle: const Text("Don't forget to make video"),
+      subtitle: Text(chatRoom.lastMessage),
     );
   }
 
@@ -99,18 +109,33 @@ class _ChatsScreenState extends State<ChatsScreen> {
           ),
         ],
       ),
-      body: AnimatedList(
-        key: _key,
-        padding: const EdgeInsets.symmetric(
-          vertical: Sizes.size10,
-        ),
-        itemBuilder: (context, index, animation) {
-          return FadeTransition(
-            key: Key('$index'),
-            opacity: animation,
-            child:
-                SizeTransition(sizeFactor: animation, child: _makeTile(index)),
+      body: ref.watch(chatRoomsStreamProvider).when(
+        data: (data) {
+          print(data);
+
+          return AnimatedList(
+            // key: _key,
+            padding: const EdgeInsets.symmetric(
+              vertical: Sizes.size10,
+            ),
+            initialItemCount: data.length,
+            itemBuilder: (context, index, animation) {
+              final chatRoom = data[index];
+
+              return FadeTransition(
+                key: Key('$index'),
+                opacity: animation,
+                child: SizeTransition(
+                    sizeFactor: animation, child: _makeTile(chatRoom)),
+              );
+            },
           );
+        },
+        error: (error, stackTrace) {
+          return null;
+        },
+        loading: () {
+          return null;
         },
       ),
     );
