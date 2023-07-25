@@ -4591,3 +4591,12 @@ service cloud.firestore {
 - should be named with `*_test.dart`
 
   => `test/unit_test.dart`
+
+## 30.4. Widget Testing part One
+
+- pumpWidget: renders UI from given widget
+  - No Directionality widget found Error
+    - Meterial or Cupertino already included it
+    - give TextDirection.ltr
+- set finding type to generic to get proper style fields hint
+- `widget_test.dart`
