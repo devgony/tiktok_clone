@@ -4131,7 +4131,7 @@ export const onVideoCreated = functions.firestore
 firebase deploy --only functions
 ```
 
-- fix ios/cocodpod error
+- fix ios/cocoapod error
 
 ```
 cd ios
@@ -4516,3 +4516,36 @@ if (video) {
 ```
 
 - Test: as soon as click like, make app background > get push!
+
+# 30. SECURITY AND TESTING
+
+## 30.1. Security Rules
+
+- Firestore Database > Rules
+- Currently, Anyone is allowed to read and write
+
+- Specify User: if request.auth !=null
+- resource: the document has been created
+- write: delete + update + create
+- make only creator be able to update
+
+```json
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{document=**} {
+      allow read, update, create : if request.auth != null && resource.id == request.auth.uid
+    }
+    match /videos/{document=**} {
+      allow read, create : if request.auth != null
+      allow update : if request.auth != null && request.auth.uid == resource.data.creatorUid
+    }
+    match /likes/{document=**} {
+      allow read, create
+    }
+    match /chat_rooms/{document=**} {
+      allow read, create
+    }
+  }
+}
+```
