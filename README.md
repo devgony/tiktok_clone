@@ -4578,3 +4578,16 @@ service cloud.firestore {
   }
 }
 ```
+
+## 30.3. Unit Testing
+
+### Challenge: Rules
+
+- upload avatar if logged in
+- delete video if uploaded by me
+
+### Unit Test
+
+- should be named with `*_test.dart`
+
+  => `test/unit_test.dart`
