@@ -4549,3 +4549,32 @@ service cloud.firestore {
   }
 }
 ```
+
+## 30.2. Security Querying
+
+- can use {userId} param like /users/{userID}
+  - /users/{userId}/videos
+- `get()` fetch data from db -> don't use much, it charges to read db
+- or use `exists()`
+- allow user to read/write likes only if user has noti-token
+
+```json
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{userId} {
+      allow read, update, create : if request.auth != null && userId == request.auth.uid
+    }
+    match /users/{userId}/videos {
+      allow read: if request.auth != null
+    }
+    match /videos/{document=**} {
+      allow read, create : if request.auth != null
+      allow update : if request.auth != null && request.auth.uid == resource.data.creatorUid
+    }
+    match /likes/{document=**} {
+      allow read, write: if request.auth != null && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.token != ""
+    }
+  }
+}
+```
