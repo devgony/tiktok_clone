@@ -7,6 +7,7 @@ import '../../authentication/repos/authentication_repo.dart';
 
 class ChatRoomsViewModel extends AsyncNotifier<void> {
   late final ChatRoomsRepo _repo;
+  late final String chatRoomId;
   // final List<ChatRoomModel> _list = [];
 
   // Future<List<ChatRoomModel>> _fetchChatRooms() async {
@@ -17,10 +18,10 @@ class ChatRoomsViewModel extends AsyncNotifier<void> {
 
   Future createChatRoom(String otherUid) async {
     final user = ref.read(authRepo).user;
-
     state = const AsyncValue.loading();
-    await _repo.createChatRoom(user!.uid, otherUid);
-    // state = AsyncValue.data(await _fetchChatRooms());
+    final id = await _repo.createChatRoom(user!.uid, otherUid);
+
+    state = AsyncValue.data(chatRoomId = id);
   }
 
   @override
@@ -29,7 +30,7 @@ class ChatRoomsViewModel extends AsyncNotifier<void> {
     _repo = ref.read(chatRoomsRepo);
     // _list = await _fetchChatRooms();
 
-    // return _list;
+    return chatRoomId;
   }
 }
 

@@ -43,6 +43,7 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
       name: name,
       birthday: birthday,
       hasAvatar: false,
+      chatRooms: [],
     );
     await _usersRepository.createProfile(profile);
     state = AsyncValue.data(profile);
@@ -60,6 +61,9 @@ class UsersViewModel extends AsyncNotifier<UserProfileModel> {
     await _usersRepository
         .updateUser(state.value!.uid, {"bio": bio, "link": link});
   }
+
+  FutureOr<List<UserProfileModel>> findProfiles() async =>
+      await _usersRepository.findProfiles();
 }
 
 final usersProvider = AsyncNotifierProvider<UsersViewModel, UserProfileModel>(

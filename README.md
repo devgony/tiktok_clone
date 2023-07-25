@@ -4390,3 +4390,8 @@ lib/features/inbox/views/activity_screen.dart
 ### Q&A
 
 - For performance, it might better to update chat_room whenever new message was sent
+
+### Todo
+
+- [ ] replace Avatar without upload
+- [ ] recover privileges

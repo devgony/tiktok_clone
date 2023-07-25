@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/inbox/models/chat_room.dart';
 import 'package:tiktok_clone/features/inbox/repos/chat_rooms_repo.dart';
+import 'package:tiktok_clone/features/inbox/views/select_chat_partner_screen.dart';
 import 'chat_detail_screen.dart';
 
 class ChatsScreen extends ConsumerStatefulWidget {
@@ -31,13 +33,19 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
   }
 
   void _addItem() {
-    if (_key.currentState != null) {
-      _key.currentState!.insertItem(
-        _items.length,
-        duration: _duration,
-      );
-      _items.add(_items.length);
-    }
+    // if (_key.currentState != null) {
+    //   _key.currentState!.insertItem(
+    //     _items.length,
+    //     duration: _duration,
+    //   );
+    //   _items.add(_items.length);
+    // }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const SelectChatPartnerScreen(),
+      ),
+    );
   }
 
   void _deleteItem(int index) {
@@ -68,23 +76,25 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
     return ListTile(
       // onLongPress: () => _deleteItem(index),
       // onTap: () => _onChatTap(index),
-      leading: const CircleAvatar(
+      leading: CircleAvatar(
+        // TODO: should merge with Avatar widget
         radius: 30,
         foregroundImage: NetworkImage(
-          "https://avatars.githubusercontent.com/u/51254761?v=4",
+          "https://firebasestorage.googleapis.com/v0/b/tiktok-devgony.appspot.com/o/avatars%2F${chatRoom.otherUser.uid}?alt=media&haha=${DateTime.now().toString()}",
         ),
-        child: Text('Henry'),
+        child: Text(chatRoom.otherUser.name),
       ),
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
-            chatRoom.lastMessage,
+            chatRoom.otherUser.name,
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
           Text(
-            "2:04 PM",
+            DateFormat('a hh:mm').format(
+                DateTime.fromMillisecondsSinceEpoch(chatRoom.updatedAt * 1000)),
             style: TextStyle(
               color: Colors.grey.shade500,
               fontSize: Sizes.size12,
@@ -111,8 +121,6 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
       ),
       body: ref.watch(chatRoomsStreamProvider).when(
         data: (data) {
-          print(data);
-
           return AnimatedList(
             // key: _key,
             padding: const EdgeInsets.symmetric(

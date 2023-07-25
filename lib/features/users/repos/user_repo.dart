@@ -18,6 +18,15 @@ class UserRepository {
     return doc.data();
   }
 
+  Future<List<UserProfileModel>> findProfiles() async {
+    final querySnapshot = await _db.collection("users").get();
+    final profiles = querySnapshot.docs
+        .map((doc) => UserProfileModel.fromJson(doc.data()))
+        .toList();
+
+    return profiles;
+  }
+
   Future<void> uploadAvatar(File file, String fileName) async {
     final fileRef = _storage.ref().child("avatars/$fileName");
     await fileRef.putFile(file);

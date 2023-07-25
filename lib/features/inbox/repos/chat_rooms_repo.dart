@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_clone/features/inbox/models/chat_room.dart';
@@ -11,46 +13,63 @@ class ChatRoomsRepo {
           .collection("users")
           .doc(uid)
           .collection("chat_rooms")
-
-          // .orderBy("createdAt", descending: true)
+          // .orderBy("updatedAt",
+          //     descending:
+          //         true) // TODO: should be sorted by updatedAt so that save duplicated date?
           .snapshots()
           .asyncMap((event) async {
         final chatRooms = <ChatRoomModel>[];
         for (final doc in event.docs) {
           final chatRoomData = doc.data();
           final chatRoomRef = chatRoomData['ref'] as DocumentReference;
-          final chatRoomSnapshot = chatRoomRef.get();
-          final chatRoomData2 =
-              (await chatRoomSnapshot).data() as Map<String, dynamic>;
-          final chatRoom = ChatRoomModel.fromJson(chatRoomData2);
+          final chatRoomSnapshot = await chatRoomRef.get();
+          final chatRoomMap = chatRoomSnapshot.data() as Map<String, dynamic>;
+          final currentUserRef =
+              chatRoomMap['currentUserRef'] as DocumentReference;
+          final otherUserRef = chatRoomMap['otherUserRef'] as DocumentReference;
+          final lastMessageRef =
+              chatRoomMap['lastMessageRef'] as DocumentReference;
+          chatRoomMap['currentUser'] = (await currentUserRef.get()).data();
+          chatRoomMap['otherUser'] = (await otherUserRef.get()).data();
+          final lastMessage =
+              (await lastMessageRef.get()).data() as Map<String, dynamic>;
+          chatRoomMap['lastMessage'] = lastMessage['text'];
+          // chatRoomMap['updatedAt'] = lastMessage['createdAt'];
+          final chatRoom = ChatRoomModel.fromJson(chatRoomMap);
           chatRooms.add(chatRoom);
         }
-        print(chatRooms);
 
         return chatRooms;
       });
 
-  Future createChatRoom(String uid, String otherUid) async {
-    final chatRoom = ChatRoomModel(
-      personA: uid,
-      personB: otherUid,
-      lastMessage: "",
-      updatedAt: DateTime.now().millisecondsSinceEpoch,
-    );
+  FutureOr<String> createChatRoom(
+      String currentUserId, String otherUserId) async {
+    final currentUser = await _db.collection("users").doc(currentUserId).get();
+    final otherUser = await _db.collection("users").doc(otherUserId).get();
+    final chatRoom = {
+      "currentUser": currentUser.data(),
+      "otherUser": otherUser.data(),
+      "lastMessage": "",
+      "updatedAt": DateTime.now().millisecondsSinceEpoch,
+    };
 
-    await _db
-        .collection("users")
-        .doc(uid)
-        .collection("chat_rooms")
-        .doc(otherUid)
-        .set(chatRoom.toJson());
+    final createdChatRoom = await _db.collection("chat_rooms").add(chatRoom);
 
-    await _db
-        .collection("users")
-        .doc(otherUid)
-        .collection("chat_rooms")
-        .doc(uid)
-        .set(chatRoom.toJson());
+    final currentUserRef = _db.collection("users").doc(currentUserId);
+    final currentUserDoc = await currentUserRef.get();
+    final currentUserChatRooms =
+        List<String>.from(currentUserDoc.data()?['chatRooms'] ?? []);
+    currentUserChatRooms.add(createdChatRoom.id);
+    await currentUserRef.update({'chatRooms': currentUserChatRooms});
+
+    final otherUserRef = _db.collection("users").doc(otherUserId);
+    final otherUserDoc = await otherUserRef.get();
+    final otherUserChatRooms =
+        List<String>.from(otherUserDoc.data()?['chatRooms'] ?? []);
+    otherUserChatRooms.add(createdChatRoom.id);
+    await otherUserRef.update({'chatRooms': otherUserChatRooms});
+
+    return createdChatRoom.id;
   }
 }
 
