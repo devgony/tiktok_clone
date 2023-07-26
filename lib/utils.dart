@@ -4,6 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'features/authentication/view_models/social_auth_view_model.dart';
 
+bool isDarkMode(BuildContext context) =>
+    MediaQuery.of(context).platformBrightness == Brightness.dark;
+
 void showFirebaseErrorSnack(
   BuildContext context,
   Object? error,

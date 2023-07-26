@@ -4600,3 +4600,31 @@ service cloud.firestore {
     - give TextDirection.ltr
 - set finding type to generic to get proper style fields hint
 - `widget_test.dart`
+
+```dart
+testWidgets("Enabled State", (WidgetTester tester) async {
+  await tester.pumpWidget(
+    const Directionality(
+      textDirection: TextDirection.ltr,
+      child: FormButton(
+        disabled: false,
+        payload: 'Next',
+      ),
+    ),
+  );
+  expect(find.text("Next"), findsOneWidget);
+  expect(
+    tester
+        .firstWidget<AnimatedDefaultTextStyle>(
+            find.byType(AnimatedDefaultTextStyle))
+        .style
+        .color,
+    Colors.white,
+  );
+});
+```
+
+## 30.5. Widget Testing part Two
+
+- formButton disabled => MediaQuery.of(context) was inherited => manually render MediaQuery
+- fix: missed implementation(darkMode) found by test
