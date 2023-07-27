@@ -4647,3 +4647,13 @@ dev_dependencies:
 mkdir -p integration_test/
 touch integration_test/integration_test.dart
 ```
+
+## 30.7. Integration Testing part Two
+
+- Duration to see progress
+
+```dart
+await tester.pumpAndSettle(const Duration(seconds: 3));
+```
+
+- Challenge: should test all the widgets, ErrorSnackbar in each page
