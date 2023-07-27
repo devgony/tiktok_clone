@@ -4628,3 +4628,22 @@ testWidgets("Enabled State", (WidgetTester tester) async {
 
 - formButton disabled => MediaQuery.of(context) was inherited => manually render MediaQuery
 - fix: missed implementation(darkMode) found by test
+
+## 30.6. Integration Testing part One
+
+```yaml
+# pubspec.yaml
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+```
+
+- IntegrationTestWidgetsFlutterBinding.ensureInitialized();
+- log in/out
+- pumpAndSettle: wait untill animation finish
+- comment out I10n for now
+
+```
+mkdir -p integration_test/
+touch integration_test/integration_test.dart
+```

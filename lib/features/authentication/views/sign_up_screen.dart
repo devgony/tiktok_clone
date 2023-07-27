@@ -52,9 +52,10 @@ class SignUpScreen extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Gaps.v80,
-                  Text(
-                    S.of(context).signUpTitle("TikTok"),
-                    style: const TextStyle(
+                  const Text(
+                    // S.of(context).signUpTitle("TikTok"),
+                    "Sign up for TikTok",
+                    style: TextStyle(
                       fontSize: Sizes.size24,
                       fontWeight: FontWeight.w700,
                     ),
@@ -74,7 +75,8 @@ class SignUpScreen extends ConsumerWidget {
                   if (orientation == Orientation.portrait) ...[
                     AuthButton(
                       icon: const FaIcon(FontAwesomeIcons.user),
-                      text: S.of(context).emailPasswordButton,
+                      // text: S.of(context).emailPasswordButton,
+                      text: "Use email & password",
                       onTap: _onEmailTap,
                     ),
                     Gaps.v16,
@@ -90,7 +92,8 @@ class SignUpScreen extends ConsumerWidget {
                         Expanded(
                           child: AuthButton(
                             icon: const FaIcon(FontAwesomeIcons.user),
-                            text: S.of(context).emailPasswordButton,
+                            // text: S.of(context).emailPasswordButton,
+                            text: "Use email & password",
                             onTap: _onEmailTap,
                           ),
                         ),
@@ -127,7 +130,8 @@ class SignUpScreen extends ConsumerWidget {
                   GestureDetector(
                     onTap: () => _onLoginTap(context),
                     child: Text(
-                      S.of(context).logIn("female"),
+                      // S.of(context).logIn("female"),
+                      "Log in",
                       style: TextStyle(
                         fontSize: Sizes.size16,
                         fontWeight: FontWeight.w600,
