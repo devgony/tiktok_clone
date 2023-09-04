@@ -6,7 +6,7 @@ class UserProfileModel {
   final String link;
   final String birthday;
   final bool hasAvatar;
-  final List<String> chatRooms;
+  final List chatRooms;
 
   UserProfileModel({
     required this.uid,

@@ -5,8 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:tiktok_clone/constants/sizes.dart';
 import 'package:tiktok_clone/features/inbox/models/chat_room.dart';
-import 'package:tiktok_clone/features/inbox/repos/chat_rooms_repo.dart';
 import 'package:tiktok_clone/features/inbox/views/select_chat_partner_screen.dart';
+import '../view_models/chat_rooms_view_model.dart';
 import 'chat_detail_screen.dart';
 
 class ChatsScreen extends ConsumerStatefulWidget {
@@ -140,10 +140,14 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
           );
         },
         error: (error, stackTrace) {
-          return null;
+          return Center(
+            child: Text(error.toString()),
+          );
         },
         loading: () {
-          return null;
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );

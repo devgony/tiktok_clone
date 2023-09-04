@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:tiktok_clone/features/users/models/user_profile_model.dart';
 
 import '../../users/view_models/users_view_model.dart';
@@ -37,10 +38,12 @@ class _SelectChatPartnerScreenState
   void openChat(UserProfileModel user) async {
     final id =
         await ref.read(chatRoomsProvider.notifier).createChatRoom(user.uid);
-    Navigator.of(context).pushNamed(
-      '/chatDetail',
-      arguments: user,
-    );
+    context.go('/chats/$id');
+    // .pushNamed(ChatDetailScreen.routeName, arguments: user);
+    // context.pushNamed(
+    //   'chatDetail',
+    //   arguments: user,
+    // );
   }
 
   @override
