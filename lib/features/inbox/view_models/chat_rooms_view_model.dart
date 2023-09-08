@@ -48,41 +48,26 @@ final chatRoomsStreamProvider = StreamProvider.autoDispose<List<ChatRoomModel>>(
     print("here");
 
     final user = await db.collection("users").doc(uid).get();
-    final List<DocumentReference> chatRooms = user
-        .get("chatRooms")
-        .cast<DocumentReference>(); // TODO: not cast but generic
+    final List<DocumentReference<Map<String, dynamic>>> chatRooms =
+        user.get("chatRooms");
 
-    for (final chatRoomRef in chatRooms) {
+    final a = chatRooms.map((chatRoomRef) async {
       final chatRoom = (await chatRoomRef.get());
-      final currentUser = await getRefData(chatRoom, 'currentUserRef');
-      final otherUser = await getRefData(chatRoom, 'otherUserRef');
-      final lastMessage =
-          (await (chatRoom.get('lastMessage') as DocumentReference).get())
-              .data();
+      final currentUser = await getRefData(chatRoom, "currentUserRef");
+      final otherUser = await getRefData(chatRoom, "otherUserRef");
+      final Map<String, dynamic> lastMessage =
+          await getRefData(chatRoom, "lastMessage");
+      final int updatedAt = await lastMessage['createdAt'];
+      final String text = await lastMessage['text'];
 
-      // how to convert to map?
-      final updatedAt = lastMessage != null ? lastMessage['createdAt'] : null;
-
-      // final chatRoom = await db.collection("chat_rooms").doc(chatRoomRef).get();
-
-      // final chatRoomData = chatRoom.data() as Map<String, dynamic>;
-      // final currentUserRef =
-      //     chatRoomData['currentUserRef'] as DocumentReference;
-      // final otherUserRef = chatRoomData['otherUserRef'] as DocumentReference;
-      // final lastMessageRef =
-      //     chatRoomData['lastMessageRef'] as DocumentReference;
-      // chatRoomData['currentUser'] = (await currentUserRef.get()).data();
-      // chatRoomData['otherUser'] = (await otherUserRef.get()).data();
-      // final lastMessage =
-      //     (await lastMessageRef.get()).data() as Map<String, dynamic>;
-      // chatRoomData['lastMessage'] = lastMessage['text'];
-      // chatRoomData['updatedAt'] = lastMessage['createdAt'];
-      // final chatRoomModel = ChatRoomModel.fromJson(chatRoomData);
-
-      // print(chatRoomModel);
-
-      // yield chatRoomModel;
-    }
+      return ChatRoomModel(
+        currentUser: currentUser,
+        otherUser: otherUser,
+        lastMessage: text,
+        updatedAt: updatedAt,
+      );
+    }).toList();
+    // }
     // chatRooms.map((chatRoomRef) async {
     //   final a = await db.collection("chat_rooms").doc(chatRoomRef).get();
 
@@ -109,7 +94,16 @@ final chatRoomsStreamProvider = StreamProvider.autoDispose<List<ChatRoomModel>>(
   },
 );
 
-Future<Object?> getRefData(
-    DocumentSnapshot<Object?> document, String ref) async {
-  return (await (document.get(ref) as DocumentReference).get()).data();
+Future<dynamic> getRefData(
+    DocumentSnapshot<Map<String, dynamic>> document, String ref,
+    [String? field]) async {
+  final documentSnapshot =
+      (await (document.get(ref) as DocumentReference<Map<String, dynamic>>)
+          .get());
+
+  if (field != null) {
+    return documentSnapshot.get(field).data();
+  }
+
+  return documentSnapshot.data();
 }
