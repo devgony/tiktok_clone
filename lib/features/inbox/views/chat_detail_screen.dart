@@ -43,7 +43,7 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
     if (text == "") {
       return;
     }
-    ref.read(messagesProvider.notifier).sendMessage(text);
+    ref.read(messagesProvider(widget.chatId).notifier).sendMessage(text);
 
     _textEditingController.clear();
     setState(() {
@@ -53,7 +53,7 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final isLoading = ref.watch(messagesProvider).isLoading;
+    final isLoading = ref.watch(messagesProvider(widget.chatId)).isLoading;
     return Scaffold(
       appBar: AppBar(
         title: ListTile(
@@ -115,7 +115,7 @@ class _ChatDetailScreenState extends ConsumerState<ChatDetailScreen> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Stack(
           children: [
-            ref.watch(chatProvider).when(
+            ref.watch(chatProvider2(widget.chatId)).when(
                   data: (data) {
                     return ListView.separated(
                       reverse: true,

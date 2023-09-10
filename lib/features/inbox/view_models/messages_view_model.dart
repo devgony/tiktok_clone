@@ -6,15 +6,17 @@ import 'package:tiktok_clone/features/authentication/repos/authentication_repo.d
 import 'package:tiktok_clone/features/inbox/models/message.dart';
 import 'package:tiktok_clone/features/inbox/repos/messages_repo.dart';
 
-class MessagesViewModel extends AsyncNotifier<void> {
+class MessagesViewModel extends FamilyAsyncNotifier<void, String> {
   late final MessagesRepo _repo;
 
   @override
-  FutureOr<void> build() {
+  FutureOr<void> build(String arg) {
     _repo = ref.read(messagesRepo);
   }
 
-  Future<void> sendMessage(String text) async {
+  Future<void> sendMessage(
+    String text,
+  ) async {
     final user = ref.read(authRepo).user;
     state = const AsyncValue.loading();
     state = await AsyncValue.guard(() async {
@@ -23,22 +25,24 @@ class MessagesViewModel extends AsyncNotifier<void> {
         userId: user!.uid,
         createdAt: DateTime.now().millisecondsSinceEpoch,
       );
-      await _repo.sendMessage(message);
+      await _repo.sendMessage(message: message, chatId: arg);
     });
   }
 }
 
-final messagesProvider = AsyncNotifierProvider<MessagesViewModel, void>(
+final messagesProvider =
+    AsyncNotifierProvider.family<MessagesViewModel, void, String>(
   () => MessagesViewModel(),
 );
 
 // if there is only GET logic, simple impl without Model
-final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
+final chatProvider2 =
+    StreamProvider.autoDispose.family<List<MessageModel>, String>((ref, arg) {
   final db = FirebaseFirestore.instance;
 
   return db
-      .collection("chat_rooms")
-      .doc("nxOkcWBA9gDBquMnxiYy")
+      .collection("chatRooms")
+      .doc(arg)
       .collection("texts")
       .orderBy("createdAt")
       .snapshots()
@@ -54,3 +58,25 @@ final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
             .toList(),
       );
 });
+
+// final chatProvider = StreamProvider.autoDispose<List<MessageModel>>((ref) {
+//   final db = FirebaseFirestore.instance;
+
+//   return db
+//       .collection("chat_rooms")
+//       .doc("aaaa")
+//       .collection("texts")
+//       .orderBy("createdAt")
+//       .snapshots()
+//       .map(
+//         (event) => event.docs
+//             .map(
+//               (doc) => MessageModel.fromJson(
+//                 doc.data(),
+//               ),
+//             )
+//             .toList()
+//             .reversed // TODO: can be removed if orderBy("createdAt", descending: true)
+//             .toList(),
+//       );
+// });

@@ -65,23 +65,23 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
     }
   }
 
-  void _onChatTap(int index) {
+  void _onChatTap(String id) {
     context.pushNamed(
       ChatDetailScreen.routeName,
-      params: {"chatId": "$index"},
+      params: {"chatId": id},
     );
   }
 
   Widget _makeTile(ChatRoomModel chatRoom) {
     return ListTile(
       // onLongPress: () => _deleteItem(index),
-      // onTap: () => _onChatTap(index),
+      onTap: () => _onChatTap(chatRoom.id),
       leading: CircleAvatar(
         // TODO: should merge with Avatar widget
         radius: 30,
-        foregroundImage: NetworkImage(
-          "https://firebasestorage.googleapis.com/v0/b/tiktok-devgony.appspot.com/o/avatars%2F${chatRoom.otherUser.uid}?alt=media&haha=${DateTime.now().toString()}",
-        ),
+        // foregroundImage: NetworkImage(
+        //   "https://firebasestorage.googleapis.com/v0/b/tiktok-devgony.appspot.com/o/avatars%2F${chatRoom.otherUser.uid}?alt=media&haha=${DateTime.now().toString()}",
+        // ),
         child: Text(chatRoom.otherUser.name),
       ),
       title: Row(
@@ -92,17 +92,22 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
             chatRoom.otherUser.name,
             style: const TextStyle(fontWeight: FontWeight.w600),
           ),
-          Text(
-            DateFormat('a hh:mm').format(
-                DateTime.fromMillisecondsSinceEpoch(chatRoom.updatedAt * 1000)),
-            style: TextStyle(
-              color: Colors.grey.shade500,
-              fontSize: Sizes.size12,
-            ),
-          ),
+          chatRoom.updatedAt != null
+              ? Text(
+                  DateFormat('a hh:mm').format(
+                      DateTime.fromMillisecondsSinceEpoch(
+                          chatRoom.updatedAt! * 1000)),
+                  style: TextStyle(
+                    color: Colors.grey.shade500,
+                    fontSize: Sizes.size12,
+                  ),
+                )
+              : const Text(""),
         ],
       ),
-      subtitle: Text(chatRoom.lastMessage),
+      subtitle: chatRoom.lastMessage != null
+          ? Text(chatRoom.lastMessage!)
+          : const Text(""),
     );
   }
 

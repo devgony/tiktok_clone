@@ -5,14 +5,20 @@ import 'package:tiktok_clone/features/inbox/models/message.dart';
 class MessagesRepo {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
-  Future<void> sendMessage(MessageModel message) async {
-    await _db
-        .collection("chat_rooms")
-        .doc("nxOkcWBA9gDBquMnxiYy")
-        .collection("texts")
-        .add(
-          message.toJson(),
-        );
+  Future<void> sendMessage({
+    required MessageModel message,
+    required String chatId,
+  }) async {
+    final lastMessageRef =
+        await _db.collection("chatRooms").doc(chatId).collection("texts").add(
+              message.toJson(),
+            );
+
+    await _db.collection("chatRooms").doc(chatId).update(
+      {
+        "lastMessageRef": lastMessageRef,
+      },
+    );
   }
 }
 
