@@ -42,34 +42,44 @@ final chatRoomsProvider = AsyncNotifierProvider<ChatRoomsViewModel, void>(
 );
 
 final chatRoomsStreamProvider =
-    StreamProvider.autoDispose<List<ChatRoomModel>>((ref) async* {
+    StreamProvider.autoDispose<List<ChatRoomModel>>((ref) {
   // final repo = ref.read(chatRoomsRepo);
   final uid = ref.read(authRepo).user!.uid;
   final db = FirebaseFirestore.instance;
-  final user = await db.collection("users").doc(uid).get();
-  final List<DocumentReference<Map<String, dynamic>>> chatRooms =
-      user.get("chatRooms").cast<DocumentReference<Map<String, dynamic>>>();
+  final user =
+      db.collection("users").doc(uid).snapshots().asyncMap((event) async {
+    final List<DocumentReference<Map<String, dynamic>>> chatRooms =
+        event.get("chatRooms").cast<DocumentReference<Map<String, dynamic>>>();
 
-  final chatRoomModels = chatRooms.map((chatRoomRef) async {
-    final chatRoom = (await chatRoomRef.get());
-    final UserProfileModel currentUser =
-        UserProfileModel.fromJson(await getRefData(chatRoom, "currentUserRef"));
-    final UserProfileModel otherUser =
-        UserProfileModel.fromJson(await getRefData(chatRoom, "otherUserRef"));
-    final Map<String, dynamic>? lastMessage =
-        await getRefData(chatRoom, "lastMessageRef");
-    final int? updatedAt = await lastMessage?['createdAt'];
-    final String? text = await lastMessage?['text'];
+    final chatRoomModels = chatRooms.map((chatRoomRef) async {
+      final chatRoom = (await chatRoomRef.get());
+      final UserProfileModel currentUser = UserProfileModel.fromJson(
+          await getRefData(chatRoom, "currentUserRef"));
+      final UserProfileModel otherUser =
+          UserProfileModel.fromJson(await getRefData(chatRoom, "otherUserRef"));
+      final Map<String, dynamic>? lastMessage =
+          await getRefData(chatRoom, "lastMessageRef");
+      final int? updatedAt = await lastMessage?['createdAt'];
+      final String? text = await lastMessage?['text'];
 
-    return ChatRoomModel(
-      id: chatRoom.id,
-      currentUser: currentUser,
-      otherUser: otherUser,
-      lastMessage: text,
-      updatedAt: updatedAt,
-    );
+      return ChatRoomModel(
+        id: chatRoom.id,
+        currentUser: currentUser,
+        otherUser: otherUser,
+        lastMessage: text,
+        updatedAt: updatedAt,
+      );
+    });
+
+    return await Future.wait(chatRoomModels);
   });
-  yield await Future.wait(chatRoomModels);
+
+  return user;
+
+  // final List<DocumentReference<Map<String, dynamic>>> chatRooms =
+  //     user.get("chatRooms").cast<DocumentReference<Map<String, dynamic>>>();
+
+  // yield await Future.wait(chatRoomModels);
 });
 
 Future<dynamic> getRefData(
