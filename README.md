@@ -4373,7 +4373,7 @@ lib/features/inbox/views/activity_screen.dart
 - reverse order
 - MediaQuery for cross-platform
 
-## Code Challenge: Chat room CRUD
+## 28.4 Code Challenge: Chat room CRUD
 
 1. list chat rooms
 
