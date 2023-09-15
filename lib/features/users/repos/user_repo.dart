@@ -18,9 +18,10 @@ class UserRepository {
     return doc.data();
   }
 
-  Future<List<UserProfileModel>> findProfiles() async {
+  Future<List<UserProfileModel>> findProfiles(String myId) async {
     final querySnapshot = await _db.collection("users").get();
     final profiles = querySnapshot.docs
+        .where((element) => element.id != myId)
         .map((doc) => UserProfileModel.fromJson(doc.data()))
         .toList();
 

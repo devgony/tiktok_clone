@@ -8,17 +8,38 @@ class MessagesRepo {
   Future<void> sendMessage({
     required MessageModel message,
     required String chatId,
+    required String currentUserId,
   }) async {
-    final lastMessageRef =
-        await _db.collection("chatRooms").doc(chatId).collection("texts").add(
-              message.toJson(),
-            );
+    try {
+      await _db.collection("chatRooms").doc(chatId).collection("texts").add(
+            message.toJson(),
+          );
 
-    await _db.collection("chatRooms").doc(chatId).update(
-      {
-        "lastMessageRef": lastMessageRef,
-      },
-    );
+      final users = _db.collection("users");
+
+      final currentUserChatRoomsRef =
+          users.doc(currentUserId).collection("chatRooms").doc(chatId);
+
+      final now = DateTime.now().millisecondsSinceEpoch;
+      await currentUserChatRoomsRef
+          .update({"lastMessage": message.text, "updatedAt": now});
+
+      final currentUserChatRooms = await currentUserChatRoomsRef.get();
+
+      final Map<String, dynamic> otherUser =
+          currentUserChatRooms.get("otherUser");
+      final String otherUserId = otherUser["uid"];
+      final otherUserChatRoomsRef =
+          users.doc(otherUserId).collection("chatRooms").doc(chatId);
+
+      await otherUserChatRoomsRef.update({
+        "lastMessage": message.text,
+        "updatedAt": now,
+      });
+    } catch (e) {
+      print("error");
+      print(e);
+    }
   }
 }
 

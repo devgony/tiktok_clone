@@ -25,7 +25,9 @@ class MessagesViewModel extends FamilyAsyncNotifier<void, String> {
         userId: user!.uid,
         createdAt: DateTime.now().millisecondsSinceEpoch,
       );
-      await _repo.sendMessage(message: message, chatId: arg);
+
+      await _repo.sendMessage(
+          message: message, chatId: arg, currentUserId: message.userId);
     });
   }
 }

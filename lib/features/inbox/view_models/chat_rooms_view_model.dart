@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tiktok_clone/features/inbox/repos/chat_rooms_repo.dart';
-import 'package:tiktok_clone/features/users/models/user_profile_model.dart';
 
 import '../../authentication/repos/authentication_repo.dart';
 import '../models/chat_room.dart';
@@ -46,35 +45,47 @@ final chatRoomsStreamProvider =
   // final repo = ref.read(chatRoomsRepo);
   final uid = ref.read(authRepo).user!.uid;
   final db = FirebaseFirestore.instance;
-  final user =
-      db.collection("users").doc(uid).snapshots().asyncMap((event) async {
-    final List<DocumentReference<Map<String, dynamic>>> chatRooms =
-        event.get("chatRooms").cast<DocumentReference<Map<String, dynamic>>>();
 
-    final chatRoomModels = chatRooms.map((chatRoomRef) async {
-      final chatRoom = (await chatRoomRef.get());
-      final UserProfileModel currentUser = UserProfileModel.fromJson(
-          await getRefData(chatRoom, "currentUserRef"));
-      final UserProfileModel otherUser =
-          UserProfileModel.fromJson(await getRefData(chatRoom, "otherUserRef"));
-      final Map<String, dynamic>? lastMessage =
-          await getRefData(chatRoom, "lastMessageRef");
-      final int? updatedAt = await lastMessage?['createdAt'];
-      final String? text = await lastMessage?['text'];
+  return db
+      .collection("users")
+      .doc(uid)
+      .collection("chatRooms")
+      .orderBy("updatedAt", descending: true)
+      .snapshots()
+      .map((event) => event.docs
+          .map((doc) => ChatRoomModel.fromJson({"id": doc.id, ...doc.data()}))
+          .toList());
 
-      return ChatRoomModel(
-        id: chatRoom.id,
-        currentUser: currentUser,
-        otherUser: otherUser,
-        lastMessage: text,
-        updatedAt: updatedAt,
-      );
-    });
+  // final user = db.collection("users").doc(uid).snapshots().asyncMap((event) async {
+  // final x = event.("chatRooms");
 
-    return await Future.wait(chatRoomModels);
-  });
+  // final List<DocumentReference<Map<String, dynamic>>> chatRooms =
+  //     event.get("chatRooms").cast<DocumentReference<Map<String, dynamic>>>();
 
-  return user;
+  // final chatRoomModels = chatRooms.map((chatRoomRef) async {
+  //   final chatRoom = (await chatRoomRef.get());
+  //   final UserProfileModel currentUser = UserProfileModel.fromJson(
+  //       await getRefData(chatRoom, "currentUserRef"));
+  //   final UserProfileModel otherUser =
+  //       UserProfileModel.fromJson(await getRefData(chatRoom, "otherUserRef"));
+  //   final Map<String, dynamic>? lastMessage =
+  //       await getRefData(chatRoom, "lastMessageRef");
+  //   final int? updatedAt = await lastMessage?['createdAt'];
+  //   final String? text = await lastMessage?['text'];
+
+  //   return ChatRoomModel(
+  //     id: chatRoom.id,
+  //     currentUser: currentUser,
+  //     otherUser: otherUser,
+  //     lastMessage: text,
+  //     updatedAt: updatedAt,
+  //   );
+  // });
+
+  // return await Future.wait(chatRoomModels);
+  // });
+
+  // return user;
 
   // final List<DocumentReference<Map<String, dynamic>>> chatRooms =
   //     user.get("chatRooms").cast<DocumentReference<Map<String, dynamic>>>();

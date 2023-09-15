@@ -2,14 +2,12 @@ import 'package:tiktok_clone/features/users/models/user_profile_model.dart';
 
 class ChatRoomModel {
   final String id;
-  final UserProfileModel currentUser;
   final UserProfileModel otherUser;
   final String? lastMessage;
   final int? updatedAt;
 
   ChatRoomModel({
     required this.id,
-    required this.currentUser,
     required this.otherUser,
     required this.lastMessage,
     required this.updatedAt,
@@ -17,7 +15,6 @@ class ChatRoomModel {
 
   ChatRoomModel.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        currentUser = UserProfileModel.fromJson(json['currentUser']),
         otherUser = UserProfileModel.fromJson(json['otherUser']),
         lastMessage = json['lastMessage'],
         updatedAt = json['updatedAt'];
@@ -25,7 +22,6 @@ class ChatRoomModel {
   Map<String, dynamic> toJson() {
     return {
       "id": id,
-      "currentUser": currentUser,
       "otherUser": otherUser,
       "lastMessage": lastMessage,
       "updatedAt": updatedAt,

@@ -55,31 +55,28 @@ class ChatRoomsRepo {
 
   FutureOr<String> createChatRoom(
       String currentUserId, String otherUserId) async {
-    // final currentUser = _db.collection("users").doc(currentUserId);
     final currentUserRef = _db.collection("users").doc(currentUserId);
-    // final otherUser = _db.collection("users").doc(otherUserId);
+    final currentUser = await currentUserRef.get();
     final otherUserRef = _db.collection("users").doc(otherUserId);
-    final chatRoom = {
-      "currentUserRef": currentUserRef,
-      "otherUserRef": otherUserRef,
-      // "lastMessage": "",
-    };
+    final otherUser = await otherUserRef.get();
 
-    final createdChatRoom = await _db.collection("chatRooms").add(chatRoom);
+    final createdChatRoom = await _db
+        .collection("chatRooms")
+        .add({}); // TODO: currently it is useless
 
-    final currentUserDoc = await currentUserRef.get();
-    final currentUserChatRooms =
-        List<DocumentReference>.from(currentUserDoc.data()?['chatRooms'] ?? []);
-    currentUserChatRooms.add(createdChatRoom);
+    final currentUserChatRooms = currentUserRef.collection("chatRooms");
+    final otherUserChatRooms = otherUserRef.collection("chatRooms");
 
-    await currentUserRef.update({'chatRooms': currentUserChatRooms});
+    final now = DateTime.now().millisecondsSinceEpoch;
+    await currentUserChatRooms.doc(createdChatRoom.id).set({
+      "otherUser": otherUser.data(),
+      "updatedAt": now,
+    });
 
-    final otherUserDoc = await otherUserRef.get();
-    final otherUserChatRooms =
-        List<DocumentReference>.from(otherUserDoc.data()?['chatRooms'] ?? []);
-    otherUserChatRooms.add(createdChatRoom);
-
-    await otherUserRef.update({'chatRooms': otherUserChatRooms});
+    await otherUserChatRooms.doc(createdChatRoom.id).set({
+      "otherUser": currentUser.data(),
+      "updatedAt": now,
+    });
 
     return createdChatRoom.id;
   }
