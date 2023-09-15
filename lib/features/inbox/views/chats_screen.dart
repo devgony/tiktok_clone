@@ -79,9 +79,9 @@ class _ChatsScreenState extends ConsumerState<ChatsScreen> {
       leading: CircleAvatar(
         // TODO: should merge with Avatar widget
         radius: 30,
-        // foregroundImage: NetworkImage(
-        //   "https://firebasestorage.googleapis.com/v0/b/tiktok-devgony.appspot.com/o/avatars%2F${chatRoom.otherUser.uid}?alt=media&haha=${DateTime.now().toString()}",
-        // ),
+        foregroundImage: NetworkImage(
+          "https://firebasestorage.googleapis.com/v0/b/tiktok-devgony.appspot.com/o/avatars%2F${chatRoom.otherUser.uid}?alt=media&haha=${DateTime.now().toString()}",
+        ),
         child: Text(chatRoom.otherUser.name),
       ),
       title: Row(

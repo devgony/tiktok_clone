@@ -7,7 +7,7 @@ import 'package:tiktok_clone/features/inbox/repos/chat_rooms_repo.dart';
 import '../../authentication/repos/authentication_repo.dart';
 import '../models/chat_room.dart';
 
-class ChatRoomsViewModel extends AsyncNotifier<void> {
+class ChatRoomsViewModel extends FamilyAsyncNotifier<ChatRoomModel?, String?> {
   late final ChatRoomsRepo _repo;
   late final String chatRoomId;
   // final List<ChatRoomModel> _list = [];
@@ -25,18 +25,26 @@ class ChatRoomsViewModel extends AsyncNotifier<void> {
     return await _repo.createChatRoom(user!.uid, otherUid);
   }
 
-  @override
-  FutureOr<void> build() {
-    // TODO: what should i return here?
-    // _repo = ref.read(messagesRepo);
-    _repo = ref.read(chatRoomsRepo);
-    // _list = await _fetchChatRooms();
+  Future<ChatRoomModel> getChatRoom(String chatRoomId) async {
+    final user = ref.read(authRepo).user;
 
-    // return chatRoomId;
+    return await _repo.getChatRoom(user!.uid, chatRoomId);
+  }
+
+  @override
+  FutureOr<ChatRoomModel?> build(String? arg) async {
+    _repo = ref.read(chatRoomsRepo);
+
+    if (arg == null) {
+      return null;
+    }
+
+    return await getChatRoom(arg);
   }
 }
 
-final chatRoomsProvider = AsyncNotifierProvider<ChatRoomsViewModel, void>(
+final chatRoomsProvider =
+    AsyncNotifierProviderFamily<ChatRoomsViewModel, ChatRoomModel?, String?>(
   () => ChatRoomsViewModel(),
 );
 
@@ -52,9 +60,11 @@ final chatRoomsStreamProvider =
       .collection("chatRooms")
       .orderBy("updatedAt", descending: true)
       .snapshots()
-      .map((event) => event.docs
-          .map((doc) => ChatRoomModel.fromJson({"id": doc.id, ...doc.data()}))
-          .toList());
+      .map((event) => event.docs.map((doc) {
+            print(doc);
+            print(doc.id);
+            return ChatRoomModel.fromJson({"id": doc.id, ...doc.data()});
+          }).toList());
 
   // final user = db.collection("users").doc(uid).snapshots().asyncMap((event) async {
   // final x = event.("chatRooms");

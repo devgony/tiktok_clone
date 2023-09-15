@@ -7,6 +7,25 @@ import 'package:tiktok_clone/features/inbox/models/chat_room.dart';
 class ChatRoomsRepo {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
+  Future<ChatRoomModel> getChatRoom(
+      String currentUserId, String chatRoomId) async {
+    var chatRoomDoc = _db
+        .collection("users")
+        .doc(currentUserId)
+        .collection("chatRooms")
+        .doc(chatRoomId);
+
+    final chatRoomSnapshot = await chatRoomDoc.get();
+
+    final chatRoom = chatRoomSnapshot.data();
+
+    if (chatRoom == null) {
+      throw Exception("ChatRoom not found");
+    }
+
+    return ChatRoomModel.fromJson({"id": chatRoomSnapshot.id, ...chatRoom});
+  }
+
   Stream<List<ChatRoomModel>> fetchChatRooms(String uid) {
     final a =
         _db.collection("users").doc(uid).collection("chatRooms").snapshots();

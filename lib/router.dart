@@ -14,7 +14,7 @@ import 'package:tiktok_clone/features/videos/views/video_recording_screen.dart';
 final routerProvider = Provider((ref) {
   // ref.watch(authState);
   return GoRouter(
-    initialLocation: "/",
+    initialLocation: "/chats",
     redirect: (context, state) {
       final isLoggedIn = ref.read(authRepo).isLoggedIn;
       if (!isLoggedIn) {

@@ -36,8 +36,9 @@ class _SelectChatPartnerScreenState
   }
 
   void openChat(UserProfileModel user) async {
-    final id =
-        await ref.read(chatRoomsProvider.notifier).createChatRoom(user.uid);
+    final id = await ref
+        .read(chatRoomsProvider(null).notifier)
+        .createChatRoom(user.uid);
     context.go('/chats/$id');
     // .pushNamed(ChatDetailScreen.routeName, arguments: user);
     // context.pushNamed(
